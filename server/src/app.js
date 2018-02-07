@@ -9,15 +9,16 @@ app.use(bodyParser.json()); // allows our app to easily parse any json data that
 app.use(cors()); // you need cors if you want your server to be served on a
 // different domain and you want any client to be able to hit your server
 
-app.get('/status', (req, res) => {
+app.post('/register', (req, res) => {
   res.send({
-    message: 'hello world', // server will send back a json object which has the attribut
+    message: `hello ${req.body.email}! Your user was registered!`, // server will send back a json object which has the attribut
     // message and then the string hello when it gets a request to
     // the /status endpoint
   });
 }); // get request to a status endpoint and
 // once we get a request on that endpoint we can send something back
 
-app.listen(process.env.PORT || 8081); // we have a server running on port 8081, process.env.PORT allows us to
+app.listen(process.env.PORT || 8081);
+// we have a server running on port 8081, process.env.PORT allows us to
 // overwrite that port using environment variables if we want
 
