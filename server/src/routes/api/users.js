@@ -1,4 +1,5 @@
 // put all the requests involving user models in here
+const AuthenticationController = require('../../controllers/AuthenticationController');
 
 const mongoose = require('mongoose');
 // may need to import express
@@ -12,8 +13,31 @@ module.exports = (app) => {
     User.find()
       .exec()
       .then(docs => {
-        console.log(docs);
-        res.status(200).json(docs);
+        const response = {
+          count: docs.length,
+          users: docs.map(doc => {
+            return {
+              _id: doc._id,
+              name: doc.name,
+              dob: doc.dob,
+              gender: doc.gender,
+              role: doc.role,
+              manager: doc.manager, // possibly just change this to team
+              team: doc.team,
+              allowance: doc.allowance,
+              taken: doc.taken,
+              dates: doc.dates,
+              job: doc.job,
+              username: doc.username,
+              password: doc.password,
+              request: {
+                type: 'GET',
+                url: 'http://localhost:8081/users/' + doc._id, // this is just to show we can format reponse whatever way we want
+              }
+            }
+          }),
+        };
+        res.status(200).json(response);
       })
       .catch(err => {
         console.log(err);
@@ -23,47 +47,8 @@ module.exports = (app) => {
 
 
   // adding a user
-  app.post('/users/register', (req, res) => {
-    const user = new User({
-      _id: new mongoose.Types.ObjectId(),
-      name: req.body.name,
-      dob: req.body.dob,
-      gender: req.body.gender,
-      role: req.body.role,
-      manager: new mongoose.Types.ObjectId(), // possibly just change this to team
-      team: req.body.team,
-      allowance: req.body.allowance,
-      taken: req.body.taken,
-      dates: req.body.dates,
-      job: req.body.job,
-      username: req.body.username,
-      password: req.body.password,
-    });
-
-    user
-      .save()
-      .then(result => { // mongoose model method to store in database
-        // have to call exec or then or callback after save
-        console.log(result);
-        res.status(201).json({
-          message: 'Handling POST requests to /register',
-          createdUser: user,
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err,
-        })
-      }); // catch potential errors
-
-    res.send({
-      message: `Hell ${req.body.gender}! You were registered!`, // server will send back a json object which has the attribut
-      // message and then the string hello when it gets a request to
-      // the /status endpoint
-    });
-  }); // post request to register endpoint
-
+  // possibly change this to a different file, authentiacation
+  app.post('/users/register', AuthenticationController.register)
 
   // getting a single user
   app.get('/users/:userId', (req, res, next) => {
@@ -73,7 +58,14 @@ module.exports = (app) => {
       .then(doc => {
         console.log('From database', doc); // we have to call
         if (doc) {
-          res.status(200).json(doc);
+          res.status(200).json({
+            user: doc,
+            request: {
+              type: 'GET',
+              description: 'Get all users',
+              url: 'http://localhost:8081/users',
+            }
+          });
         } else {
           res.status(404).json({message: 'No valid entry found for provided id'})
         }
@@ -100,8 +92,13 @@ module.exports = (app) => {
     User.update({_id: id}, {$set: updateOps})// might just change one thing :)
       .exec()
       .then(result => {
-        console.log(result);
-        res.status(200).json(result);
+        res.status(200).json({
+          message: 'User Updated',
+          request: {
+            type: 'GET',
+            url: 'http://localhost:8081/users/' + result._id,
+          }
+        });
       })
       .catch(err => {
         console.log(err);
@@ -133,8 +130,10 @@ module.exports = (app) => {
     User.remove({_id: id}) // remove the user who has an _id value of id
       .exec()
       .then(result => {
-        res.status(200).json(result);
-      })
+        res.status(200).json({
+          message: 'user deleted',
+          });
+        })
       .catch(err => {
         console.log(err);
         res.status(500).json({

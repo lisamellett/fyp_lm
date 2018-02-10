@@ -4,15 +4,24 @@ const cors = require('cors'); // this will go into the modules folder and find t
 const morgan = require('morgan'); // log generator
 const mongoose = require('mongoose');
 
+// what is a cors error - google images
+// cross origin resource sharing
+// security concept - https://youtu.be/zoSJ3bNGPp0
+
 const config = require('./config/config');
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 
 // const userRoutes = require('routes/api/users');
 
 // Connect to mongoose
 mongoose.connect(config.db); // this will need to be changed when switching to atlas
 mongoose.Promise = global.Promise;
+
+const database = mongoose.connection;
+database.once('open', () => {
+  console.log('Connected to MongoDb');
+});
 
 const app = express(); // this will build us a simple express server
 app.use(morgan('combined')); // combine allows us to print out our logs in a certain way
@@ -22,7 +31,7 @@ app.use(cors()); // you need cors if you want your server to be served on a
 
 require('./routes/index')(app); // pass routes app which will attach all the endpoints
 
-app.listen(process.env.PORT || 8081);
+// app.listen(process.env.PORT || 8081);
 // we have a server running on port 8081, process.env.PORT allows us to
 // overwrite that port using environment variables if we want
 

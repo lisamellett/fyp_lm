@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs'); // filesystem
 const path = require('path');
 
 module.exports = (app) => {
