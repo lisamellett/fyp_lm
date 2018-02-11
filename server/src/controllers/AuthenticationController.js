@@ -6,6 +6,7 @@ module.exports = {
     User.findById(req.body.manager) // this is to make sure the manager exists
       .then(manager => {
         if (!manager) {
+          console.log('hahjsdh');
           return res.status(404).json({
             message: "Manager not found",
           });
@@ -30,6 +31,7 @@ module.exports = {
       .then(result => { // mongoose model method to store in database
         // have to call exec or then or callback after save
         console.log(result);
+        console.log('aaaaaa');
         res.status(201).json({
           message: 'Created new user',
           createdUser: {
@@ -55,8 +57,9 @@ module.exports = {
       })
       .catch(err => {
         console.log(err);
+        console.log('un here');
         res.status(500).json({
-          message: 'This username already exists',
+          error: 'Username already exists',
         })
       }); // catch potential errors
 

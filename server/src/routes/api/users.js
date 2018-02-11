@@ -1,6 +1,8 @@
 // put all the requests involving user models in here
 const AuthenticationController = require('../../controllers/AuthenticationController');
 
+const AuthenticationControllerPolicy = require('../../policies/AuthenticationContollerPolicy');
+
 const mongoose = require('mongoose');
 // may need to import express
 
@@ -48,7 +50,10 @@ module.exports = (app) => {
 
   // adding a user
   // possibly change this to a different file, authentiacation
-  app.post('/users/register', AuthenticationController.register)
+  app.post('/users/register',
+    AuthenticationControllerPolicy.register, // we call this middleware before we hit our controller
+    // when next() is called in policy then it will go  the controller
+    AuthenticationController.register);
 
   // getting a single user
   app.get('/users/:userId', (req, res, next) => {

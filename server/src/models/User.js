@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
   taken: {type: Number, required: true},
   dates: {type: Array, required: true},
   job: {type: String, required: true},
-  username: {type: String, required: true},
+  username: {type: String, required: true, unique:true},
   password: {type: String, required: true},
   // may include a list of message Ids here too
   // include a message schema and then when user is logged in
