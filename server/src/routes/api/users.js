@@ -55,6 +55,9 @@ module.exports = (app) => {
     // when next() is called in policy then it will go  the controller
     AuthenticationController.register);
 
+  app.post('/users/login',
+    AuthenticationController.login);
+
   // getting a single user
   app.get('/users/:userId', (req, res, next) => {
     const id = req.params.userId;

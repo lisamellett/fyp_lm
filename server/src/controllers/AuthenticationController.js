@@ -1,5 +1,15 @@
 const User = require('../models/User');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
+
+// function to sign a user object to using jwt library to give us a jwt token
+function jwtSignUser (user) {
+  const ONE_WEEK =  60 * 60 * 24 *7;
+  return jwt.sign(user, config.authentication.jwtSecret, {
+    expiresIn: ONE_WEEK,
+  })
+}
 
 module.exports = {
   register (req, res) {
@@ -58,15 +68,44 @@ module.exports = {
       .catch(err => {
         console.log(err);
         console.log('un here');
-        res.status(500).json({
-          error: 'Username already exists',
+        res.status(400).json({
+          error: 'Username already exists or invalid manager id',
         })
-      }); // catch potential errors
+      });
 
-    // res.send({
-    //   message: `Hello ${req.body.name}! You were registered!`, // server will send back a json object which has the attribut
-    //   // message and then the string hello when it gets a request to
-    //   // the /status endpoint
-    // });
-  },// post request to register endpoint
+
+  },// post request to login endpoint
+  async login (req, res) {
+    try {
+      const {username, password} = req.body;
+      const user = await User.findOne({username: username});
+      if (!user) {
+        return res.status(403).send({
+          error: 'The login information was incorrect'
+        });
+      }
+
+      const isPasswordValid = await user.comparePassword(password);
+      if (!isPasswordValid) {
+        return res.status(403).send({
+          error: 'The login information was incorrect pwd'
+        })
+      }
+
+      console.log('pwd valid', isPasswordValid);
+
+      const userJson = user.toJSON();
+      res.send({
+        user: userJson,
+        token: jwtSignUser(userJson),
+      });
+
+      console.log('pwd valid', isPasswordValid);
+
+    } catch (err) {
+      res.status(500).send({
+        error: 'An error has occurred trying to log in',
+      });
+    }
+  }
 };

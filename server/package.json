@@ -11,10 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "joi": "^13.1.2",
+    "jsonwebtoken": "^8.1.1",
     "mongoose": "^5.0.3",
     "mongoose-unique-validator": "^2.0.0",
     "morgan": "^1.9.0"

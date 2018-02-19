@@ -1,5 +1,6 @@
+const Promise = require('bluebird');
 const mongoose = require('mongoose');
-// const uniqueValidator = require('mongoose-unique-validator');
+const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'));
 
 const UserSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -29,6 +30,29 @@ const UserSchema = new mongoose.Schema({
   // will have a from: userid, to: useris
 });
 
-// UserSchema.plugin(uniqueValidator);
+UserSchema.pre('save', function() { // do i need to include update abd before here too?
+  const user = this;
+
+  const SALT_FACTOR = 8;
+
+  // only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) {
+    return;
+  }
+
+  return bcrypt
+    .genSaltAsync(SALT_FACTOR)
+    .then(salt => bcrypt.hashAsync(user.password, salt, null))
+    .then(hash => {
+      user.password = hash;
+    })
+
+  // may need to include next here
+
+});
+
+UserSchema.methods.comparePassword = function (candidatePassword) {
+  return bcrypt.compareAsync(candidatePassword, this.password);
+};
 
 module.exports = mongoose.model('User', UserSchema);

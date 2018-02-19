@@ -10,28 +10,29 @@
             <v-text-field
               label="name"
               v-model="name"
-              :rules="commonRules"
-              required
+              :rules="[v => !!v || 'Name is required']"
             ></v-text-field>
             <v-text-field
               label="Date of Birth"
               type="date"
               v-model="dob"
-              :rules="commonRules"
+              :rules="[v => !!v || 'Date of birth is required']"
               required
             ></v-text-field>
             <v-select
               label="Gender"
               v-model="select"
               :items="genders"
+              :rules="[v => !!v || 'Gender is required']"
               required>
             </v-select>
-            <v-text-field
-              label="role"
-              v-model="role"
-              :rules="commonRules"
-              required
-            ></v-text-field>
+            <v-select
+              label="Role"
+              v-model="selectRole"
+              :items="roles"
+              :rules="[v => !!v || 'Role is required']"
+              required>
+            </v-select>
             <!--<input name="manager"-->
             <!--v-model="manager"-->
             <!--placeholder="manager">-->
@@ -40,20 +41,20 @@
             <v-text-field
               label="team"
               v-model="team"
-              :rules="commonRules"
+              :rules="[v => !!v || 'Team is required']"
               required
             ></v-text-field>
             <v-text-field
               type="number"
-              label="allowance"
+              label="Holiday Allowance"
               v-model="allowance"
-              :rules="commonRules"
+              :rules="[v => !!v || 'Holiday Allowance is required']"
               required
             ></v-text-field>
             <v-text-field
-              label="job"
+              label="Job Description"
               v-model="job"
-              :rules="commonRules"
+              :rules="[v => !!v || 'Job description is required']"
               required
             ></v-text-field>
             <v-text-field
@@ -69,7 +70,7 @@
               :rules="passwordRules"
               required
             ></v-text-field>
-          <div class="error" v-html="error"></div>
+          <div class="error-msg" v-html="error"></div>
           <br>
 <!--v-model is a two way binding that basically says set the input to whatever
             those values are in the controller-->
@@ -82,61 +83,6 @@
     </v-flex>
   </v-layout>
 </template>
-<!--<template>-->
-  <!--<div>-->
-    <!--<h1>Register</h1>-->
-
-    <!--<input name="name"-->
-           <!--v-model="name"-->
-           <!--placeholder="name">-->
-    <!--<br>-->
-    <!--<input type="date"-->
-           <!--name="dob"-->
-           <!--v-model="dob"-->
-           <!--placeholder="date of birth">-->
-    <!--<br>-->
-    <!--<input name="gender"-->
-           <!--v-model="gender"-->
-           <!--placeholder="gender">-->
-    <!--<br>-->
-    <!--<input name="role"-->
-           <!--v-model="role"-->
-           <!--placeholder="role">-->
-    <!--<br>-->
-    <!--&lt;!&ndash;<input name="manager"&ndash;&gt;-->
-           <!--&lt;!&ndash;v-model="manager"&ndash;&gt;-->
-           <!--&lt;!&ndash;placeholder="manager">&ndash;&gt;-->
-    <!--&lt;!&ndash;&lt;!&ndash;may have to change this type &ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;<br>&ndash;&gt;-->
-    <!--<input name="team"-->
-           <!--v-model="team"-->
-           <!--placeholder="team">-->
-    <!--<br>-->
-    <!--<input type="number"-->
-           <!--name="allowance"-->
-           <!--v-model="allowance"-->
-           <!--placeholder="allowance">-->
-    <!--<br>-->
-    <!--<input name="job"-->
-           <!--v-model="job"-->
-           <!--placeholder="job description">-->
-    <!--<br>-->
-    <!--<input name="username"-->
-           <!--v-model="username"-->
-           <!--placeholder="username">-->
-    <!--<br>-->
-    <!--<input type="password"-->
-           <!--name="password"-->
-           <!--v-model="password"-->
-           <!--placeholder="password">-->
-    <!--<br>-->
-    <!--&lt;!&ndash;v-model is a two way binding that basically says set the input to whatever-->
-    <!--those values are in the controller&ndash;&gt;-->
-    <!--<button @click="register">Register</button>-->
-    <!--&lt;!&ndash;we want register method to be called when button is clicked&ndash;&gt;-->
-
-  <!--</div>-->
-<!--</template>-->
 
 
 <!--everything inside this script tag is the
@@ -148,13 +94,12 @@ import VToolbar from 'vuetify/src/components/VToolbar/VToolbar';
 import AuthenticationService from '@/services/AuthenticationService';
 import VTextField from 'vuetify/es5/components/VTextField/VTextField';
 import VSelect from "vuetify/es5/components/VSelect/VSelect";
-// import VBtn from 'vuetify/src/components/VBtn/VBtn';
 
 export default {
   components: {
     VSelect,
     VTextField,
-    VToolbar },
+    VToolbar,},
   data() {
     return {
       valid: true,
@@ -170,20 +115,24 @@ export default {
       password: '',
       error: null,
       usernameRules: [
-        (v) => !!v || 'Name is required',
-        (v) => v && v.length >= 3 || 'User Name must be at least than 3 characters'
-      ],
-      commonRules: [
-        (v) => !!v || 'Required',
+        (v) => !!v || 'Username is required',
+        (v) => v && v.length >= 3 || 'Username must be at least 3 characters'
       ],
       passwordRules: [
         (v) => !!v || 'Password is required',
-        (v) => v && v.length >= 3 || 'Password must be at least than 3 characters'
+        (v) => v && v.length >= 8 || 'Password must be at least 8 characters'
       ],
       select: null,
       genders: [
         'male',
         'female',
+      ],
+      selectRole: null,
+      roles: [
+        'employee',
+        'manager',
+        'senior management',
+        'admin',
       ],
     }
   },
@@ -194,8 +143,8 @@ export default {
           name: this.name,
           dob: this.dob,
           gender: this.select,
-          role: this.role,
-          manager: '5a7c78ff92cc973718481a24',
+          role: this.selectRole,
+          manager: '5a8083b0e102240bf003969c',
           team: this.team,
           allowance: this.allowance,
           taken: 0,
@@ -204,9 +153,7 @@ export default {
           username: this.username,
           password: this.password,
         });
-        // console.log(response.data);
       } catch (error) {
-        // console.log('here');
         this.error = error.response.data.error;
       }
     },
@@ -230,5 +177,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .error-msg {
+    color: red;
+  }
 </style>
