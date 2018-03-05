@@ -12,7 +12,8 @@
     <v-toolbar-items>
       <v-btn
         v-if="$store.state.isUserLoggedIn"
-        class="cyan" flat dark>
+        class="cyan" flat dark
+        @click="navigateTo({name: 'calendar'})">
         Calendar
       </v-btn>
     </v-toolbar-items>
@@ -37,8 +38,10 @@
 
     <v-toolbar-items>
       <v-btn
-        v-if="$store.state.isUserLoggedIn"
-        flat dark>Settings</v-btn>
+        v-if="$store.state.isUserLoggedIn && $store.state.user.role == 'admin'"
+        flat dark @click="navigateTo({name: 'employees'})">
+        Employees
+      </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
       <v-btn
@@ -50,7 +53,7 @@
 
     <v-toolbar-items>
       <v-btn
-        v-if="$store.state.isUserLoggedIn"
+        v-if="$store.state.isUserLoggedIn && $store.state.user.role == 'admin'"
         flat dark @click="navigateTo({name: 'register'})">
         Register a User
       </v-btn>

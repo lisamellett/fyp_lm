@@ -8,17 +8,43 @@
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-form v-model="valid" ref="form" lazy-validation>
             <v-text-field
-              label="name"
+              label="Name"
               v-model="name"
               :rules="[v => !!v || 'Name is required']"
             ></v-text-field>
-            <v-text-field
-              label="Date of Birth"
-              type="date"
-              v-model="dob"
-              :rules="[v => !!v || 'Date of birth is required']"
-              required
-            ></v-text-field>
+            <!--<v-text-field-->
+              <!--label="Date of Birth"-->
+              <!--type="date"-->
+              <!--v-model="dob"-->
+              <!--:rules="[v => !!v || 'Date of birth is required']"-->
+              <!--required-->
+            <!--&gt;</v-text-field>-->
+            <v-menu
+              ref="menu"
+              lazy
+              :close-on-content-click="false"
+              v-model="menu"
+              transition="scale-transition"
+              offset-y
+              full-width
+              :nudge-right="40"
+              min-width="290px"
+            >
+              <v-text-field
+                slot="activator"
+                label="Date of Birth"
+                v-model="dob"
+                prepend-icon="event"
+                readonly
+              ></v-text-field>
+              <v-date-picker
+                ref="picker"
+                v-model="dob"
+                @change="save"
+                min="1950-01-01"
+                :max="new Date().toISOString().substr(0, 10)"
+              ></v-date-picker>
+            </v-menu>
             <v-select
               label="Gender"
               v-model="select"
@@ -38,8 +64,26 @@
             <!--placeholder="manager">-->
             <!--&lt;!&ndash;may have to change this type &ndash;&gt;-->
             <!--<br>-->
+            <v-select
+              label="Manager"
+              v-model="selectManager"
+              :items="managers"
+              item-text="name"
+              return-object
+              autocomplete
+              :rules="[v => !!v || 'Manager is required']"
+              required>
+            </v-select>
+            <!--<v-select-->
+              <!--label="Team"-->
+              <!--v-model="selectTeam"-->
+              <!--tags-->
+              <!--:items="teams"-->
+              <!--:rules="[v => !!v || 'Team is required']"-->
+              <!--required>-->
+            <!--</v-select>-->
             <v-text-field
-              label="team"
+              label="Team"
               v-model="team"
               :rules="[v => !!v || 'Team is required']"
               required
@@ -94,6 +138,7 @@ import VToolbar from 'vuetify/src/components/VToolbar/VToolbar';
 import AuthenticationService from '@/services/AuthenticationService';
 import VTextField from 'vuetify/es5/components/VTextField/VTextField';
 import VSelect from "vuetify/es5/components/VSelect/VSelect";
+import UsersService from '@/services/UsersService';
 
 export default {
   components: {
@@ -122,6 +167,7 @@ export default {
         (v) => !!v || 'Password is required',
         (v) => v && v.length >= 8 || 'Password must be at least 8 characters'
       ],
+      menu: false,
       select: null,
       genders: [
         'male',
@@ -134,7 +180,24 @@ export default {
         'senior management',
         'admin',
       ],
+      selectManager: null,
+      managers: [],
+      selectTeam: null,
+      teams: ['sales', 'marketing'],
     }
+  },
+  watch: {
+    menu (val) {
+      val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
+    }
+  },
+  async mounted() {
+    this.managers = (await UsersService.getManagers()).data.managers;
+    // for (var i = 0; i< this.managers.length; i++) {
+    //   this.dict[this.managers[i]._id] = this.managers[i].name;
+    //   console.log(this.dict);
+    // }
+    console.log(this.managers);
   },
   methods: {
     async register() {
@@ -144,7 +207,7 @@ export default {
           dob: this.dob,
           gender: this.select,
           role: this.selectRole,
-          manager: '5a8083b0e102240bf003969c',
+          manager: this.selectManager._id,
           team: this.team,
           allowance: this.allowance,
           taken: 0,
@@ -153,9 +216,15 @@ export default {
           username: this.username,
           password: this.password,
         });
+        this.$router.push({
+          name: 'employees',
+        }); // may want to change this to different location
       } catch (error) {
         this.error = error.response.data.error;
       }
+    },
+    save(dob) {
+      this.$refs.menu.save(dob)
     },
   },
 };

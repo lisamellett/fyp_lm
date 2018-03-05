@@ -76,11 +76,15 @@ export default {
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
         console.log("waiting");
+        this.$router.push('home');
       } catch (error) {
         console.log('here7');
         // this.error = error.response.data.error;
       }
     },
+  },
+  navigateTo(route) {
+
   },
 };
 

@@ -3,6 +3,9 @@ import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import Register from '@/components/Register';
 import Login from '@/components/Login';
+import Calendar from '@/components/Calendar';
+import Employees from '@/components/Employees';
+import Profile from '@/components/Profile';
 
 Vue.use(Router);
 
@@ -23,5 +26,20 @@ export default new Router({
       name: 'login',
       component: Login,
     },
+    {
+      path: '/calender',
+      name: 'calendar',
+      component: Calendar,
+    },
+    {
+      path: '/employees',
+      name: 'employees',
+      component: Employees,
+    },
+    {
+      path: '/profile/:userId',
+      name: 'profile',
+      component: Profile,
+    }
   ],
 });
