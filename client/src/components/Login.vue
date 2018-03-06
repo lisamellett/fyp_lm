@@ -78,13 +78,9 @@ export default {
         console.log("waiting");
         this.$router.push('home');
       } catch (error) {
-        console.log('here7');
-        // this.error = error.response.data.error;
+        this.error = error.response.data.error;
       }
     },
-  },
-  navigateTo(route) {
-
   },
 };
 

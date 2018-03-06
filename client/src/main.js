@@ -69,6 +69,9 @@ Vue.use(Vuetify, {
 });
 
 sync(store, router);
+// whenever the router changes then the value of the router
+// and the params in the store will also change
+// eg. const userId = this.$store.state.route.params.userId
 
 /* eslint-disable no-new */
 new Vue({

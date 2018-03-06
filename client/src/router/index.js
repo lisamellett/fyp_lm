@@ -37,7 +37,7 @@ export default new Router({
       component: Employees,
     },
     {
-      path: '/profile/:userId',
+      path: '/profile',
       name: 'profile',
       component: Profile,
     }

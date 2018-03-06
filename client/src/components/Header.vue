@@ -2,18 +2,19 @@
   <v-toolbar fixed class="cyan" dark>
 
     <v-toolbar-title class="mr4">
-      <span
+      <router-link
         class="home"
-        @click="navigateTo({name: 'root'})">
+        tag="span"
+        :to="{ name: 'root'}">
         FYP APP
-      </span>
+      </router-link>
     </v-toolbar-title>
 
     <v-toolbar-items>
       <v-btn
         v-if="$store.state.isUserLoggedIn"
         class="cyan" flat dark
-        @click="navigateTo({name: 'calendar'})">
+        :to="{ name:'calendar'}">
         Calendar
       </v-btn>
     </v-toolbar-items>
@@ -33,20 +34,34 @@
     </v-toolbar-items>
 
 
-    <v-spacer></v-spacer>
+    <v-spacer>
+
+      <v-toolbar-items>
+        <router-link
+          tag="span"
+          :to="{ name: 'profile'}"
+          v-if="$store.state.isUserLoggedIn"
+          class="cyan" flat dark>
+          <v-icon>account_circle</v-icon>
+        </router-link>
+      </v-toolbar-items>
+
+    </v-spacer>
 
 
     <v-toolbar-items>
       <v-btn
         v-if="$store.state.isUserLoggedIn && $store.state.user.role == 'admin'"
-        flat dark @click="navigateTo({name: 'employees'})">
+        flat dark
+        :to="{name: 'employees'}">
         Employees
       </v-btn>
     </v-toolbar-items>
     <v-toolbar-items>
       <v-btn
         v-if="!$store.state.isUserLoggedIn"
-        flat dark @click="navigateTo({name: 'login'})">
+        flat dark
+        :to="{name: 'login'}">
         Login
       </v-btn>
     </v-toolbar-items>
@@ -54,7 +69,8 @@
     <v-toolbar-items>
       <v-btn
         v-if="$store.state.isUserLoggedIn && $store.state.user.role == 'admin'"
-        flat dark @click="navigateTo({name: 'register'})">
+        flat dark
+        :to="{name: 'register'}">
         Register a User
       </v-btn>
     </v-toolbar-items>
@@ -78,9 +94,6 @@ export default {
     VToolbar,
   },
   methods: {
-    navigateTo(route) {
-      this.$router.push(route);
-    },
     logout() {
       this.$store.dispatch('setToken', null);
       this.$store.dispatch('setUser', null);
