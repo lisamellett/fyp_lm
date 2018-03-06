@@ -29,6 +29,8 @@ app.use(bodyParser.json()); // allows our app to easily parse any json data that
 app.use(cors()); // you need cors if you want your server to be served on a
 // different domain and you want any client to be able to hit your server
 
+require('./passport');
+
 require('./routes/index')(app); // pass routes app which will attach all the endpoints
 
 // app.listen(process.env.PORT || 8081);
