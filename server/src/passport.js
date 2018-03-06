@@ -1,8 +1,6 @@
 /* eslint-disable */
 const passport = require('passport');
-const { User } = require('./models/User');
-// const User = require('../../models/User');
-//
+const User = require('./models/User');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt; // helper function
 const config = require('./config/config');
@@ -20,15 +18,12 @@ passport.use(
   },
   async (jwtPayload, done) => {
     try {
-      console.log('in try');
       // when we get a request, we need to first check that the user exists in the database
       // jwtPayload will be whatever we decide to encrypt or sign
       // look AuthenticationController, we signed the user
-      const user = await User.findOne({ _id: jwtPayload.id });
+      const user = await User.findOne({ _id: jwtPayload._id });
       // if that user doesn't exist then return error
-      console.log(jwtPayload.id);
       if (!user) {
-        console.log('in no user');
         return done(new Error(), false);
       }
       // otherwise return user object
@@ -36,7 +31,6 @@ passport.use(
       // whatever you pass as second parameter will set it on the req
       // eg. above.. req.user = user
     } catch (err) {
-      console.log('error straight away');
       return done(new Error(), false);
     }
   }),

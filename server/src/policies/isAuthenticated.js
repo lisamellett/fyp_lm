@@ -8,14 +8,11 @@ const passport = require('passport');
 // back html error but we want json for out pure restful api
 module.exports = function (req, res, next) {
   passport.authenticate('jwt', function (err, user) {
-    console.log('rifht here');
     if (err || !user) {
-      console.log('1111');
       res.status(403).send({
         error: "You do not have access to this resource",
       });
     } else {
-      console.log('22222');
       // then there is a user and they are logged in
       req.user = user;
       next()

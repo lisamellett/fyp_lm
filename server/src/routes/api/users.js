@@ -1,6 +1,8 @@
 const AuthenticationController = require('../../controllers/AuthenticationController');
 const AuthenticationControllerPolicy = require('../../policies/AuthenticationContollerPolicy');
 const isAuthenticated = require('../../policies/isAuthenticated');
+// include isAuthenticated policy before any endpoint where the user should
+// be logged in to access
 
 const mongoose = require('mongoose');
 // may need to import express
@@ -21,9 +23,12 @@ module.exports = (app) => {
     // when next() is called in policy then it will go  the controller
     AuthenticationController.register);
 
-  app.post('/users/login', AuthenticationController.login);
+  app.post('/users/login',
+    AuthenticationController.login);
 
-  app.get('/users/:userId', UsersController.getOneUser);
+  app.get('/users/:userId',
+    isAuthenticated,
+    UsersController.getOneUser);
 
   app.patch('/users/:userId',
     // to update users the user has to be logged in
@@ -34,6 +39,8 @@ module.exports = (app) => {
     isAuthenticated,
     UsersController.deleteOneUser);
 
-  app.get('/managers', UsersController.managers);
+  app.get('/managers',
+    isAuthenticated,
+    UsersController.managers);
 
 };
