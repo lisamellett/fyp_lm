@@ -107,5 +107,30 @@ module.exports = {
         error: 'An error has occurred trying to log in',
       });
     }
+  },
+
+  roleAuthorization(roles) {
+    return function(req, res, next) {
+
+      const user = req.user;
+
+      User.findById(user._id, function(err, foundUser) {
+
+        if (err) {
+          res.status(422).json({error: 'No user found in database that matches user id in the request.'});
+          return next(err);
+        }
+
+        if (roles.indexOf(foundUser.role) > -1) {
+          // if user has a role that is in the list
+          return next();
+        }
+
+        res.status(401).json({error: 'You are not authorized to view this content, or perform this action'});
+        return next('Unauthorized');
+
+      });
+
+    }
   }
 };

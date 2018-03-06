@@ -14,33 +14,39 @@ module.exports = (app) => {
 
   app.get('/users',
     isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']),
     UsersController.users);
 
   app.post('/users/register',
     // to register a user someone has to be logged in
     isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']), // only admins can register
     AuthenticationControllerPolicy.register, // we call this middleware before we hit our controller
     // when next() is called in policy then it will go  the controller
     AuthenticationController.register);
 
   app.post('/users/login',
-    AuthenticationController.login);
+    AuthenticationController.login,
+    AuthenticationController.roleAuthorization(['employee', 'manager', 'admin'])); // this adds extra security -> talk about in report
 
   app.get('/users/:userId',
     isAuthenticated,
-    UsersController.getOneUser);
+    UsersController.getOneUser); // not sure if the end point is being used yet
 
   app.patch('/users/:userId',
     // to update users the user has to be logged in
     isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']),
     UsersController.update);
 
   app.delete('/users/:userId',
     isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']),
     UsersController.deleteOneUser);
 
   app.get('/managers',
     isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']),
     UsersController.managers);
 
 };
