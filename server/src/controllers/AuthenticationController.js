@@ -33,6 +33,7 @@ module.exports = {
           taken: req.body.taken,
           dates: req.body.dates,
           job: req.body.job,
+          reviews: req.body.reviews,
           username: req.body.username,
           password: req.body.password,
         });
@@ -56,6 +57,7 @@ module.exports = {
             taken: result.taken,
             dates: result.dates,
             job: result.job,
+            reviews: result.reviews,
             username: result.username,
             password: result.password,
             request: {

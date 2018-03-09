@@ -21,7 +21,8 @@
     <v-toolbar-items>
       <v-btn
         v-if="$store.state.isUserLoggedIn"
-        class="cyan" flat dark>
+        class="cyan" flat dark
+        :to="{ name:'performance'}">
         Performance
       </v-btn>
     </v-toolbar-items>

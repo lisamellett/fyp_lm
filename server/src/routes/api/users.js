@@ -13,8 +13,9 @@ const UsersController = require('../../controllers/UsersController');
 module.exports = (app) => {
 
   app.get('/users',
-    isAuthenticated,
-    AuthenticationController.roleAuthorization(['admin']),
+    // isAuthenticated,
+    // AuthenticationController.roleAuthorization(['admin']),
+    // add above two lines back in when finished testing
     UsersController.users);
 
   app.post('/users/register',
@@ -49,4 +50,9 @@ module.exports = (app) => {
     AuthenticationController.roleAuthorization(['admin']),
     UsersController.managers);
 
+  app.post('/reviews/:userId',
+    UsersController.addReview);
+
+  app.get('/employees/:managerId',
+    UsersController.getManagersEmployees);
 };

@@ -14,6 +14,17 @@ const UserSchema = new mongoose.Schema({
   taken: {type: Number, required: true},
   dates: {type: Array, required: true},
   job: {type: String, required: true},
+  reviews: [
+    {
+      authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // manager id
+      communication : {type: Number},
+      cooperation : {type: Number},
+      punctuality : {type: Number},
+      qualityOfWork : {type: Number},
+      feedback : {type: String},
+      date: {type: Date},
+    }
+  ],
   username: {type: String, required: true, unique:true},
   password: {type: String, required: true},
   // may include a list of message Ids here too

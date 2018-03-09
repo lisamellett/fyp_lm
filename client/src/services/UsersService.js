@@ -16,5 +16,13 @@ export default {
 
   getManagers() {
     return Api().get('managers');
-  }
+  },
+
+  getManagersEmployees(managerId) {
+    return Api().get('employees/' + managerId);
+  },
+
+  addReview(userId, review) {
+    return Api().post('/reviews/' + userId, review);
+  },
 }

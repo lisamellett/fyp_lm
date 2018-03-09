@@ -213,6 +213,7 @@ export default {
           taken: 0,
           dates: [],
           job: this.job,
+          reviews: [],
           username: this.username,
           password: this.password,
         });

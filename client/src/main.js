@@ -33,6 +33,11 @@ import {
   VDialog,
   VIcon,
   VDatePicker,
+  VStepper,
+  VDivider,
+  VRadioGroup,
+  VSlider,
+  VSubheader,
 } from 'vuetify';
 
 import App from './App';
@@ -65,6 +70,11 @@ Vue.use(Vuetify, {
     VDialog,
     VIcon,
     VDatePicker,
+    VStepper,
+    VDivider,
+    VRadioGroup,
+    VSlider,
+    VSubheader,
   },
 });
 
