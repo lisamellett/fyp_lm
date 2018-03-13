@@ -46,7 +46,7 @@
               </v-menu>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Job Description" v-model="editedItem.job"></v-text-field>
+                <v-text-field label="Job Title" v-model="editedItem.title"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-text-field label="Holidays Taken" v-model="editedItem.taken" type="number"></v-text-field>
@@ -140,8 +140,8 @@
       <template slot="expand" slot-scope="props">
         <v-card flat>
           <v-card-text>
-            <h4 class="text-xs-left">Job Description</h4>
-            <p class="text-xs-left">{{ props.item.job }}</p>
+            <h4 class="text-xs-left">Job Title</h4>
+            <p class="text-xs-left">{{ props.item.title }}</p>
           </v-card-text>
         </v-card>
       </template>
@@ -170,7 +170,7 @@ export default {
         { text: 'Gender', value: 'gender' },
         { text: 'Team', value: 'team' },
         { text: 'Holidays Taken', value: 'taken' },
-        { text: 'Holidays Remaining', value: 'allowance' },
+        { text: 'Total Holidays', value: 'allowance' },
       ],
       genders: [
         'male',
@@ -193,7 +193,7 @@ export default {
         taken: '',
         allowance: '',
         manager: '',
-        job: '',
+        title: '',
       },
       defaultItem: {
         name: '',
@@ -204,7 +204,7 @@ export default {
         taken: '',
         allowance: '',
         manager: '',
-        job: '',
+        title: '',
       },
       items: [], // change items to users or employees
       menu: false,

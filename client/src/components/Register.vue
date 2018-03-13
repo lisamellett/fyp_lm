@@ -96,9 +96,9 @@
               required
             ></v-text-field>
             <v-text-field
-              label="Job Description"
-              v-model="job"
-              :rules="[v => !!v || 'Job description is required']"
+              label="Job Title"
+              v-model="title"
+              :rules="[v => !!v || 'Job title is required']"
               required
             ></v-text-field>
             <v-text-field
@@ -155,7 +155,7 @@ export default {
       team: '',
       manager: '',
       allowance: '',
-      job: '',
+      title: '',
       username: '',
       password: '',
       error: null,
@@ -212,7 +212,7 @@ export default {
           allowance: this.allowance,
           taken: 0,
           dates: [],
-          job: this.job,
+          title: this.title,
           reviews: [],
           username: this.username,
           password: this.password,

@@ -21,6 +21,8 @@ module.exports = {
             message: "Manager not found",
           });
         }
+        const birthDate = new Date(req.body.dob);
+        const prettyDob = birthDate.toDateString();
         const user = new User({
           _id: new mongoose.Types.ObjectId(),
           name: req.body.name,
@@ -32,10 +34,11 @@ module.exports = {
           allowance: req.body.allowance,
           taken: req.body.taken,
           dates: req.body.dates,
-          job: req.body.job,
+          title: req.body.title,
           reviews: req.body.reviews,
           username: req.body.username,
           password: req.body.password,
+          prettyDob: prettyDob,
         });
         return user.save();
       })
@@ -56,10 +59,11 @@ module.exports = {
             allowance: result.allowance,
             taken: result.taken,
             dates: result.dates,
-            job: result.job,
+            title: result.title,
             reviews: result.reviews,
             username: result.username,
             password: result.password,
+            prettyDob: result.prettyDob,
             request: {
               type: 'GET',
               url: 'http://localhost:8081/users/' + result.id,

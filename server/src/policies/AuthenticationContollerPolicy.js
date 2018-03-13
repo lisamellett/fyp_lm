@@ -14,7 +14,7 @@ module.exports = {
       allowance: Joi.number(),
       taken: Joi.number(),
       dates: Joi.array(), // Joi.array().items(Joi.string(), Joi.any().strip());
-      job: Joi.string(),
+      title: Joi.string(),
       reviews: Joi.array(),
       username: Joi.string().alphanum().min(3).max(30).required(),
       password: Joi.string().regex(/^[a-zA-Z0-9]{8,32}$/),
@@ -72,9 +72,9 @@ module.exports = {
           });
           break;
 
-        case 'job':
+        case 'title':
           res.status(400).send({
-            error: 'Job must be a string'
+            error: 'Title must be a string'
           });
           break;
 

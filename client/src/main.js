@@ -38,6 +38,7 @@ import {
   VRadioGroup,
   VSlider,
   VSubheader,
+  VExpansionPanel,
 } from 'vuetify';
 
 import App from './App';
@@ -75,6 +76,7 @@ Vue.use(Vuetify, {
     VRadioGroup,
     VSlider,
     VSubheader,
+    VExpansionPanel,
   },
 });
 

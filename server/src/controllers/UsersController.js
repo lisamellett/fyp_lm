@@ -21,7 +21,7 @@ module.exports = {
             allowance: doc.allowance,
             taken: doc.taken,
             dates: doc.dates,
-            job: doc.job,
+            title: doc.title,
             reviews: doc.reviews,
             username: doc.username,
             password: doc.password,
@@ -57,7 +57,7 @@ module.exports = {
             allowance: doc.allowance,
             taken: doc.taken,
             dates: doc.dates,
-            job: doc.job,
+            title: doc.title,
             reviews: doc.reviews,
             username: doc.username,
             password: doc.password,
@@ -135,12 +135,9 @@ module.exports = {
       console.log(employeeId);
       const review = {
         "authorId": req.body.authorId,
-        "communication": req.body.communication,
-        "cooperation": req.body.cooperation,
-        "punctuality": req.body.punctuality,
-        "qualityOfWork": req.body.qualityOfWork,
+        "fields": req.body.fields,
         "feedback": req.body.feedback,
-        "date": new Date(),
+        "date": new Date().toDateString(),
       };
       console.log(review);
       const user = await User.findOne({_id: employeeId});
@@ -149,7 +146,7 @@ module.exports = {
           error: 'The user you are trying to post a review for does not exist'
         });
       }
-      const response = await User.findOneAndUpdate({_id: employeeId}, {$push: {reviews: review}});
+      const response = await User.findOneAndUpdate({_id: employeeId}, {$push: {reviews: { $each: [review], $position: 0}}});
       res.status(200).json(response);
 
     } catch (err){
@@ -184,7 +181,7 @@ module.exports = {
             allowance: doc.allowance,
             taken: doc.taken,
             dates: doc.dates,
-            job: doc.job,
+            title: doc.title,
             reviews: doc.reviews,
             username: doc.username,
             password: doc.password,
