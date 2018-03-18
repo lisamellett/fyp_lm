@@ -22,22 +22,11 @@
                 <span>Add New Review</span>
               </v-tooltip>
           </v-toolbar>
-          <!--<v-card-text>-->
-            <!--<v-btn color="primary" dark @click.stop="dialog2 = !dialog2">Open Dialog 2</v-btn>-->
-            <!--<v-tooltip right>-->
-              <!--<v-btn slot="activator">Tool Tip Activator</v-btn>-->
-              <!--Tool Tip-->
-            <!--</v-tooltip>-->
             <v-alert type="success"  dismissible v-model="successAlert">
               The review has successfully been added
             </v-alert>
             <v-layout>
               <v-flex xs8 class="mr-4 ml-4 mt-4">
-                <!--<div class="white elevation-2">-->
-                <!--<v-toolbar flat dense class="cyan" dark>-->
-                <!--<v-toolbar-title class="title">Login</v-toolbar-title>-->
-                <!--</v-toolbar>-->
-                <!--<div class="pl-4 pr-4 pt-2 pb-2">-->
                 <v-text-field
                   append-icon="search"
                   label="Search"
@@ -141,8 +130,6 @@
             <div>
               <v-stepper v-model="e1">
                 <v-stepper-header>
-                  <!--<v-stepper-step step="1" :complete="e1 > 1">Pick Employee</v-stepper-step>-->
-                  <!--<v-divider></v-divider>-->
                   <v-stepper-step step="1" :complete="e1 > 1">Review</v-stepper-step>
                   <v-divider></v-divider>
                   <v-stepper-step step="2" :complete="e1 > 2">Additional Feedback</v-stepper-step>
@@ -150,26 +137,6 @@
                   <v-stepper-step step="3">Submit</v-stepper-step>
                 </v-stepper-header>
                 <v-stepper-items>
-                  <!--<v-stepper-content step="1">-->
-                    <!--<v-card class="mb-5">-->
-                      <!--<v-radio-group v-model="selectedEmployee">-->
-                        <!--<v-layout row wrap>-->
-                          <!--<v-flex xs4-->
-                                  <!--v-for="n in employees"-->
-                                  <!--:key="n._id">-->
-                            <!--<v-radio-->
-                              <!--:label="`${n.name}`"-->
-                              <!--:value="n"-->
-                            <!--&gt;</v-radio>-->
-                          <!--</v-flex>-->
-                        <!--</v-layout>-->
-                      <!--</v-radio-group>-->
-                      <!--<span v-if="selectedEmployee">Picked: {{ selectedEmployee.name }}</span>-->
-                      <!--<div class="error-msg" v-html="error"></div>-->
-                    <!--</v-card>-->
-                    <!--<v-btn color="primary" @click="continuePressed">Continue</v-btn>-->
-                    <!--<v-btn flat @click="cancelPressed">Cancel</v-btn>-->
-                  <!--</v-stepper-content>-->
                   <v-stepper-content step="1">
                     <v-card class="mb-5">
                       <v-card-title align="left" v-if="currentEmployee" class="subheading">Please rate {{ currentEmployee.name }} on the following:</v-card-title>
@@ -195,22 +162,6 @@
                         </v-flex>
                         <v-flex xs2>
                           <v-text-field placeholder="add new field" v-model="newField"></v-text-field>
-                          <!--<v-card>-->
-                          <!--<v-card-title>-->
-                          <!--<span class="headline">Add New Field</span>-->
-                          <!--</v-card-title>-->
-                          <!--<v-card-text>-->
-                          <!--<v-flex xs12>-->
-                          <!--<v-text-field label="Field Name" v-model="newField"></v-text-field>-->
-                          <!--</v-flex>-->
-                          <!--</v-card-text>-->
-                          <!--<v-card-actions>-->
-                          <!--<v-spacer></v-spacer>-->
-                          <!--<v-btn color="blue darken-1" flat @click.native="dialog = false">Cancel</v-btn>-->
-                          <!--<v-btn color="blue darken-1" flat @click.native="addField(newField)">Save</v-btn>-->
-                          <!--</v-card-actions>-->
-                          <!--</v-card>-->
-                          <!--</v-dialog>-->
                         </v-flex>
                       </v-layout>
                     </v-card>
@@ -308,16 +259,6 @@
         class="elevation-1"
         item-key="_id"
       >
-        <!--<template slot="headerCell" slot-scope="props">-->
-        <!--<v-tooltip bottom>-->
-        <!--<span slot="activator">-->
-        <!--{{ props.header.text }}-->
-        <!--</span>-->
-        <!--<span>-->
-        <!--{{ props.header.text }}-->
-        <!--</span>-->
-        <!--</v-tooltip>-->
-        <!--</template>-->
         <template slot="items" slot-scope="props">
           <tr>
             <td class="text-xs-left">{{ props.item.name }}</td>
@@ -355,194 +296,8 @@
         <v-btn class="cyan--after" :to="{ name:'myPerformance'}">My Performance</v-btn>
       </v-toolbar>
       <div>
-      <!--<v-stepper v-model="e1">-->
-        <!--<v-stepper-header>-->
-          <!--<v-stepper-step step="1" :complete="e1 > 1">Pick Employee</v-stepper-step>-->
-          <!--<v-divider></v-divider>-->
-          <!--<v-stepper-step step="2" :complete="e1 > 2">Review</v-stepper-step>-->
-          <!--<v-divider></v-divider>-->
-          <!--<v-stepper-step step="3" :complete="e1 > 3">Additional Feedback</v-stepper-step>-->
-          <!--<v-divider></v-divider>-->
-          <!--<v-stepper-step step="4">Submit</v-stepper-step>-->
-        <!--</v-stepper-header>-->
-        <!--<v-stepper-items>-->
-          <!--<v-stepper-content step="1">-->
-            <!--<v-card class="mb-5">-->
-              <!--<v-radio-group v-model="selectedEmployee">-->
-                <!--<v-layout row wrap>-->
-                <!--<v-flex xs4-->
-                        <!--v-for="n in employees"-->
-                        <!--:key="n._id">-->
-                  <!--<v-radio-->
-                    <!--:label="`${n.name}`"-->
-                    <!--:value="n"-->
-                  <!--&gt;</v-radio>-->
-                <!--</v-flex>-->
-                <!--</v-layout>-->
-              <!--</v-radio-group>-->
-              <!--<span v-if="selectedEmployee">Picked: {{ selectedEmployee.name }}</span>-->
-              <!--<div class="error-msg" v-html="error"></div>-->
-            <!--</v-card>-->
-            <!--<v-btn color="primary" @click="continuePressed">Continue</v-btn>-->
-            <!--<v-btn flat @click="cancelPressed">Cancel</v-btn>-->
-          <!--</v-stepper-content>-->
-          <!--<v-stepper-content step="2">-->
-            <!--<v-card class="mb-5">-->
-              <!--<v-card-title align="left" v-if="selectedEmployee" class="subheading">Please rate {{ selectedEmployee.name }} on the following:</v-card-title>-->
-              <!--<v-layout v-for="(value, field) in fields" :key="" row wrap>-->
-                <!--<v-flex xs1>-->
-                <!--<v-btn icon class="mx-0" @click.stop="removeField(field)">-->
-                  <!--<v-icon color="pink">remove_circle_outline</v-icon>-->
-                <!--</v-btn>-->
-                <!--</v-flex>-->
-                  <!--<v-flex xs8>-->
-                    <!--<v-slider :label="field" :max="10" v-model="fields[field]"></v-slider>-->
-                  <!--</v-flex>-->
-                  <!--<v-flex xs3>-->
-                    <!--<v-text-field :max="10" :min="0" v-model="fields[field]" type="number"></v-text-field>-->
-                  <!--</v-flex>-->
-              <!--</v-layout>-->
-              <!--<v-layout>-->
-                <!--<v-flex xs1>-->
-              <!--&lt;!&ndash;<v-dialog v-model="dialog" persistent max-width="300px">&ndash;&gt;-->
-                <!--<v-btn icon class="mx-0" slot="activator" @click.native="addField(newField)">-->
-                  <!--<v-icon color="green">add_circle_outline</v-icon>-->
-                <!--</v-btn>-->
-                <!--</v-flex>-->
-                  <!--<v-flex xs2>-->
-                <!--<v-text-field placeholder="field name" v-model="newField"></v-text-field>-->
-                <!--&lt;!&ndash;<v-card>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<v-card-title>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<span class="headline">Add New Field</span>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</v-card-title>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<v-card-text>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<v-flex xs12>&ndash;&gt;-->
-                          <!--&lt;!&ndash;<v-text-field label="Field Name" v-model="newField"></v-text-field>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</v-flex>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</v-card-text>&ndash;&gt;-->
-                  <!--&lt;!&ndash;<v-card-actions>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<v-spacer></v-spacer>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<v-btn color="blue darken-1" flat @click.native="dialog = false">Cancel</v-btn>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<v-btn color="blue darken-1" flat @click.native="addField(newField)">Save</v-btn>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</v-card-actions>&ndash;&gt;-->
-                <!--&lt;!&ndash;</v-card>&ndash;&gt;-->
-              <!--&lt;!&ndash;</v-dialog>&ndash;&gt;-->
-                <!--</v-flex>-->
-              <!--</v-layout>-->
-            <!--</v-card>-->
-            <!--<v-btn flat @click="backPressed">Back</v-btn>-->
-            <!--<v-btn color="primary" @click.native="e1=3">Continue</v-btn>-->
-            <!--<v-btn flat @click="cancelPressed">Cancel</v-btn>-->
-          <!--</v-stepper-content>-->
-          <!--<v-stepper-content step="3">-->
-            <!--<v-card class="mb-5">-->
-              <!--<v-layout row>-->
-                <!--<v-flex xs2>-->
-                  <!--<v-subheader v-if="selectedEmployee">Provide {{ selectedEmployee.name }} with some feedback:</v-subheader>-->
-                <!--</v-flex>-->
-                <!--<v-flex xs10>-->
-                  <!--<v-text-field-->
-                    <!--name="feedback"-->
-                    <!--label="Feedback"-->
-                    <!--v-model="feedback"-->
-                    <!--multi-line-->
-                  <!--&gt;</v-text-field>-->
-                <!--</v-flex>-->
-              <!--</v-layout>-->
-            <!--</v-card>-->
-            <!--<v-btn flat @click="backPressed">Back</v-btn>-->
-            <!--<v-btn color="primary" @click.native="e1 = 4">Continue</v-btn>-->
-            <!--<v-btn flat @click="cancelPressed">Cancel</v-btn>-->
-          <!--</v-stepper-content>-->
-          <!--<v-stepper-content step="4">-->
-            <!--<v-card v-if="selectedEmployee" class="mb-5">-->
-              <!--<h3 class="title">Review</h3>-->
-              <!--<v-layout row wrap>-->
-                <!--<v-flex xs6 offset-xs3>-->
-                  <!--<span class="grey&#45;&#45;text">Employee: </span>-->
-                  <!--<span>{{ selectedEmployee.name }}</span>-->
-                <!--</v-flex>-->
-                <!--<v-flex xs12>-->
-                <!--<table>-->
-                  <!--<tr>-->
-                    <!--<th>Skill</th>-->
-                    <!--<th>Score</th>-->
-                  <!--</tr>-->
-                  <!--<tr v-for="(value, field) in fields">-->
-                    <!--<td>{{field}} : </td>-->
-                    <!--<td>-->
-                      <!--<v-icon small v-for="i in value">grade</v-icon>-->
-                      <!--<v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>-->
-                    <!--</td>-->
-                  <!--</tr>-->
-                <!--</table>-->
-                <!--</v-flex>-->
-                <!--<v-flex xs6 offset-xs3>-->
-                  <!--<div>-->
-                    <!--<span class="grey&#45;&#45;text">Feedback: </span>-->
-                    <!--<span>{{feedback}}</span>-->
-                  <!--</div>-->
-                <!--</v-flex>-->
-              <!--</v-layout>-->
-            <!--</v-card>-->
-            <!--<v-btn flat @click="backPressed">Back</v-btn>-->
-            <!--<v-btn color="primary" @click="submitPressed">Submit</v-btn>-->
-            <!--<v-btn flat @click="cancelPressed">Cancel</v-btn>-->
-          <!--</v-stepper-content>-->
-        <!--</v-stepper-items>-->
-      <!--</v-stepper>-->
     </div>
-
   </div>
-    <!--<v-layout>-->
-      <!--<v-flex xs6>-->
-    <!--<div class="white elevation-2 mt-4">-->
-      <!--<v-toolbar flat dense class="cyan" dark>-->
-        <!--<v-toolbar-title class="title">My Employee's Performance Reviews</v-toolbar-title>-->
-      <!--</v-toolbar>-->
-        <!--<v-flex xs6 class="pa-4">-->
-          <!--<v-radio-group v-model="selectedEmployeeToView">-->
-        <!--<div-->
-                <!--v-for="e in employees"-->
-                <!--:key="e._id">-->
-          <!--<v-radio-->
-            <!--:label="`${e.name}`"-->
-            <!--:value="e"-->
-          <!--&gt;</v-radio>-->
-        <!--</div>-->
-          <!--</v-radio-group>-->
-        <!--</v-flex>-->
-      <!--</div>-->
-      <!--</v-flex>-->
-        <!--<v-flex xs6 class="mt-4 ml-4">-->
-          <!--<v-expansion-panel popout>-->
-            <!--<v-expansion-panel-content v-for="(review) in selectedEmployeeToView.reviews" :key="review._id">-->
-              <!--<div slot="header" class="subheader">{{ review.date }}</div>-->
-              <!--<v-card>-->
-                <!--<v-card-text>-->
-                  <!--<table align="left" class="mr-4">-->
-                    <!--<tr class="cyan">-->
-                      <!--<th>Skill</th>-->
-                      <!--<th>Score</th>-->
-                    <!--</tr>-->
-                    <!--<tr v-for="(value,field) in review.fields">-->
-                      <!--<td>{{ field }}: </td>-->
-                      <!--<td>-->
-                        <!--<v-icon small v-for="i in value">grade</v-icon>-->
-                        <!--<v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>-->
-                      <!--</td>-->
-                    <!--</tr>-->
-                  <!--</table>-->
-                  <!--<div>-->
-                    <!--<h4 class="grey&#45;&#45;text">Feedback: </h4>-->
-                    <!--<p>{{ review.feedback }}</p>-->
-                  <!--</div>-->
-                <!--</v-card-text>-->
-              <!--</v-card>-->
-            <!--</v-expansion-panel-content>-->
-          <!--</v-expansion-panel>-->
-        <!--</v-flex>-->
-    <!--</v-layout>-->
   </div>
   </v-container>
 </template>
@@ -736,28 +491,6 @@ export default {
       this.$delete(this.fields, field);
       console.log(this.fields);
     },
-    // setPage(p) {
-    //   this.selected = p;
-    //   this.pagination = this.paginator(this.viewFilteredReviews.length, p);
-    // },
-    // paginate(reviews) {
-    //   return reviews.slice( this.pagination.startIndex, this.pagination.endIndex + 1)
-    // },
-    // paginator(totalItems, currentPage) {
-    //   let startIndex = (currentPage - 1) * this.perPage,
-    //     endIndex = Math.min(startIndex + this.perPage - 1, totalItems - 1);
-    //   let upperBound = Math.ceil(totalItems / this.perPage) + 1;
-    //   let pages = [];
-    //   for (let i = 1; i < upperBound; i++) {
-    //     pages.push(i);
-    //   }
-    //   return {
-    //     currentPage: currentPage,
-    //     startIndex: startIndex,
-    //     endIndex: endIndex,
-    //     pages: pages,
-    //   };
-    // },
     closeViewDialog() {
       this.viewDialog = false;
       this.selectPage(1);
@@ -819,19 +552,6 @@ export default {
       })
     },
   },
-  // computed: {
-  //   viewFilteredReviews: function() {
-  //     return this.currentViewEmployee.reviews.filter((review) => {
-  //       return review.date.toLowerCase().includes(this.search1.toLowerCase()); // if we return true then that review remains in the array
-  //     })
-  //   },
-  //   paginatedReviews() {
-  //     return this.paginate(this.viewFilteredReviews);
-  //   },
-  // },
-  // created() {
-  //   this.setPage(1); // setPage(1) resets everything -> good to know this for debugging
-  // },
 }
 </script>
 

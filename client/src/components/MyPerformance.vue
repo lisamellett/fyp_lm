@@ -1,11 +1,6 @@
 <template>
   <v-layout>
     <v-flex xs8 class="mr-4">
-      <!--<div class="white elevation-2">-->
-        <!--<v-toolbar flat dense class="cyan" dark>-->
-          <!--<v-toolbar-title class="title">Login</v-toolbar-title>-->
-        <!--</v-toolbar>-->
-        <!--<div class="pl-4 pr-4 pt-2 pb-2">-->
       <v-text-field
         append-icon="search"
         label="Search"
@@ -113,7 +108,6 @@ export default {
       searchItem: '',
       filteredItems: [],
       paginatedItems: [],
-      selectedItems: [],
       selected: null,
       pagination: {
         range: 5,
@@ -241,6 +235,12 @@ export default {
     float: left;
     padding: 8px 16px;
     text-decoration: none;
+  }
+
+  .pagination a.active {
+    background-color: #1565C0;
+    color: white;
+    border-radius: 5px;
   }
 
   .pagination a:hover:not(.active) {
