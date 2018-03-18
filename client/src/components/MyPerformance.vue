@@ -11,10 +11,12 @@
         label="Search"
         single-line
         hide-details
-        v-model="search"
+        v-model="searchItem"
+        v-on:keyup="searchInTheList(searchItem)"
       ></v-text-field>
+      <span class="help is-dark"><strong>{{filteredItems.length}}</strong> of {{items.length}} reviews found</span>
       <v-expansion-panel popout>
-        <v-expansion-panel-content v-for="(review) in paginatedReviews" :key="review._id">
+        <v-expansion-panel-content v-for="(review) in paginatedItems">
           <div slot="header" class="subheader">{{ review.date }}</div>
           <v-card>
             <v-card-text>
@@ -47,15 +49,15 @@
         <div class="pagination">
           <v-layout row>
             <v-flex>
-              <v-btn icon class="mt-0" :disabled="pagination.currentPage === 1" @click.prevent="setPage(pagination.currentPage - 1)">
+              <v-btn icon class="mt-0" v-on:click="selectPage(pagination.currentPage - 1)" :disabled="pagination.currentPage===pagination.items[0] || pagination.items.length===0">
                 <v-icon>keyboard_arrow_left</v-icon>
               </v-btn>
             </v-flex>
             <v-flex>
-              <a small round v-for="p in pagination.pages" @click.prevent="setPage(p)" :class="{active:p === selected}">{{p}}</a>
+                <a v-for="item in pagination.filteredItems"  v-on:click="selectPage(item)" v-bind:class="{'is-info': item === pagination.currentPage}" :class="{active:item === selected}">{{item}}</a>
             </v-flex>
             <v-flex>
-              <v-btn icon class="mt-0" :disabled="pagination.currentPage === pagination.pages.length" @click.prevent="setPage(pagination.currentPage + 1)">
+              <v-btn icon class="mt-0" v-on:click="selectPage(pagination.currentPage+1)" :disabled="pagination.currentPage===(pagination.items[pagination.items.length-1] || pagination.items.length===0)">
                 <v-icon>keyboard_arrow_right</v-icon>
               </v-btn>
             </v-flex>
@@ -106,50 +108,82 @@ export default {
   data() {
     return {
       search: '',
-      reviews: store.state.user.reviews,
+      items: store.state.user.reviews,
       mostRecent: store.state.user.reviews[store.state.user.reviews.length - 1 ],
-      perPage: 8,
-      pagination: {},
+      searchItem: '',
+      filteredItems: [],
+      paginatedItems: [],
+      selectedItems: [],
       selected: null,
+      pagination: {
+        range: 5,
+        currentPage: 1,
+        itemPerPage: 6,
+        items: [],
+        filteredItems: [],
+      }
     };
   },
-  computed: {
-    filteredReviews: function() {
-      return this.reviews.filter((review) => {
-        return review.date.toLowerCase().includes(this.search.toLowerCase()); // if we return true then that review remains in the array
-      })
-    },
-    paginatedReviews() {
-      return this.paginate(this.filteredReviews);
-    },
+  mounted() {
+    this.filteredItems = this.items;
+    this.buildPagination();
+    this.selectPage(1);
   },
   methods: {
-    setPage(p) {
-      this.selected = p;
-      this.pagination = this.paginator(this.filteredReviews.length, p);
-    },
-    paginate(reviews) {
-      return reviews.slice( this.pagination.startIndex, this.pagination.endIndex + 1)
-    },
-    paginator(totalItems, currentPage) {
-      let startIndex = (currentPage - 1) * this.perPage,
-        endIndex = Math.min(startIndex + this.perPage - 1, totalItems - 1);
-      let upperBound = Math.ceil(totalItems / this.perPage) + 1;
-      let pages = [];
-      for (let i = 1; i < upperBound; i++) {
-        pages.push(i);
+    searchInTheList(searchText, currentPage){
+      this.filteredItems = this.items.filter( function(v, k){
+        return v.date.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+      });
+      this.buildPagination();
+
+      if(currentPage == null){ // NB triple equals === will not work here!
+        this.selectPage(1);
       }
-      return {
-        currentPage: currentPage,
-        startIndex: startIndex,
-        endIndex: endIndex,
-        pages: pages,
-      };
+      else{
+        this.selectPage(currentPage);
+      }
+    },
+    buildPagination(){
+      let numberOfPage = Math.ceil(this.filteredItems.length/this.pagination.itemPerPage);
+      this.pagination.items = [];
+      for(let i=0; i<numberOfPage; i++){
+        this.pagination.items.push(i+1)
+      }
+    },
+    selectPage(item) {
+      this.selected = item;
+      this.pagination.currentPage = item;
+      let start = 0;
+      let end = 0;
+      if(this.pagination.currentPage < this.pagination.range-2){
+        start = 1;
+        end = start+this.pagination.range-1
+      }
+      else if(this.pagination.currentPage <= this.pagination.items.length && this.pagination.currentPage > this.pagination.items.length - this.pagination.range + 2){
+        start = this.pagination.items.length-this.pagination.range+1;
+        end = this.pagination.items.length
+      }
+      else{
+        start = this.pagination.currentPage-2;
+        end = this.pagination.currentPage+2
+      }
+      if(start<1){
+        start = 1
+      }
+      if(end>this.pagination.items.length){
+        end = this.pagination.items.length
+      }
+
+      this.pagination.filteredItems = [];
+      for(let i=start; i<=end; i++){
+        this.pagination.filteredItems.push(i);
+      }
+
+      this.paginatedItems = this.filteredItems.filter((v, k) => {
+        return Math.ceil((k+1) / this.pagination.itemPerPage) === this.pagination.currentPage;
+      })
     },
   },
-  created() {
-    this.setPage(1);
-  }
 };
 
 </script>
@@ -209,15 +243,10 @@ export default {
     text-decoration: none;
   }
 
-  .pagination a.active {
-    background-color: #1565C0;
-    color: white;
-    border-radius: 5px;
-  }
-
   .pagination a:hover:not(.active) {
     background-color: #ddd;
     border-radius: 5px;
   }
+
 
 </style>

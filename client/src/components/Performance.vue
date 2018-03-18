@@ -43,10 +43,12 @@
                   label="Search"
                   single-line
                   hide-details
-                  v-model="search1"
+                  v-model="searchItem"
+                  v-on:keyup="searchInTheList(searchItem)"
                 ></v-text-field>
+                <span class="help is-dark"><strong>{{filteredItems.length}}</strong> of {{ currentViewEmployee.reviews.length}} reviews found</span>
                 <v-expansion-panel popout>
-                  <v-expansion-panel-content v-for="(review) in paginatedReviews" :key="review._id">
+                  <v-expansion-panel-content v-for="(review) in paginatedItems" :key="review._id">
                     <div slot="header" class="subheader">{{ review.date }}</div>
                     <v-card>
                       <v-card-text>
@@ -75,15 +77,15 @@
                   <div class="pagination">
                     <v-layout row>
                       <v-flex>
-                        <v-btn icon class="mt-0" :disabled="pagination.currentPage === 1" @click.prevent="setPage(pagination.currentPage - 1)">
+                        <v-btn icon class="mt-0" v-on:click="selectPage(pagination.currentPage - 1)" :disabled="pagination.currentPage===pagination.items[0] || pagination.items.length===0">
                           <v-icon>keyboard_arrow_left</v-icon>
                         </v-btn>
                       </v-flex>
                       <v-flex>
-                        <a v-for="p in pagination.pages" @click.prevent="setPage(p)" :class="{active:p === selected}">{{p}}</a>
+                        <a v-for="item in pagination.filteredItems"  v-on:click="selectPage(item)" :class="{active:item === selected}">{{item}}</a>
                       </v-flex>
                       <v-flex>
-                        <v-btn icon class="mt-0" :disabled="pagination.currentPage === pagination.pages.length" @click.prevent="setPage(pagination.currentPage + 1)">
+                        <v-btn icon class="mt-0" v-on:click="selectPage(pagination.currentPage+1)" :disabled="pagination.currentPage===(pagination.items[pagination.items.length-1] || pagination.items.length===0)">
                           <v-icon>keyboard_arrow_right</v-icon>
                         </v-btn>
                       </v-flex>
@@ -624,12 +626,26 @@ export default {
         "quality of work": 0,
       },
       newField: '',
-      perPage: 6,
-      pagination: {},
+      // perPage: 6,
+      // pagination: {},
       selected: null,
+      searchItem: '',
+      filteredItems: [],
+      paginatedItems: [],
+      selectedItems: [],
+      pagination: {
+        range: 5,
+        currentPage: 1,
+        itemPerPage: 6,
+        items: [],
+        filteredItems: [],
+      },
     }
   },
   async mounted() {
+    this.filteredItems = this.currentViewEmployee.reviews;
+    this.buildPagination();
+    this.selectPage(1);
     // do a request to the backend for all the users
     // so when the page is loaded do a request to backend - may need to do this fo rmanagers register page
     this.employees = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
@@ -696,7 +712,11 @@ export default {
     },
     viewReviews(employee1) {
       this.currentViewEmployee = employee1;
-      this.setPage(1);
+      console.log(this.currentViewEmployee.name);
+      this.filteredItems = this.currentViewEmployee.reviews;
+      this.buildPagination();
+      this.selectPage(1);
+      this.selected = 1;
       this.viewDialog = true;
     },
     addField(field) {
@@ -716,46 +736,102 @@ export default {
       this.$delete(this.fields, field);
       console.log(this.fields);
     },
-    setPage(p) {
-      this.selected = p;
-      this.pagination = this.paginator(this.viewFilteredReviews.length, p);
-    },
-    paginate(reviews) {
-      return reviews.slice( this.pagination.startIndex, this.pagination.endIndex + 1)
-    },
-    paginator(totalItems, currentPage) {
-      let startIndex = (currentPage - 1) * this.perPage,
-        endIndex = Math.min(startIndex + this.perPage - 1, totalItems - 1);
-      let upperBound = Math.ceil(totalItems / this.perPage) + 1;
-      let pages = [];
-      for (let i = 1; i < upperBound; i++) {
-        pages.push(i);
-      }
-      return {
-        currentPage: currentPage,
-        startIndex: startIndex,
-        endIndex: endIndex,
-        pages: pages,
-      };
-    },
+    // setPage(p) {
+    //   this.selected = p;
+    //   this.pagination = this.paginator(this.viewFilteredReviews.length, p);
+    // },
+    // paginate(reviews) {
+    //   return reviews.slice( this.pagination.startIndex, this.pagination.endIndex + 1)
+    // },
+    // paginator(totalItems, currentPage) {
+    //   let startIndex = (currentPage - 1) * this.perPage,
+    //     endIndex = Math.min(startIndex + this.perPage - 1, totalItems - 1);
+    //   let upperBound = Math.ceil(totalItems / this.perPage) + 1;
+    //   let pages = [];
+    //   for (let i = 1; i < upperBound; i++) {
+    //     pages.push(i);
+    //   }
+    //   return {
+    //     currentPage: currentPage,
+    //     startIndex: startIndex,
+    //     endIndex: endIndex,
+    //     pages: pages,
+    //   };
+    // },
     closeViewDialog() {
       this.viewDialog = false;
-      this.setPage(1);
-    }
-  },
-  computed: {
-    viewFilteredReviews: function() {
-      return this.currentViewEmployee.reviews.filter((review) => {
-        return review.date.toLowerCase().includes(this.search1.toLowerCase()); // if we return true then that review remains in the array
+      this.selectPage(1);
+    },
+    searchInTheList(searchText, currentPage){
+      this.filteredItems = this.currentViewEmployee.reviews.filter( function(v, k){
+        return v.date.toLowerCase().indexOf(searchText.toLowerCase()) > -1
+      });
+      this.buildPagination();
+
+      if(currentPage == null){ // NB triple equals === will not work here!
+        this.selectPage(1);
+      }
+      else{
+        this.selectPage(currentPage);
+      }
+    },
+    buildPagination(){
+      let numberOfPage = Math.ceil(this.filteredItems.length/this.pagination.itemPerPage);
+      this.pagination.items = [];
+      for(let i=0; i<numberOfPage; i++){
+        this.pagination.items.push(i+1)
+      }
+    },
+    selectPage(item) {
+      console.log(this.currentViewEmployee.name);
+      console.log(this.currentViewEmployee.reviews);
+      this.selected = item;
+      console.log('selected', this.selected);
+      this.pagination.currentPage = item;
+      let start = 0;
+      let end = 0;
+      if(this.pagination.currentPage < this.pagination.range-2){
+        start = 1;
+        end = start+this.pagination.range-1
+      }
+      else if(this.pagination.currentPage <= this.pagination.items.length && this.pagination.currentPage > this.pagination.items.length - this.pagination.range + 2){
+        start = this.pagination.items.length-this.pagination.range+1;
+        end = this.pagination.items.length
+      }
+      else{
+        start = this.pagination.currentPage-2;
+        end = this.pagination.currentPage+2
+      }
+      if(start<1){
+        start = 1
+      }
+      if(end>this.pagination.items.length){
+        end = this.pagination.items.length
+      }
+
+      this.pagination.filteredItems = [];
+      for(let i=start; i<=end; i++){
+        this.pagination.filteredItems.push(i);
+      }
+
+      this.paginatedItems = this.filteredItems.filter((v, k) => {
+        return Math.ceil((k+1) / this.pagination.itemPerPage) === this.pagination.currentPage;
       })
     },
-    paginatedReviews() {
-      return this.paginate(this.viewFilteredReviews);
-    },
   },
-  created() {
-    this.setPage(1); // setPage(1) resets everything -> good to know this for debugging
-  },
+  // computed: {
+  //   viewFilteredReviews: function() {
+  //     return this.currentViewEmployee.reviews.filter((review) => {
+  //       return review.date.toLowerCase().includes(this.search1.toLowerCase()); // if we return true then that review remains in the array
+  //     })
+  //   },
+  //   paginatedReviews() {
+  //     return this.paginate(this.viewFilteredReviews);
+  //   },
+  // },
+  // created() {
+  //   this.setPage(1); // setPage(1) resets everything -> good to know this for debugging
+  // },
 }
 </script>
 
