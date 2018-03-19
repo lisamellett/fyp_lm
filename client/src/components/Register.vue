@@ -102,6 +102,12 @@
               required
             ></v-text-field>
             <v-text-field
+              label="Email Address"
+              v-model="email"
+              :rules="emailRules"
+              required
+            ></v-text-field>
+            <v-text-field
               label="username"
               v-model="username"
               :rules="usernameRules"
@@ -156,9 +162,16 @@ export default {
       manager: '',
       allowance: '',
       title: '',
+      email: '',
       username: '',
       password: '',
       error: null,
+      emailRules: [
+        (v) => {
+          return !!v || 'E-mail is required'
+        },
+        (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+      ],
       usernameRules: [
         (v) => !!v || 'Username is required',
         (v) => v && v.length >= 3 || 'Username must be at least 3 characters'
@@ -193,10 +206,6 @@ export default {
   },
   async mounted() {
     this.managers = (await UsersService.getManagers()).data.managers;
-    // for (var i = 0; i< this.managers.length; i++) {
-    //   this.dict[this.managers[i]._id] = this.managers[i].name;
-    //   console.log(this.dict);
-    // }
     console.log(this.managers);
   },
   methods: {
@@ -214,6 +223,7 @@ export default {
           dates: [],
           title: this.title,
           reviews: [],
+          email: this.email,
           username: this.username,
           password: this.password,
         });
@@ -230,22 +240,8 @@ export default {
   },
 };
 
-// _id: mongoose.Schema.Types.ObjectId,
-//  name: String,
-//  dob: Date,
-//  gender: String,
-//  role: String,
-//  manager: mongoose.Schema.Types.ObjectId, // possibly just change this to team
-//  team: String,
-//  allowance: Number,
-//  taken: Number,
-//  dates: Array,
-//  job: String,
-//  username: String,
-//  password: String,
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .error-msg {
     color: red;

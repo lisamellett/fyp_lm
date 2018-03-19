@@ -1,6 +1,20 @@
 const User = require('../models/User');
 const mongoose = require('mongoose');
 const config = require('../config/config');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  port: 25,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: 'elizamillitt@gmail.com', // generated ethereal user
+    pass: 'lizmar23'  // generated ethereal password
+  },
+  tls:{
+    rejectUnauthorized:false
+  }
+});
 
 
 module.exports = {
@@ -23,6 +37,7 @@ module.exports = {
             dates: doc.dates,
             title: doc.title,
             reviews: doc.reviews,
+            email: doc.email,
             username: doc.username,
             password: doc.password,
             request: {
@@ -133,12 +148,34 @@ module.exports = {
     try {
       const employeeId = req.params.userId;
       console.log(employeeId);
+
       const review = {
         "authorId": req.body.authorId,
         "fields": req.body.fields,
         "feedback": req.body.feedback,
         "date": new Date().toDateString(),
       };
+
+      const email = req.body.email;
+      console.log(email);
+
+      const output = `
+        <p>You have a new performance review</p>
+        <h3>Date: ${review.date}</h3>
+        <ul>  
+          <li>Feedback: ${review.feedback}</li>
+        </ul>
+        <p>A new review has been submitted for you. To view the full review please log into your account</p>
+       `;
+
+      let mailOptions = {
+        from: '"HR APP" <elizamillitt@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: 'Performance Review', // Subject line
+        // text: 'Hello world?', // plain text body
+        html: output // html body
+      };
+
       console.log(review);
       const user = await User.findOne({_id: employeeId});
       if (!user) {
@@ -146,6 +183,17 @@ module.exports = {
           error: 'The user you are trying to post a review for does not exist'
         });
       }
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        res.render('contact', {msg:'Email has been sent'});
+      });
+
       const response = await User.findOneAndUpdate({_id: employeeId}, {$push: {reviews: { $each: [review], $position: 0}}});
       res.status(200).json(response);
 
@@ -183,6 +231,7 @@ module.exports = {
             dates: doc.dates,
             title: doc.title,
             reviews: doc.reviews,
+            email: doc.email,
             username: doc.username,
             password: doc.password,
             request: {
@@ -199,16 +248,6 @@ module.exports = {
       })
     }
   },
-
-// {
-//   authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // manager id
-//   communication : {type: Number},
-//   cooperation : {type: Number},
-//   punctuality : {type: Number},
-//   qualityOfWork : {type: Number},
-//   feedback : {type: String},
-//   // date: {type: }
-// }
 
 
   getOneUser(req, res, next) {

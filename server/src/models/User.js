@@ -14,6 +14,7 @@ const UserSchema = new mongoose.Schema({
   taken: {type: Number, required: true},
   dates: {type: Array, required: true},
   title: {type: String, required: true},
+  email: {type: String, required: true},
   reviews: [
     {
       authorId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}, // manager id
@@ -22,7 +23,7 @@ const UserSchema = new mongoose.Schema({
       date: {type: String},
     }
   ],
-  prettyDob: {type: String},
+  prettyDob: {type: String}, // todo: do I  need this?
   username: {type: String, required: true, unique:true},
   password: {type: String, required: true},
   // may include a list of message Ids here too

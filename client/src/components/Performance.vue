@@ -323,6 +323,7 @@ export default {
         taken: '',
         allowance: '',
         manager: '',
+        email: '',
         title: '',
         reviews: [],
       },
@@ -335,6 +336,7 @@ export default {
         taken: '',
         allowance: '',
         manager: '',
+        email: '',
         title: '',
         reviews: [],
       },
@@ -434,7 +436,9 @@ export default {
           fields: this.fields,
           feedback: this.feedback,
           date: new Date(),
+          email: this.currentEmployee.email,
         };
+        console.log('frontend', review.email);
         await UsersService.addReview(this.currentEmployee._id, review);
         this.e1 = 1;
         this.communication = 0;
@@ -463,6 +467,7 @@ export default {
     },
     addReview(employee) {
       this.currentEmployee = employee;
+      console.log(employee.email);
       this.addDialog = true;
     },
     viewReviews(employee1) {

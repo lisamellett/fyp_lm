@@ -14,9 +14,6 @@
               <v-flex xs12 sm6 md4>
                <v-select label="Gender" v-model="editedItem.gender" :items="genders"></v-select>
               </v-flex>
-              <!--<v-flex xs12 sm6 md4>-->
-                <!--<v-text-field label="Date of Birth" v-model="editedItem.dob" type="date"></v-text-field>-->
-              <!--</v-flex>-->
               <v-flex xs12 sm6 md4>
               <v-menu
                 ref="menu"
@@ -65,9 +62,6 @@
                 >
                 </v-select>
               </v-flex>
-              <!--<v-flex xs12 sm6 md4>-->
-                <!--<v-text-field label="Manager" v-model="editedItem.manager"></v-text-field>-->
-              <!--</v-flex>-->
               <v-flex>
                 <v-select
                   label="Manager"
