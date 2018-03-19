@@ -4,7 +4,7 @@ const config = require('../config/config');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'gmail', // todo: may need to change this to own host when deploy
   port: 25,
   secure: false, // true for 465, false for other ports
   auth: {
@@ -86,7 +86,7 @@ module.exports = {
       res.status(200).json(response);
     } catch (err){
       res.status(500).send({
-        error: 'An error has occurred trying to fetch the users',
+        error: 'An error has occurred trying to fetch the managers',
       });
     }
   },
@@ -114,35 +114,6 @@ module.exports = {
         res.status(500).json({ error: err });
       });
     },
-
-  // addReview(req, res, next) {
-  //   const id = req.params.userId;
-  //   const updateOps = {};
-  //   for (const ops of req.body) {
-  //     updateOps[ops.propName] = ops.value;
-  //   }
-  //   User.update({_id: id}, {$set: updateOps})// might just change one thing :)
-  //     .exec()
-  //     .then(result => {
-  //       res.status(200).json({
-  //         message: 'User Updated',
-  //         request: {
-  //           type: 'GET',
-  //           url: 'http://localhost:8081/users/' + result._id,
-  //         }
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       res.status(500).json({ error: err });
-  //     });
-  // },
-
-//   exports.addFriend = function (req, res, next)
-// {
-//   var friend = {"firstName": req.body.fName, "lastName": req.body.lName};
-//   Users.findOneAndUpdate({name: req.user.name}, {$push: {friends: friend}});
-// };
 
   async addReview(req, res) {
     try {
@@ -292,6 +263,4 @@ module.exports = {
       });
     });
   },
-
-
 };
