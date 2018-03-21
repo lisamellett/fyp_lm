@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout id="performance">
     <v-flex xs8 class="mr-4">
       <v-text-field
         append-icon="search"
@@ -94,8 +94,6 @@
 </template>
 
 
-<!--everything inside this script tag is the
-controller and you can bind the html to it-->
 <script>
 import store from '../store/store';
 
@@ -104,7 +102,7 @@ export default {
     return {
       search: '',
       items: store.state.user.reviews,
-      mostRecent: store.state.user.reviews[store.state.user.reviews.length - 1 ],
+      mostRecent: store.state.user.reviews[0],
       searchItem: '',
       filteredItems: [],
       paginatedItems: [],
@@ -185,6 +183,10 @@ export default {
 <style scoped>
   .error-msg {
     color: red;
+  }
+
+  #performance {
+    text-align: center;
   }
 
   table {

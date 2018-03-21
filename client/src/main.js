@@ -39,6 +39,7 @@ import {
   VSlider,
   VSubheader,
   VExpansionPanel,
+  VParallax,
 } from 'vuetify';
 
 import App from './App';
@@ -77,6 +78,7 @@ Vue.use(Vuetify, {
     VSlider,
     VSubheader,
     VExpansionPanel,
+    VParallax,
   },
 });
 

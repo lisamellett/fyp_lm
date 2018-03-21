@@ -1,8 +1,6 @@
 <template>
-  <v-layout column>
-    <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar flat dense class="blue darken-2" dark>
           <v-toolbar-title class="title">Login</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
@@ -27,11 +25,9 @@
 
             <!--we want register method to be called when button is clicked-->
           </v-form>
-          <v-btn class="cyan" @click="login" :disabled="!valid" dark>Login</v-btn>
+          <v-btn class="blue darken-2" @click="login" :disabled="!valid" dark>Login</v-btn>
         </div>
       </div>
-    </v-flex>
-  </v-layout>
 </template>
 
 

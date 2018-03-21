@@ -1,36 +1,51 @@
 <template>
   <div id="app">
     <v-app>
-      <page-header/>
 
-      <main>
-        <v-container fluid>
-          <!--<img src="./assets/logo.png">-->
-          <router-view/>
-        </v-container>
-      </main>
+      <v-toolbar
+        color="blue darken-3"
+        dark
+        v-if="!$store.state.isUserLoggedIn"
+      >
+        <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+          <span class="hidden-sm-and-down">LM Solutions</span>
+        </v-toolbar-title>
+      </v-toolbar>
+
+      <home v-if="!$store.state.isUserLoggedIn"></home>
+
+      <toolbar-nav v-if="$store.state.isUserLoggedIn"></toolbar-nav>
+
+      <v-footer class="blue darken-2" app fixed>
+        <v-layout row wrap align-center>
+          <v-flex xs12>
+            <div class="white--text ml-3">
+              Made with
+              <v-icon class="red--text">favorite</v-icon>
+              by Lisa Mellett
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-footer>
+
+
     </v-app>
   </div>
 </template>
 
 <script>
-import PageHeader from '@/components/Header';
+import store from '@/store/store';
+import Home from '@/components/Home';
+import ToolbarNav from '@/components/ToolbarNav';
 
 export default {
   name: 'App',
   components: {
-    PageHeader,
-  },
+    ToolbarNav,
+    Home,
+  }
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

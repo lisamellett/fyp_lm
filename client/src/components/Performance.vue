@@ -286,19 +286,6 @@
         </v-alert>
       </v-data-table>
     </v-card>
-
-  <div>
-    <div class="white elevation-2">
-
-      <v-toolbar flat dense class="cyan" dark>
-        <v-toolbar-title class="title">Add Performance Review</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn class="cyan--after" :to="{ name:'myPerformance'}">My Performance</v-btn>
-      </v-toolbar>
-      <div>
-    </div>
-  </div>
-  </div>
   </v-container>
 </template>
 
