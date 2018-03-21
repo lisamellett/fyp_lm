@@ -81,7 +81,7 @@
       <span class="hidden-sm-and-down">LM Soltutions</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn icon @click.stop="right=!right">
+    <v-btn icon @click="getNotifications">
       <v-icon>notifications</v-icon>
     </v-btn>
   </v-toolbar>
@@ -98,17 +98,20 @@
       v-model="right"
       fixed
     >
-      <notifications></notifications>
+      <notifications v-bind:nots="nots"></notifications>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
 import store from '@/store/store';
-// import Toolbar from '@/components/MyToolbar';
+import Notifications from '@/components/Notifications';
+import NotificationService from '@/services/NotificationService';
+
 
 export default {
   components: {
+    Notifications,
   },
   data() {
     return {
@@ -116,6 +119,7 @@ export default {
       drawer: null,
       items: this.getItems(),
       right: null,
+      nots: [],
     }
   },
   methods: {
@@ -123,6 +127,13 @@ export default {
       console.log(i.model);
       i.model = !i.model;
       console.log(i.model);
+    },
+    getNotifications() { // this function updates the nots list
+      this.right = !this.right;
+      this.apiCall();
+    },
+    async apiCall() {
+      this.nots = (await NotificationService.getUserNotifications(store.state.user._id)).data.notifications;
     },
     navigateTo(destination) {
       this.$router.push({
