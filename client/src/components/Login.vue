@@ -6,12 +6,14 @@
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-form v-model="valid" ref="form" lazy-validation>
             <v-text-field
+              prepend-icon="person"
               label="username"
               v-model="username"
               :rules="usernameRules"
               required
             ></v-text-field>
             <v-text-field
+              prepend-icon="lock"
               label="password"
               type="password"
               v-model="password"
@@ -25,7 +27,7 @@
 
             <!--we want register method to be called when button is clicked-->
           </v-form>
-          <v-btn class="blue darken-2" @click="login" :disabled="!valid" dark>Login</v-btn>
+            <v-btn class="blue darken-2" @click="login" :disabled="!valid" dark>Login</v-btn>
         </div>
       </div>
 </template>

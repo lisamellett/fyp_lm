@@ -22,7 +22,7 @@ export default {
   //   return Api().get('employees/' + managerId);
   // },
   //
-  // addReview(userId, review) {
-  //   return Api().post('/reviews/' + userId, review);
-  // },
+  addNotification(notification) {
+    return Api().post('/notifications', notification);
+  },
 }

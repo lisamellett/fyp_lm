@@ -291,6 +291,7 @@
 
 <script>
 import UsersService from '@/services/UsersService';
+import NotificationService from '@/services/NotificationService';
 import store from '../store/store';
 
 export default {
@@ -425,8 +426,15 @@ export default {
           date: new Date(),
           email: this.currentEmployee.email,
         };
+        const notification = {
+          senderId: store.state.user._id,
+          receiverId: this.currentEmployee._id,
+          type: "review",
+          message: "A new review has been submitted by your manager"
+        };
         console.log('frontend', review.email);
         await UsersService.addReview(this.currentEmployee._id, review);
+        await NotificationService.addNotification(notification);
         this.e1 = 1;
         this.communication = 0;
         this.cooperation = 0;

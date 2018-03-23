@@ -8,7 +8,7 @@
         v-if="!$store.state.isUserLoggedIn"
       >
         <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-          <span class="hidden-sm-and-down">LM Solutions</span>
+          <span class="hidden-sm-and-down">KIN</span>
         </v-toolbar-title>
       </v-toolbar>
 

@@ -152,7 +152,8 @@ export default {
         case "admin":
           return [
             {icon: 'show_chart', text: 'Metrics'},
-            {icon: 'date_range', text: 'Calendar'},
+            {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
+            {icon: 'date_range', text: 'Calendar2', destination: 'teamCalendar'},
             {
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
               text: 'Performance',

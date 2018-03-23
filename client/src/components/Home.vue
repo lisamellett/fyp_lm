@@ -13,8 +13,8 @@
             class="white--text"
           >
             <v-flex xs-6>
-            <img src="../assets/lm.png" height="200" class="center">
-            <h1 class="white--text mb-2 display-1 text-xs-center">LM HR Solutions</h1>
+            <img src="../assets/Kin_Logo.png" height="200" class="center">
+            <h1 class="white--text mb-2 display-1 text-xs-center"></h1>
             <div class="subheading mb-3 text-xs-center">FYP by Lisa Mellett</div>
             </v-flex>
             <v-flex xs6>
