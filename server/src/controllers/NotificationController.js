@@ -94,7 +94,7 @@ module.exports = {
   },
 
   deleteNotification(req, res, next) {
-    const id = req.params.userId;
+    const id = req.params.notificationId;
     Notification.remove({_id: id}) // remove the user who has an _id value of id
       .exec()
       .then(result => {

@@ -14,6 +14,6 @@ module.exports = (app) => {
   app.get('/notifications/:userId',
     NotificationController.getOneUserNotifications); // not sure if the end point is being used yet
 
-  app.delete('/notifications/:userId',
+  app.delete('/notifications/:notificationId',
     NotificationController.deleteNotification);
 };
