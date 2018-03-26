@@ -40,6 +40,9 @@ import {
   VSubheader,
   VExpansionPanel,
   VParallax,
+  VCarousel,
+  VBottomNav,
+  VBtnToggle,
 } from 'vuetify';
 
 import App from './App';
@@ -79,6 +82,9 @@ Vue.use(Vuetify, {
     VSubheader,
     VExpansionPanel,
     VParallax,
+    VCarousel,
+    VBottomNav,
+    VBtnToggle,
   },
 });
 

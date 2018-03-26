@@ -8,6 +8,7 @@ import Employees from '@/components/Employees';
 import Profile from '@/components/Profile';
 import Performance from '@/components/Performance';
 import MyPerformance from '@/components/MyPerformance';
+import Calendar2 from '@/components/Calendar2';
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/calender',
       name: 'calendar',
       component: Calendar,
+    },
+    {
+      path: '/team-calender',
+      name: 'teamCalendar',
+      component: Calendar2,
     },
     {
       path: '/employees',

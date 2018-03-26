@@ -37,7 +37,7 @@ module.exports = {
 
   async getOneUserEvents(req, res) {
     try {
-      const docs = await Event.find( { employeeId: req.params.employeeId} );
+      const docs = await Event.find( { employeeId: req.params.userId} );
       const response = {
         count: docs.length,
         events: docs.map(doc => {
@@ -148,7 +148,7 @@ module.exports = {
 
   async getTeamEvents(req, res) {
     try {
-      const docs = await Event.find( { managerId: req.params.managerId, type: "booked"} );
+      const docs = await Event.find( { managerId: req.params.managerId} ); //Todo: change this back
       const response = {
         count: docs.length,
         events: docs.map(doc => {
