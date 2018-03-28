@@ -7,6 +7,7 @@
             <span class="headline">Request Time Off</span>
           </v-card-title>
           <v-card-text>
+            <v-form v-model="valid" ref="form" lazy-validation>
             <v-container>
               <v-layout wrap>
                 <v-flex xs12>
@@ -37,11 +38,12 @@
               </v-layout>
             </v-container>
             <small>*indicates required field</small>
+            </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="teal darken-1" flat @click.native="cancelPressed">Cancel</v-btn>
-            <v-btn color="teal darken-1" flat @click.native="submitRequest">Submit</v-btn>
+            <v-btn color="teal darken-1" flat @click.native="submitRequest" :disabled="!valid">Submit</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -88,7 +90,7 @@
         <v-card v-if="showMine">
           <v-toolbar class="blue darken-2" dark dense>
             <v-toolbar-title>
-              {{ selectedDate }}
+              {{ prettyDate(selectedDate) }}
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-tooltip top>
@@ -97,7 +99,7 @@
             </v-tooltip>
           </v-toolbar>
           <v-container class="hee2">
-          <v-card-title class="subheading grey--text py-0">Showing schedule for {{ selectedDate2}}</v-card-title>
+          <v-card-title class="subheading grey--text py-0">Showing schedule for {{ prettyDate(selectedDate)}}</v-card-title>
           <v-flex xs12 v-if="filteredItems.length === 0" class="pb-2 py-2">
             <v-card class="cyan lighten-5" raised>
               <v-card-title class="body-1 center">You have no events scheduled for this day</v-card-title>
@@ -120,16 +122,16 @@
                     Starting:
                   </v-flex>
                   <v-flex xs8>
-                    {{item.start}}
+                    {{prettyDate(item.start)}}
                   </v-flex>
                   <v-flex xs4>
                     Back to Work
                   </v-flex>
                   <v-flex xs8>
-                    {{ item.end }}
+                    {{ prettyDate(item.end) }}
                   </v-flex>
                   <v-flex xs4 v-if="item.reason">
-                    Reason:
+                    Detail:
                   </v-flex>
                   <v-flex xs8 v-if="item.reason">
                     {{item.reason}}
@@ -145,11 +147,11 @@
         <v-card v-else>
           <v-toolbar class="blue darken-2" dark dense>
             <v-toolbar-title>
-              {{ selectedDate2 }}
+              {{ prettyDate(selectedDate2) }}
             </v-toolbar-title>
           </v-toolbar>
           <v-container class="hee2">
-          <v-card-title class="subheading grey--text py-0"><span class="center">Showing schedule for {{ selectedDate2}}</span></v-card-title>
+          <v-card-title class="subheading grey--text py-0"><span class="center">Showing schedule for {{ prettyDate(selectedDate2)}}</span></v-card-title>
           <v-flex xs12 v-if="filteredTeam.length === 0" class="pb-2 py-2">
             <v-card class="cyan lighten-5" raised>
               <v-card-title class="body-1">No members of your team have events scheduled for this day</v-card-title>
@@ -172,19 +174,13 @@
                     Starting:
                   </v-flex>
                   <v-flex xs8>
-                    {{item.start}}
+                    {{prettyDate(item.start)}}
                   </v-flex>
                   <v-flex xs4>
                     Back to Work
                   </v-flex>
                   <v-flex xs8>
-                    {{ item.end }}
-                  </v-flex>
-                  <v-flex xs4 v-if="item.reason">
-                    Reason:
-                  </v-flex>
-                  <v-flex xs8 v-if="item.reason">
-                    {{item.reason}}
+                    {{ prettyDate(item.end) }}
                   </v-flex>
                 </v-layout>
               </v-card-title>
@@ -213,8 +209,8 @@
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                       <v-list-tile-title>{{event.title}} <span class="caption">{{event.type}}</span></v-list-tile-title>
-                      <v-list-tile-sub-title> start: {{ event.start}}</v-list-tile-sub-title>
-                      <v-list-tile-sub-title> back to work: {{ event.end}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> start: {{ prettyDate(event.start)}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> back to work: {{ prettyDate(event.end)}}</v-list-tile-sub-title>
                     </v-list-tile-content>
                   </v-list-tile>
                 </template>
@@ -239,8 +235,8 @@
                     </v-list-tile-avatar>
                     <v-list-tile-content>
                       <v-list-tile-title>{{ event.name }}</v-list-tile-title>
-                      <v-list-tile-sub-title> start: {{ event.start}}</v-list-tile-sub-title>
-                      <v-list-tile-sub-title> back to work: {{ event.end}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> start: {{ prettyDate(event.start)}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> back to work: {{ prettyDate(event.end)}}</v-list-tile-sub-title>
                     </v-list-tile-content>
                   </v-list-tile>
                 </template>
@@ -272,6 +268,7 @@ const today = new Date();
 export default {
   data() {
     return {
+      valid: true,
       selectedDate: today,
       selectedDate2: today,
       filteredItems: [],
@@ -324,6 +321,10 @@ export default {
     console.log('team', this.teamEvents);
   },
   methods: {
+    prettyDate(date) {
+      const date1 = new Date(date).toUTCString();
+      return date1.split(' ').slice(0, 4).join(' ');
+    },
     changeToTeam() {
       this.showMine = false;
     },
@@ -364,7 +365,7 @@ export default {
     },
     cancelPressed() {
       this.requestModel = false;
-      this.detail = null;
+      this.$refs.form.reset();
     },
     getEvents(day) {
       this.filteredItems = this.myEvents.filter(function (event) {
@@ -444,8 +445,9 @@ export default {
       this.requestModel = false;
       this.startDate = null;
       this.endDate = null;
-      this.detail = null;
-      this.selectReason = null;
+      this.$refs.form.reset();
+      this.myEvents = (await EventService.getUserEvents(store.state.user._id)).data.events;
+      this.teamEvents = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
     },
 
     getDateRange(startDate, endDate) {
@@ -476,7 +478,7 @@ export default {
       const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       const daysLeft = store.state.user.allowance - store.state.user.taken - diffDays;
       if (daysLeft < 0) {
-        this.warning = "Warning: You have exceeded you're total allowed holidays by " + Math.abs(daysLeft) + " days. A member of admin will be notified a long with your manager if you proceed with this request."
+        this.warning = "Warning: You have exceeded you're total allowed holidays by " + Math.abs(daysLeft) + " days. A member of admin will be notified along with your manager if you proceed with this request."
       } else {
         this.warning = '';
       }
