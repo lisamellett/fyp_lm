@@ -342,19 +342,6 @@ export default {
       ],
       e1: 0,
       employees: [],
-      // selectedEmployee: null,
-      selectedEmployeeToView: {
-        reviews: [
-          {
-            date: '18/19/1990',
-            fields: {
-              sbdjhba: 0,
-              ebshjdb: 2,
-            },
-            feedback: 'ekdhbjhad',
-          }
-        ]
-      },
       communication: 0,
       cooperation: 0,
       punctuality: 0,
@@ -430,7 +417,8 @@ export default {
           senderId: store.state.user._id,
           receiverId: this.currentEmployee._id,
           type: "review",
-          message: "A new review has been submitted by your manager"
+          message: "A new review has been submitted by your manager",
+          data: {},
         };
         console.log('frontend', review.email);
         await UsersService.addReview(this.currentEmployee._id, review);

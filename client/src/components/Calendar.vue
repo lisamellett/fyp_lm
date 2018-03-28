@@ -429,18 +429,21 @@ export default {
         reason: this.detail, // this could be appointment, holidays -> may only show in your personal cal
       };
       console.log(request);
-      const notification = {
-        senderId: store.state.user._id,
-        receiverId: store.state.user.manager,
-        type: "Day Off Request",
-        message: store.state.user.name + "has request time off."
-      };
+      let result = {};
       try {
-        await EventService.addEvent(request);
+        result = await EventService.addEvent(request);
         // send new request for events here (update them to show new request)
       } catch(error) {
         this.error = error.response.data.error;
       }
+      const notification = {
+        senderId: store.state.user._id,
+        receiverId: store.state.user.manager,
+        type: "Time Off Request",
+        message: store.state.user.name + "has request time off.",
+        data: result.data.createdEvent,
+      };
+      console.log(notification.data);
       await NotificationService.addNotification(notification);
       this.requestModel = false;
       this.startDate = null;

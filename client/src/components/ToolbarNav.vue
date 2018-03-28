@@ -82,7 +82,10 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon @click="getNotifications">
-      <v-icon>notifications</v-icon>
+      <v-badge overlap color="red">
+        <v-icon>notifications</v-icon>
+        <span slot="badge">5</span>
+      </v-badge>
     </v-btn>
   </v-toolbar>
 
@@ -134,6 +137,7 @@ export default {
     },
     async apiCall() {
       this.nots = (await NotificationService.getUserNotifications(store.state.user._id)).data.notifications;
+      this.nots = this.nots.reverse();
     },
     navigateTo(destination) {
       this.$router.push({

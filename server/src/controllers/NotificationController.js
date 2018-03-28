@@ -16,6 +16,7 @@ module.exports = {
             receiverId: doc.receiverId,
             type: doc.type,
             message: doc.message,
+            data: doc.data,
             request: {
               type: 'GET',
               url: 'http://localhost:8081/notifications/' + doc.senderId, // this is just to show we can format reponse whatever way we want
@@ -43,6 +44,7 @@ module.exports = {
             receiverId: doc.receiverId,
             type: doc.type,
             message: doc.message,
+            data: doc.data,
           }
         }),
       };
@@ -68,6 +70,7 @@ module.exports = {
           receiverId: req.body.receiverId,
           type: req.body.type,
           message: req.body.message,
+          data: req.body.data,
         });
         return notification.save();
       })
@@ -82,6 +85,7 @@ module.exports = {
             receiverId: result.receiverId,
             type: result.type,
             message: result.message,
+            data: result.data,
           }
         });
       })

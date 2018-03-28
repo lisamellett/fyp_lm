@@ -44,6 +44,7 @@ import {
   VBottomNav,
   VBtnToggle,
   VAvatar,
+  VBadge,
 } from 'vuetify';
 
 import App from './App';
@@ -87,6 +88,7 @@ Vue.use(Vuetify, {
     VBottomNav,
     VBtnToggle,
     VAvatar,
+    VBadge,
   },
 });
 

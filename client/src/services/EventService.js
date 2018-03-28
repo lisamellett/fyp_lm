@@ -5,9 +5,10 @@ export default {
     return Api().get('/events/' + userId); // may have to create a new endpoint for this
   },
 
-  updateEvent(eventId) {
-    console.log('update');
-    return Api().patch('/events/' + eventId);
+  updateEvent(eventId, changes) {
+    console.log('update', changes);
+    console.log(eventId);
+    return Api().patch('/events/' + eventId, changes);
   },
 
   deleteEvent(eventId) {

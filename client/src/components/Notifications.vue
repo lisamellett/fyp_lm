@@ -11,7 +11,29 @@
     <v-container fluid style="min-height: 0;" grid-list-lg>
     <v-layout column>
     <v-flex xs12 v-for="notification in nots">
-      <v-card :to="{name: getLink(notification.type)}" hover color="cyan darken-2" class="white--text">
+      <!--time off request-->
+      <v-card v-if="notification.type==='Time Off Request'" :to="{name: getLink(notification.type)}" hover color="cyan darken-2" class="white--text">
+        <v-container>
+          <v-layout wrap>
+            <v-flex xs12 class="headline">
+              {{ notification.type }}
+            </v-flex>
+            <v-flex xs12>
+              <div>{{ notification.message }}</div>
+              <span v-if="notification.data">
+                <!--will have to get rif of if-->
+              {{ prettyDate(notification.data.start)}} - {{prettyDate(notification.data.end)}}
+              </span>
+            </v-flex>
+            <v-flex xs12>
+              <v-btn @click.prevent="approve(notification.data, notification._id)">Approve</v-btn>
+              <v-btn @click.prevent="disapprove(notification.data, notification._id)">Disapprove</v-btn>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
+      <!--others-->
+      <v-card v-else :to="{name: getLink(notification.type)}" hover color="cyan darken-2" class="white--text">
         <v-container>
           <v-layout wrap>
             <v-flex xs9 class="headline">
@@ -37,6 +59,7 @@
 <script>
 import store from '@/store/store';
 import NotificationService from '@/services/NotificationService';
+import EventService from '@/services/EventService';
 
 export default {
   props: ['nots'],
@@ -50,7 +73,67 @@ export default {
       switch(type) {
         case "review":
           return 'myPerformance'; // have to use
+        case "Time Off Request":
+          return 'calendar';
+        case "Time Off Request Approved":
+          return 'calendar';
+        case "Time Off Request Disapproved":
+          return 'calendar';
       }
+    },
+    prettyDate(date) {
+      const date1 = new Date(date).toUTCString();
+      return date1.split(' ').slice(0, 4).join(' ');
+    },
+    async approve(event, notificationId) {
+      // must include in decrement counter
+      const notification = {
+        senderId: store.state.user._id,
+        receiverId: event.employeeId,
+        type: "Time Off Request Approved",
+        message: store.state.user.name + " has approved your time off from " + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
+        data: event,
+      };
+      let css = '';
+      if (event.title === 'Holiday') {
+        css = 'pink lighten-4'; // #F8BBD0
+      }
+      else if (event.title === 'Appointment') {
+        css = 'orange lighten-4'; //#FFE0B2
+      }
+      else {
+        css = 'cyan lighten-4'; //#B2EBF2
+      }
+      const changes = {
+        cssClass: css,
+        type: 'approved'
+      };
+      await EventService.updateEvent(event._id, changes);
+      await NotificationService.addNotification(notification);
+      this.deleteNotification(notificationId); // may change this to just update the notification
+
+      // change status
+      // change color
+      // send email
+      // send notification
+      // console.log(event);
+
+    },
+    async disapprove(event, notificationId) {
+      const notification = {
+        senderId: store.state.user._id,
+        receiverId: event.employeeId,
+        type: "Time Off Request Disapproved",
+        message: store.state.user.name + " has disapproved your time off request from " + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
+        data: event,
+      };
+      await EventService.deleteEvent(event._id);
+      await NotificationService.addNotification(notification);
+      this.deleteNotification(notificationId);
+      // delete request
+      // send email
+      // send notification
+
     },
     async deleteNotification(notificationId) {
       await NotificationService.deleteNotification(notificationId);

@@ -139,8 +139,11 @@ module.exports = {
   },
 
   updateToBooked(req, res, next) {
+    console.log('in here now');
     const id = req.params.eventId;
-    const updateOps = {type: "booked"}; // may have to change title too and CSS class etc
+    console.log('here', req.body.cssClass);
+    console.log(req.body.type);
+    const updateOps = {type: req.body.type, cssClass:req.body.cssClass}; // may have to change title too and CSS class etc, add in chnage of color here too
     Event.update({_id: id}, {$set: updateOps})// might just change one thing :)
       .exec()
       .then(result => {
@@ -160,7 +163,7 @@ module.exports = {
 
   async getTeamEvents(req, res) {
     try {
-      const docs = await Event.find( { managerId: req.params.managerId} ); //Todo: change this back
+      const docs = await Event.find( { managerId: req.params.managerId, type: "approved"} ); //Todo: change this back to wer request type is booked/approved
       const response = {
         count: docs.length,
         events: docs.map(doc => {

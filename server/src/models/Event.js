@@ -7,7 +7,7 @@ const EventSchema = new mongoose.Schema({
   title: {type: String, required: true},
   start: {type: String, required: true},
   end: {type: String},
-  cssClass: {type: Array, required: true},
+  cssClass: {type: String, required: true},
   type: {type: String, required: true}, // Request or Booked
   reason: {type: String}, // this could be appointment, holidays -> may only show in your personal cal
   dates: {type: Array},
