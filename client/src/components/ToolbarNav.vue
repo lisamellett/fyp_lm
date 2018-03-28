@@ -84,7 +84,7 @@
     <v-btn icon @click="getNotifications">
       <v-badge overlap color="red">
         <v-icon>notifications</v-icon>
-        <span slot="badge">5</span>
+        <span v-if="this.nots.length > 0" slot="badge">{{ this.nots.length }}</span>
       </v-badge>
     </v-btn>
   </v-toolbar>
@@ -124,6 +124,9 @@ export default {
       right: null,
       nots: [],
     }
+  },
+  async mounted() {
+    this.nots = (await NotificationService.getUserNotifications(store.state.user._id)).data.notifications;
   },
   methods: {
     test(i) {

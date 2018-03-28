@@ -376,6 +376,7 @@ export default {
       });
     },
     getTeamEvents(day) {
+      console.log('taken', store.state.user.taken);
       this.filteredTeam = this.teamEvents.filter(function(event) {
         return (event.dates.indexOf(day) > -1);
       })
@@ -433,6 +434,7 @@ export default {
         reason: this.detail, // this could be appointment, holidays -> may only show in your personal cal
         manager: manager,
         email: store.state.user.email,
+        warning: this.warning,
       };
       console.log(request);
       let result = {};

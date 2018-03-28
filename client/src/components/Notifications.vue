@@ -20,9 +20,12 @@
             </v-flex>
             <v-flex xs12>
               <div>{{ notification.message }}</div>
-              <span v-if="notification.data">
+              <span>
                 <!--will have to get rif of if-->
               {{ prettyDate(notification.data.start)}} - {{prettyDate(notification.data.end)}}
+              </span>
+              <span v-if="notification.data.warning !== ''">
+                Warning: This employee will exceed there total allowance of days off if this request is approved.
               </span>
             </v-flex>
             <v-flex xs12>
@@ -60,6 +63,7 @@
 import store from '@/store/store';
 import NotificationService from '@/services/NotificationService';
 import EventService from '@/services/EventService';
+import UsersService from "../services/UsersService";
 
 export default {
   props: ['nots'],
@@ -111,6 +115,15 @@ export default {
       };
       await EventService.updateEvent(event._id, changes);
       await NotificationService.addNotification(notification);
+      const taken = (await UsersService.getUser(event.employeeId)).data.user.taken;
+      console.log('taken', taken);
+      const updateTaken = taken + (event.dates.length - 1);
+      console.log('updateTaken', updateTaken);
+      const updates = [{
+        propName: 'taken',
+        value: updateTaken,
+      }];
+      await UsersService.updateUser(updates, event.employeeId);
       this.deleteNotification(notificationId); // may change this to just update the notification
 
       // change status

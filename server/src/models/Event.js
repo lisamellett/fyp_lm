@@ -15,6 +15,7 @@ const EventSchema = new mongoose.Schema({
   name: {type: String},
   manager: {},
   email: {type: String},
+  warning: {type: String},
 });
 
 module.exports = mongoose.model('Event', EventSchema);

@@ -37,7 +37,7 @@ module.exports = (app) => {
   app.patch('/users/:userId',
     // to update users the user has to be logged in
     isAuthenticated,
-    AuthenticationController.roleAuthorization(['admin']),
+    AuthenticationController.roleAuthorization(['admin', 'manager']),
     UsersController.update);
 
   app.delete('/users/:userId',

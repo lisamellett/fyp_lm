@@ -38,6 +38,7 @@ module.exports = {
             dates: doc.dates,
             manager: doc.manager,
             email: doc.email,
+            warning: doc.warning,
             reason: doc.reason, // this could be appointment, holidays -> may only show in your personal cal
             request: {
               type: 'GET',
@@ -75,6 +76,7 @@ module.exports = {
             reason: doc.reason, // t
             dates: doc.dates,
             manager: doc.manager,
+            warning: doc.warning,
           }
         }),
       };
@@ -141,6 +143,7 @@ module.exports = {
           dates: req.body.dates,
           manager: req.body.manager,
           email: req.body.email,
+          warning: req.body.warning,
         });
         return event.save();
       })
@@ -164,6 +167,7 @@ module.exports = {
             dates: result.dates,
             manager: result.manager,
             email: result.email,
+            warning: result.warning,
           }
         });
       })
@@ -301,6 +305,7 @@ module.exports = {
             dates: doc.dates,
             manager: doc.manager,
             email: doc.email,
+            warning: doc.warning,
           }
         }),
       };
