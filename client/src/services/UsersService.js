@@ -5,6 +5,10 @@ export default {
     return Api().get('users'); // may have to create a new endpoint for this
   },
 
+  getUser(userId) {
+    return Api().get('users/' + userId);
+  },
+
   updateUser(updates, userId) {
     console.log('update');
     return Api().patch('/users/' + userId, updates);

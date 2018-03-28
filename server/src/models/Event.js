@@ -13,6 +13,8 @@ const EventSchema = new mongoose.Schema({
   dates: {type: Array},
   icon: {type: String},
   name: {type: String},
+  manager: {},
+  email: {type: String},
 });
 
 module.exports = mongoose.model('Event', EventSchema);

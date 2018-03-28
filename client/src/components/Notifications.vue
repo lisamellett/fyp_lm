@@ -106,7 +106,8 @@ export default {
       }
       const changes = {
         cssClass: css,
-        type: 'approved'
+        type: 'approved',
+        email: event.email,
       };
       await EventService.updateEvent(event._id, changes);
       await NotificationService.addNotification(notification);
@@ -127,7 +128,7 @@ export default {
         message: store.state.user.name + " has disapproved your time off request from " + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
         data: event,
       };
-      await EventService.deleteEvent(event._id);
+      await EventService.deleteEvent(event._id, notification);
       await NotificationService.addNotification(notification);
       this.deleteNotification(notificationId);
       // delete request

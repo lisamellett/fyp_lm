@@ -1,6 +1,20 @@
 const Event = require('../models/Event');
 const User = require('../models/User');
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // todo: may need to change this to own host when deploy
+  port: 25,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: 'elizamillitt@gmail.com', // generated ethereal user
+    pass: 'lizmar23'  // generated ethereal password
+  },
+  tls:{
+    rejectUnauthorized:false
+  }
+});
 
 
 module.exports = {
@@ -22,6 +36,8 @@ module.exports = {
             name: doc.name,
             type: doc.type, // Request or Booked
             dates: doc.dates,
+            manager: doc.manager,
+            email: doc.email,
             reason: doc.reason, // this could be appointment, holidays -> may only show in your personal cal
             request: {
               type: 'GET',
@@ -47,6 +63,7 @@ module.exports = {
           return {
             _id: doc._id,
             icon: doc.icon,
+            email: doc.email,
             employeeId: doc.employeeId,
             managerId: doc.managerId,
             title: doc.title,
@@ -57,6 +74,7 @@ module.exports = {
             type: doc.type, // Request or Booked
             reason: doc.reason, // t
             dates: doc.dates,
+            manager: doc.manager,
           }
         }),
       };
@@ -76,6 +94,38 @@ module.exports = {
             message: "user not found",
           });
         }
+        ///////////////////////////// sending an email
+        const email = req.body.manager.email;
+        console.log(email);
+
+        const output = `
+        <p>Time Off request</p>
+        <h3>New Time Off Request had been made!</h3>
+        <ul>  
+          <li>Please log into Kin to see the new changes, these changes need to be approved or disapproved</li>
+        </ul>
+        <p>Kin Ltd.</p>
+       `;
+
+        let mailOptions = {
+          from: '"HR APP" <elizamillitt@gmail.com>', // sender address
+          to: email, // list of receivers
+          subject: 'Time Off Request', // Subject line
+          // text: 'Hello world?', // plain text body
+          html: output // html body
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          console.log('Message sent: %s', info.messageId);
+          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+          res.render('contact', {msg:'Email has been sent'});
+        });
+        /////////////////////////////
+
         const event = new Event({
           _id: new mongoose.Types.ObjectId(),
           employeeId: req.body.employeeId,
@@ -89,6 +139,8 @@ module.exports = {
           type: req.body.type, // Request or Booked
           reason: req.body.reason,
           dates: req.body.dates,
+          manager: req.body.manager,
+          email: req.body.email,
         });
         return event.save();
       })
@@ -110,6 +162,8 @@ module.exports = {
             type: result.type, // Request or Booked
             reason: result.reason,
             dates: result.dates,
+            manager: result.manager,
+            email: result.email,
           }
         });
       })
@@ -129,6 +183,39 @@ module.exports = {
         res.status(200).json({
           message: 'event deleted',
         });
+        ///////////////////////////// sending an email
+        const email = req.body.email;
+        console.log(email);
+
+        console.log('here');
+
+        const output = `
+        <p>Time Off Disapproved :( </p>
+        <h3>Time Logs</h3>
+        <ul>  
+          <li>Please log into Kin to see your updated request </li>
+        </ul>
+        <p>Kin Ltd</p>
+       `;
+
+        let mailOptions = {
+          from: '"HR APP" <elizamillitt@gmail.com>', // sender address
+          to: email, // list of receivers
+          subject: 'Time Off Disapproved',
+          html: output // html body
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          console.log('Message sent: %s', info.messageId);
+          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+          res.render('contact', {msg:'Email has been sent'});
+        });
+        /////////////////////////////
+
       })
       .catch(err => {
         console.log(err);
@@ -154,6 +241,38 @@ module.exports = {
             url: 'http://localhost:8081/events/',
           }
         });
+
+        ///////////////////////////// sending an email
+        const email = req.body.email;
+
+        const output = `
+        <p>Time Off approved</p>
+        <h3>Yay you time off has been approved!!</h3>
+        <ul>  
+          <li>Log into Kin to see the changes. </li>
+        </ul>
+        <p>Kin Ltd.</p>
+       `;
+
+        let mailOptions = {
+          from: '"Kin" <elizamillitt@gmail.com>', // sender address
+          to: email, // list of receivers
+          subject: 'Time Off Approved', // Subject line
+          // text: 'Hello world?', // plain text body
+          html: output // html body
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            return console.log(error);
+          }
+          console.log('Message sent: %s', info.messageId);
+          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+          res.render('contact', {msg:'Email has been sent'});
+        });
+        /////////////////////////////
+
       })
       .catch(err => {
         console.log(err);
@@ -180,6 +299,8 @@ module.exports = {
             type: doc.type, // Request or Booked
             reason: doc.reason, // t
             dates: doc.dates,
+            manager: doc.manager,
+            email: doc.email,
           }
         }),
       };

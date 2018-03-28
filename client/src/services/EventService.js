@@ -11,8 +11,9 @@ export default {
     return Api().patch('/events/' + eventId, changes);
   },
 
-  deleteEvent(eventId) {
-    return Api().delete('events/' + eventId);
+  deleteEvent(eventId, data) {
+    console.log('data', data);
+    return Api().delete('events/' + eventId, data);
   },
 
   getTeamEvents(managerId) {

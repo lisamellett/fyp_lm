@@ -258,6 +258,7 @@ import HotelDatePicker from 'vue-hotel-datepicker';
 import store from '@/store/store';
 import EventService from '@/services/EventService';
 import NotificationService from '@/services/NotificationService';
+import UsersService from '@/services/UsersService';
 import CalendarView from "vue-simple-calendar";
 require("vue-simple-calendar/dist/static/css/default.css");
 require("vue-simple-calendar/dist/static/css/holidays-us.css");
@@ -415,6 +416,9 @@ export default {
         icon='bubble_chart';
       }
 
+      const manager = (await UsersService.getUser(store.state.user.manager)).data.user;
+      console.log('manager', manager);
+
       const request = {
         employeeId: store.state.user._id,
         managerId: store.state.user.manager,
@@ -427,6 +431,8 @@ export default {
         icon: icon,
         type: 'pending', // Request or Booked
         reason: this.detail, // this could be appointment, holidays -> may only show in your personal cal
+        manager: manager,
+        email: store.state.user.email,
       };
       console.log(request);
       let result = {};
@@ -440,7 +446,7 @@ export default {
         senderId: store.state.user._id,
         receiverId: store.state.user.manager,
         type: "Time Off Request",
-        message: store.state.user.name + "has request time off.",
+        message: store.state.user.name + " has request time off.",
         data: result.data.createdEvent,
       };
       console.log(notification.data);
