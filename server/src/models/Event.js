@@ -10,6 +10,9 @@ const EventSchema = new mongoose.Schema({
   cssClass: {type: Array, required: true},
   type: {type: String, required: true}, // Request or Booked
   reason: {type: String}, // this could be appointment, holidays -> may only show in your personal cal
+  dates: {type: Array},
+  icon: {type: String},
+  name: {type: String},
 });
 
 module.exports = mongoose.model('Event', EventSchema);

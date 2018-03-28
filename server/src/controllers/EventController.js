@@ -17,8 +17,11 @@ module.exports = {
             title: doc.title,
             start: doc.start,
             end: doc.end,
+            icon: doc.icon,
             cssClass: doc.cssClass,
+            name: doc.name,
             type: doc.type, // Request or Booked
+            dates: doc.dates,
             reason: doc.reason, // this could be appointment, holidays -> may only show in your personal cal
             request: {
               type: 'GET',
@@ -43,14 +46,17 @@ module.exports = {
         events: docs.map(doc => {
           return {
             _id: doc._id,
-            employeeId: doc.userId,
+            icon: doc.icon,
+            employeeId: doc.employeeId,
             managerId: doc.managerId,
             title: doc.title,
             start: doc.start,
             end: doc.end,
+            name: doc.name,
             cssClass: doc.cssClass,
             type: doc.type, // Request or Booked
             reason: doc.reason, // t
+            dates: doc.dates,
           }
         }),
       };
@@ -76,10 +82,13 @@ module.exports = {
           managerId: req.body.managerId,
           title: req.body.title,
           start: req.body.start,
+          icon: req.body.icon,
           end: req.body.end,
           cssClass: req.body.cssClass,
+          name: req.body.name,
           type: req.body.type, // Request or Booked
           reason: req.body.reason,
+          dates: req.body.dates,
         });
         return event.save();
       })
@@ -94,10 +103,13 @@ module.exports = {
             managerId: result.managerId,
             title: result.title,
             start: result.start,
+            icon: result.icon,
             end: result.end,
+            name: result.name,
             cssClass: result.cssClass,
             type: result.type, // Request or Booked
             reason: result.reason,
+            dates: result.dates,
           }
         });
       })
@@ -156,12 +168,15 @@ module.exports = {
             _id: doc._id,
             employeeId: doc.userId,
             managerId: doc.managerId,
+            icon: doc.icon,
             title: doc.title,
             start: doc.start,
             end: doc.end,
+            name: doc.name,
             cssClass: doc.cssClass,
             type: doc.type, // Request or Booked
             reason: doc.reason, // t
+            dates: doc.dates,
           }
         }),
       };

@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout row>
     <v-flex xs8>
       <v-dialog v-model="requestModel" max-width="750px">
         <v-card>
@@ -7,7 +7,7 @@
             <span class="headline">Request Time Off</span>
           </v-card-title>
           <v-card-text>
-            <v-container grid-list-md>
+            <v-container>
               <v-layout wrap>
                 <v-flex xs12>
                   <HotelDatePicker v-on:checkInChanged="setStart" v-on:checkOutChanged="setEnd" format="DD/MM/YYYY" :i18n="ptBr">></HotelDatePicker>
@@ -75,7 +75,7 @@
             :events="teamEvents"
             locale="en"
             @eventClick="eventClick"
-            @dayClick="dayClick"
+            @dayClick="dayClickTeam"
             @moreClick="moreClick"
           ></full-calendar>
           </div>
@@ -83,13 +83,172 @@
       </v-card>
     </v-flex>
     <v-flex xs4 class="ml-3">
-      <v-card>
-        <v-toolbar class="blue darken-2" dark dense>
-          <v-toolbar-title>
-            Selected: {{ selectedDate}}
-          </v-toolbar-title>
-        </v-toolbar>
-      </v-card>
+      <v-layout row wrap >
+      <v-flex class="mb-2">
+        <v-card v-if="showMine">
+          <v-toolbar class="blue darken-2" dark dense>
+            <v-toolbar-title>
+              {{ selectedDate }}
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-tooltip top>
+            <v-icon slot="activator">info_outline</v-icon>
+              <span>Click on a day on the calendar to view the associated events</span>
+            </v-tooltip>
+          </v-toolbar>
+          <v-container class="hee2">
+          <v-card-title class="subheading grey--text py-0">Showing schedule for {{ selectedDate2}}</v-card-title>
+          <v-flex xs12 v-if="filteredItems.length === 0" class="pb-2 py-2">
+            <v-card class="cyan lighten-5" raised>
+              <v-card-title class="body-1 center">You have no events scheduled for this day</v-card-title>
+            </v-card>
+          </v-flex>
+          <v-flex xs12 v-else v-for="item in filteredItems" class="pb-2 py-2">
+            <v-card raised :class="item.cssClass">
+              <v-card-title>
+                <v-layout row wrap>
+                <v-flex xs4>
+                  <v-avatar>
+                <v-icon class="white--text">{{ item.icon }}</v-icon>
+                  </v-avatar>
+                </v-flex>
+                <v-flex xs8 class="pt-2">
+                <span class="subheading">{{ item.title }}</span>
+                  <span class="caption">{{item.type}}</span>
+                </v-flex>
+                  <v-flex xs4>
+                    Starting:
+                  </v-flex>
+                  <v-flex xs8>
+                    {{item.start}}
+                  </v-flex>
+                  <v-flex xs4>
+                    Back to Work
+                  </v-flex>
+                  <v-flex xs8>
+                    {{ item.end }}
+                  </v-flex>
+                  <v-flex xs4 v-if="item.reason">
+                    Reason:
+                  </v-flex>
+                  <v-flex xs8 v-if="item.reason">
+                    {{item.reason}}
+                  </v-flex>
+                </v-layout>
+              </v-card-title>
+
+            </v-card>
+          </v-flex>
+          </v-container>
+        </v-card>
+
+        <v-card v-else>
+          <v-toolbar class="blue darken-2" dark dense>
+            <v-toolbar-title>
+              {{ selectedDate2 }}
+            </v-toolbar-title>
+          </v-toolbar>
+          <v-container class="hee2">
+          <v-card-title class="subheading grey--text py-0"><span class="center">Showing schedule for {{ selectedDate2}}</span></v-card-title>
+          <v-flex xs12 v-if="filteredTeam.length === 0" class="pb-2 py-2">
+            <v-card class="cyan lighten-5" raised>
+              <v-card-title class="body-1">No members of your team have events scheduled for this day</v-card-title>
+            </v-card>
+          </v-flex>
+          <v-flex xs12 v-else v-for="item in filteredTeam" class="pb-2 py-2">
+            <v-card raised :class="item.cssClass">
+              <v-card-title>
+                <v-layout row wrap>
+                  <v-flex xs4>
+                    <v-avatar>
+                      <v-icon class="white--text">{{ item.icon }}</v-icon>
+                    </v-avatar>
+                  </v-flex>
+                  <v-flex xs8 class="pt-2">
+                    <span class="subheading">{{ item.title }}</span>
+                    <span class="caption">{{item.type}}</span>
+                  </v-flex>
+                  <v-flex xs4>
+                    Starting:
+                  </v-flex>
+                  <v-flex xs8>
+                    {{item.start}}
+                  </v-flex>
+                  <v-flex xs4>
+                    Back to Work
+                  </v-flex>
+                  <v-flex xs8>
+                    {{ item.end }}
+                  </v-flex>
+                  <v-flex xs4 v-if="item.reason">
+                    Reason:
+                  </v-flex>
+                  <v-flex xs8 v-if="item.reason">
+                    {{item.reason}}
+                  </v-flex>
+                </v-layout>
+              </v-card-title>
+        </v-card>
+      </v-flex>
+          </v-container>
+        </v-card>
+      </v-flex>
+
+        <v-flex class="pt-2">
+          <v-card v-if="showMine">
+            <v-toolbar dense class="blue darken-2" dark>
+              <v-toolbar-title>
+                My Days Off
+              </v-toolbar-title>
+            </v-toolbar>
+            <v-container class="hee">
+              <v-list two-line>
+                <template v-for="event in myEventsSorted">
+                  <v-divider></v-divider>
+                  <!--<v-subheader>{{ event.title }}</v-subheader>-->
+                  <!--<v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>-->
+                  <v-list-tile avatar>
+                    <v-list-tile-avatar>
+                      <v-icon :class="event.cssClass" class="white--text">{{ event.icon }}</v-icon>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                      <v-list-tile-title>{{event.title}} <span class="caption">{{event.type}}</span></v-list-tile-title>
+                      <v-list-tile-sub-title> start: {{ event.start}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> back to work: {{ event.end}}</v-list-tile-sub-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </template>
+              </v-list>
+            </v-container>
+          </v-card>
+          <v-card v-else>
+            <v-toolbar dense class="blue darken-2" dark>
+              <v-toolbar-title>
+                Team Members Days Off
+              </v-toolbar-title>
+            </v-toolbar>
+            <v-container class="hee">
+              <v-list two-line>
+                <template v-for="event in teamEventsSorted">
+                  <v-divider></v-divider>
+                  <!--<v-subheader>{{ event.title }}</v-subheader>-->
+                  <!--<v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>-->
+                  <v-list-tile avatar>
+                    <v-list-tile-avatar>
+                      <v-icon :class="event.cssClass" class="white--text">{{ event.icon }}</v-icon>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                      <v-list-tile-title>{{ event.name }}</v-list-tile-title>
+                      <v-list-tile-sub-title> start: {{ event.start}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> back to work: {{ event.end}}</v-list-tile-sub-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </template>
+              </v-list>
+            </v-container>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-flex>
   </v-layout>
 </template>
@@ -108,12 +267,15 @@ require("vue-simple-calendar/dist/static/css/default.css");
 require("vue-simple-calendar/dist/static/css/holidays-us.css");
 const moment = require('moment');
 
+const today = new Date();
 
 export default {
   data() {
     return {
-      selectedDate: null,
+      selectedDate: today,
+      selectedDate2: today,
       filteredItems: [],
+      filteredTeam: [],
       showMine: true,
       selectReason: null,
       detail: null,
@@ -138,6 +300,12 @@ export default {
   computed: {
     transition: function () {
       return this.showMine ? "slide-left" : "slide";
+    },
+    myEventsSorted: function() {
+      return _.orderBy(this.myEvents, 'start');
+    },
+    teamEventsSorted: function() {
+      return _.orderBy(this.teamEvents, 'start');
     }
   },
   components: {
@@ -146,13 +314,13 @@ export default {
     MyPanel,
     CalendarView
   },
-  async created () {
+  async mounted() {
     this.myEvents = (await EventService.getUserEvents(store.state.user._id)).data.events;
     console.log('mine', this.myEvents);
-
     console.log(store.state.user.manager);
     console.log(store.state.user._id);
     this.teamEvents = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
+    this.getEvents(today);
     console.log('team', this.teamEvents);
   },
   methods: {
@@ -166,6 +334,7 @@ export default {
       console.log('eventClick', event.title, jsEvent, pos)
     },
     dayClick(day, jsEvent) {
+      this.selectedDate = day;
       // const selected = new Date(day);
       // console.log('selected', selected);
       console.log('day', day);
@@ -179,6 +348,17 @@ export default {
       console.log('filtered', this.filteredItems);
       console.log('dayClick', day, jsEvent);
     },
+    dayClickTeam(day, jsEvent) {
+      this.selectedDate2 = day;
+      console.log('day', day);
+      const dateTest = this.convertToUTC(day);
+      console.log('dateTest', dateTest);
+      const newDate = dateTest.toISOString();
+      console.log('iso', newDate);
+      this.getTeamEvents(newDate);
+      console.log('filtered', this.filteredTeam);
+      console.log('dayClick', day, jsEvent);
+    },
     moreClick(day, events, jsEvent) {
       console.log('moreCLick', day, events, jsEvent)
     },
@@ -189,8 +369,14 @@ export default {
     getEvents(day) {
       this.filteredItems = this.myEvents.filter(function (event) {
         console.log('start', event.start);
-        return (event.start === day);
+        console.log('name', event.name);
+        return (event.dates.indexOf(day) > -1); // this returns the event if any days of the event are clicked
       });
+    },
+    getTeamEvents(day) {
+      this.filteredTeam = this.teamEvents.filter(function(event) {
+        return (event.dates.indexOf(day) > -1);
+      })
     },
     convertToUTC(date) {
       console.log('date', date);
@@ -214,27 +400,34 @@ export default {
       // send warning to manager if allowed holidays will be exceeded
       // make call to api to update event list
       let css = '';
+      let icon = '';
       if (this.selectReason === 'Holiday') {
         css = 'pink lighten-5'; // #F8BBD0
+        icon = 'work';
       }
       else if (this.selectReason === 'Appointment') {
         css = 'orange lighten-5'; //#FFE0B2
+        icon='event_busy';
       }
       else {
         css = 'cyan lighten-5'; //#B2EBF2
+        icon='bubble_chart';
       }
 
       const request = {
         employeeId: store.state.user._id,
         managerId: store.state.user.manager,
         title: this.selectReason,
-        person: store.state.user.name,
+        name: store.state.user.name,
         start: this.startDate,
         end: this.endDate,
+        dates: this.getDateRange(this.startDate, this.endDate),
         cssClass: css,
-        type: 'request', // Request or Booked
+        icon: icon,
+        type: 'pending', // Request or Booked
         reason: this.detail, // this could be appointment, holidays -> may only show in your personal cal
       };
+      console.log(request);
       const notification = {
         senderId: store.state.user._id,
         receiverId: store.state.user.manager,
@@ -255,6 +448,29 @@ export default {
       this.selectReason = null;
     },
 
+    getDateRange(startDate, endDate) {
+      let dates = [];
+      let currentDate = startDate;
+      let addDays = function(days) {
+        let date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+      };
+      while (currentDate <= endDate) {
+        dates.push(currentDate);
+        currentDate = addDays.call(currentDate, 1);
+      }
+      dates.push(this.endDate);
+      return dates;
+    },
+
+// Usage
+//       var dates = getDates(new Date(2013,10,22), new Date(2013,11,25));
+//       dates.forEach(function(date) {
+//         console.log(date);
+//       });
+//     },
+
     getDifferenceInDays(d1, d2) {
       const timeDiff = Math.abs(d1.getTime() - d2.getTime());
       const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -267,19 +483,9 @@ export default {
     },
 
     setStart(payload) {
-      // const test = new Date();
-      // console.log('test', test);
       console.log('payload start', payload);
-      // const str = 'payload';
-      // const str1 = str.substring(0,tomorrow.toLocaleString().indexOf(':')-3);
-
-      // const dateTime = 'Fri, 18 Oct 2013 11:38:23 GMT';
-      // const date1 = payload.toString().split(' ', 4).join(' ') + ' UTC';
-      // console.log('date1', date1);
-      // const newStart = new Date(date1);
-      // console.log('newStart', newStart.toUTCString());
       this.startDate = this.convertToUTC(payload);
-      // this.startDate = newStart;
+      console.log(this.startDate.toISOString());
       console.log('startDate', this.startDate);
     },
 
@@ -288,8 +494,9 @@ export default {
       if (payload !== null) {
         const yesterday = new Date(payload);
         yesterday.setDate(payload.getDate()-1);
-        this.endDate = yesterday;
+        this.endDate = this.convertToUTC(yesterday);
         this.getDifferenceInDays(this.startDate, this.endDate);
+        console.log(this.getDateRange(this.startDate, this.endDate));
       } else {
         this.endDate = payload;
       }
@@ -355,7 +562,15 @@ export default {
     position: relative;
   }
 
-  .calendar {
-    /*height: 800px;*/
+  .hee {
+    overflow: auto;
+    border-radius: unset;
+    max-height: 500px;
+  }
+
+  .hee2 {
+    overflow: auto;
+    border-radius: unset;
+    max-height: 300px;
   }
 </style>

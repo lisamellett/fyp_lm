@@ -43,6 +43,7 @@ import {
   VCarousel,
   VBottomNav,
   VBtnToggle,
+  VAvatar,
 } from 'vuetify';
 
 import App from './App';
@@ -85,6 +86,7 @@ Vue.use(Vuetify, {
     VCarousel,
     VBottomNav,
     VBtnToggle,
+    VAvatar,
   },
 });
 
