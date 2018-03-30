@@ -24,7 +24,7 @@
                   <td>{{ field }}: </td>
                   <td>
                     <v-icon small v-for="i in value">grade</v-icon>
-                    <v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>
+                    <v-icon color="grey lighten-2" small v-for="i in (5-value)">grade</v-icon>
                   </td>
                 </tr>
               </table>
@@ -79,7 +79,7 @@
               <td>{{ field }}: </td>
               <td>
                 <v-icon small v-for="i in value">grade</v-icon>
-                <v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>
+                <v-icon color="grey lighten-2" small v-for="i in (5-value)">grade</v-icon>
               </td>
             </tr>
             </table>

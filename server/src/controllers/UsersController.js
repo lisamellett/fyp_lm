@@ -140,7 +140,7 @@ module.exports = {
        `;
 
       let mailOptions = {
-        from: '"HR APP" <elizamillitt@gmail.com>', // sender address
+        from: '"Kin" <elizamillitt@gmail.com>', // sender address
         to: email, // list of receivers
         subject: 'Performance Review', // Subject line
         // text: 'Hello world?', // plain text body

@@ -100,6 +100,7 @@
       temporary
       v-model="right"
       fixed
+      class="blue-grey lighten-2"
     >
       <notifications v-bind:nots="nots"></notifications>
     </v-navigation-drawer>

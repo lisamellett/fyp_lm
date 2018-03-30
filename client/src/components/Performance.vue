@@ -50,7 +50,7 @@
                             <td class="performancetd">{{ field }}: </td>
                             <td class="performancetd">
                               <v-icon small v-for="i in value">grade</v-icon>
-                              <v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>
+                              <v-icon color="grey lighten-2" small v-for="i in (5-value)">grade</v-icon>
                             </td>
                           </tr>
                         </table>
@@ -100,7 +100,7 @@
                         <td class="performancetd">{{ field }}: </td>
                         <td class="performancetd">
                           <v-icon small v-for="i in value">grade</v-icon>
-                          <v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>
+                          <v-icon color="grey lighten-2" small v-for="i in (5-value)">grade</v-icon>
                         </td>
                       </tr>
                     </table>
@@ -147,10 +147,10 @@
                           </v-btn>
                         </v-flex>
                         <v-flex xs8>
-                          <v-slider :label="field" :max="10" v-model="fields[field]"></v-slider>
+                          <v-slider :label="field" :max="5" v-model="fields[field]"></v-slider>
                         </v-flex>
                         <v-flex xs3>
-                          <v-text-field :max="10" :min="0" v-model="fields[field]" type="number"></v-text-field>
+                          <v-text-field :max="5" :min="0" v-model="fields[field]" type="number"></v-text-field>
                         </v-flex>
                       </v-layout>
                       <v-layout>
@@ -206,7 +206,7 @@
                               <td class="performancetd">{{field}} : </td>
                               <td class="performancetd">
                                 <v-icon small v-for="i in value">grade</v-icon>
-                                <v-icon color="grey lighten-2" small v-for="i in (10-value)">grade</v-icon>
+                                <v-icon color="grey lighten-2" small v-for="i in (5-value)">grade</v-icon>
                               </td>
                             </tr>
                           </table>
@@ -405,6 +405,28 @@ export default {
       };
     },
     async submitPressed() {
+      console.log(this.fields);
+      // get the average of all the fields and then set this value to an average field
+      // $scope.sum = function (items, prop) {
+      //   if (items == null) {
+      //     return 0;
+      //   }
+      //   return items.reduce(function (a, b) {
+      //     return b[prop] == null ? a : a + b[prop];
+      //   }, 0);
+      // };
+
+      let total = 0;
+      let length = 0;
+      for( let field in this.fields) {
+        length += 1;
+        total += this.fields[field];
+        console.log('average', total);
+      }
+      const average = Math.round(total / length);
+
+      this.$set(this.fields, 'AVERAGE', average);
+
       try {
         const review = {
           authorId: store.state.user._id,
@@ -416,7 +438,7 @@ export default {
         const notification = {
           senderId: store.state.user._id,
           receiverId: this.currentEmployee._id,
-          type: "review",
+          type: "Performance Review",
           message: "A new review has been submitted by your manager",
           data: {},
         };

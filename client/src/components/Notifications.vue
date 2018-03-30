@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar color="pink">
+    <v-toolbar color="indigo">
       <v-icon>notifications</v-icon>
       <v-toolbar-title class="white--text">Notifications</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -12,46 +12,61 @@
     <v-layout column>
     <v-flex xs12 v-for="notification in nots">
       <!--time off request-->
-      <v-card v-if="notification.type==='Time Off Request'" :to="{name: getLink(notification.type)}" hover color="cyan darken-2" class="white--text">
-        <v-container>
-          <v-layout wrap>
-            <v-flex xs12 class="headline">
-              {{ notification.type }}
+      <v-card raised v-if="notification.type==='Time Off Request'" :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+          <v-layout row wrap>
+            <v-flex xs12 class="py-0">
+            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
+              <v-icon class="mx-2 white--text">work</v-icon>
+                {{ notification.type }}
+            </v-toolbar>
             </v-flex>
-            <v-flex xs12>
+            <v-flex>
+            <v-flex xs12 class="body-2 py-0">
               <div>{{ notification.message }}</div>
-              <span>
+            </v-flex>
+              <v-flex xs12 class="pb-0">
                 <!--will have to get rif of if-->
               {{ prettyDate(notification.data.start)}} - {{prettyDate(notification.data.end)}}
-              </span>
-              <span v-if="notification.data.warning !== ''">
-                Warning: This employee will exceed there total allowance of days off if this request is approved.
-              </span>
-            </v-flex>
-            <v-flex xs12>
-              <v-btn @click.prevent="approve(notification.data, notification._id)">Approve</v-btn>
-              <v-btn @click.prevent="disapprove(notification.data, notification._id)">Disapprove</v-btn>
-            </v-flex>
+              </v-flex>
+              <v-flex xs12 class="pt-0" v-if="notification.data.warning !== ''">
+                Detail: {{ notification.data.reason }}
+              </v-flex>
+              <v-flex xs12 class="py-0 red--text caption" v-if="notification.data.warning !== ''">
+                Warning: This employee will exceed their total allowance of days off if this request is approved.
+              </v-flex>
+              <!--<v-layout>-->
+              <v-flex xs12>
+                <span class="caption white--text">Approve or Dissaprove?</span>
+                <v-btn icon white-text @click.prevent="approve(notification.data, notification._id)" dark>
+                  <v-icon large>check</v-icon>
+                </v-btn>
+                <v-btn  icon white-text @click.prevent="disapprove(notification.data, notification._id)" dark>
+                  <v-icon large >close</v-icon>
+                </v-btn>
+              </v-flex>
+              <!--</v-layout>-->
+          </v-flex>
           </v-layout>
-        </v-container>
       </v-card>
       <!--others-->
-      <v-card v-else :to="{name: getLink(notification.type)}" hover color="cyan darken-2" class="white--text">
-        <v-container>
-          <v-layout wrap>
-            <v-flex xs9 class="headline">
-                  {{ notification.type }}
-                </v-flex>
-            <v-flex xs3>
-                  <v-btn icon @click.stop="deleteNotification(notification._id)">
-                    <v-icon>close</v-icon>
-                  </v-btn>
+      <v-card v-else :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+        <v-layout row wrap>
+          <v-flex xs12 class="py-0">
+            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
+              <v-icon class="mx-2 white--text">flash_on</v-icon>
+              {{ notification.type }}
+                <v-spacer></v-spacer>
+              <v-btn icon @click.stop="deleteNotification(notification._id)">
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-toolbar>
+          </v-flex>
+          <v-flex>
+            <v-flex xs12 class="body-2 py-2">
+              <div>{{ notification.message }}</div>
             </v-flex>
-            <v-flex xs12>
-                <div>{{ notification.message }}</div>
-            </v-flex>
-          </v-layout>
-        </v-container>
+          </v-flex>
+        </v-layout>
       </v-card>
     </v-flex>
     </v-layout>
@@ -75,13 +90,13 @@ export default {
   methods: {
     getLink(type) {
       switch(type) {
-        case "review":
+        case "Performance Review":
           return 'myPerformance'; // have to use
         case "Time Off Request":
           return 'calendar';
-        case "Time Off Request Approved":
+        case "Request Approved":
           return 'calendar';
-        case "Time Off Request Disapproved":
+        case "Request Disapproved":
           return 'calendar';
       }
     },
@@ -94,7 +109,7 @@ export default {
       const notification = {
         senderId: store.state.user._id,
         receiverId: event.employeeId,
-        type: "Time Off Request Approved",
+        type: "Request Approved",
         message: store.state.user.name + " has approved your time off from " + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
         data: event,
       };
@@ -137,7 +152,7 @@ export default {
       const notification = {
         senderId: store.state.user._id,
         receiverId: event.employeeId,
-        type: "Time Off Request Disapproved",
+        type: "Request Disapproved",
         message: store.state.user.name + " has disapproved your time off request from " + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
         data: event,
       };
@@ -156,3 +171,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  .rotate1 {
+    transform: rotate(45deg);
+    display: inline-block;
+  }
+</style>

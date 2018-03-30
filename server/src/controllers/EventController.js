@@ -110,7 +110,7 @@ module.exports = {
        `;
 
         let mailOptions = {
-          from: '"HR APP" <elizamillitt@gmail.com>', // sender address
+          from: '"Kin" <elizamillitt@gmail.com>', // sender address
           to: email, // list of receivers
           subject: 'Time Off Request', // Subject line
           // text: 'Hello world?', // plain text body
@@ -203,7 +203,7 @@ module.exports = {
        `;
 
         let mailOptions = {
-          from: '"HR APP" <elizamillitt@gmail.com>', // sender address
+          from: '"Kin" <elizamillitt@gmail.com>', // sender address
           to: email, // list of receivers
           subject: 'Time Off Disapproved',
           html: output // html body

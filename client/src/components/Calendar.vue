@@ -167,7 +167,7 @@
                     </v-avatar>
                   </v-flex>
                   <v-flex xs8 class="pt-2">
-                    <span class="subheading">{{ item.title }}</span>
+                    <span class="subheading">{{ item.name }}</span>
                     <span class="caption">{{item.type}}</span>
                   </v-flex>
                   <v-flex xs4>
