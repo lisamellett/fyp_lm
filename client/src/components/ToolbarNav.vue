@@ -159,16 +159,15 @@ export default {
       switch (store.state.user.role) {
         case "admin":
           return [
-            {icon: 'show_chart', text: 'Metrics'},
+            {icon: 'show_chart', text: 'Metrics', destination: 'metrics'},
             {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
-            {icon: 'date_range', text: 'Calendar2', destination: 'teamCalendar'},
             {
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
               text: 'Performance',
               model: false,
               children: [
                 {icon: 'flash_on', text: 'My Performance', destination: 'myPerformance'},
-                {icon: 'people_outline', text: 'Employee Performance (read only)'}
+                {icon: 'people_outline', text: 'Employee Performance (read only)'} //Todo: what going to do here?
               ]
             },{
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
@@ -185,8 +184,8 @@ export default {
           ];
         case "manager":
           return [
-            {icon: 'show_chart', text: 'Metrics'},
-            {icon: 'perm_contact_calendar', text: 'Calendar'},
+            {icon: 'show_chart', text: 'Metrics', destination: 'metrics'},
+            {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
             {
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
               text: 'Performance',

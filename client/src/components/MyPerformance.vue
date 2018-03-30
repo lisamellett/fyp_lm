@@ -1,5 +1,21 @@
 <template>
-  <v-layout id="performance">
+  <div>
+  <v-layout v-if="items.length === 0">
+    <v-flex xs6 offset-xs3>
+      <v-card>
+        <v-toolbar class="cyan" dark>
+          <v-icon light>info</v-icon>
+          <v-toolbar-title>
+            No Performace Reviews
+          </v-toolbar-title>
+        </v-toolbar>
+        <v-card-text class="text-sm-center">
+          Hang in there buddy! I'm sure there will be a performance review coming your way soon.
+        </v-card-text>
+      </v-card>
+    </v-flex>
+  </v-layout>
+  <v-layout id="performance" v-else>
     <v-flex xs8 class="mr-4">
       <v-text-field
         append-icon="search"
@@ -91,6 +107,7 @@
       </div>
     </v-flex>
   </v-layout>
+  </div>
 </template>
 
 
