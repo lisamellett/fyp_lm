@@ -240,7 +240,8 @@
       </v-alert>
 
       <v-card-title>
-        Employees Managed By Me
+        <span v-if="$store.state.user.role ==='senior manager'">Company Employees</span>
+        <span v-else>Employees Managed By Me</span>
         <v-spacer></v-spacer>
         <v-text-field
           append-icon="search"
@@ -380,7 +381,12 @@ export default {
     this.selectPage(1);
     // do a request to the backend for all the users
     // so when the page is loaded do a request to backend - may need to do this fo rmanagers register page
-    this.employees = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
+
+    if (store.state.user.role === 'senior manager') {
+      this.employees = (await UsersService.getAllUsers()).data.users;
+    } else {
+      this.employees = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
+    }
     console.log(this.employees);
     // this will do a get request the moment the page is mounted
   },
@@ -439,7 +445,7 @@ export default {
           senderId: store.state.user._id,
           receiverId: this.currentEmployee._id,
           type: "Performance Review",
-          message: "A new review has been submitted by your manager",
+          message: "A new review has been submitted by " + store.state.user.name + '(' + store.state.user.role + ')',
           data: {},
         };
         console.log('frontend', review.email);

@@ -3,7 +3,7 @@
   <v-layout v-if="items.length === 0">
     <v-flex xs6 offset-xs3>
       <v-card>
-        <v-toolbar class="cyan" dark>
+        <v-toolbar dense class="cyan" dark>
           <v-icon light>info</v-icon>
           <v-toolbar-title>
             No Performace Reviews

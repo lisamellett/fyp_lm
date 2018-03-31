@@ -81,7 +81,8 @@
       </v-card>
     </v-dialog>
     <v-card-title>
-      Employees
+      <span v-if="$store.state.user.role === 'manager'">Employees Managed By Me</span>
+      <span v-else>Employees</span>
       <v-spacer></v-spacer>
       <v-text-field
         append-icon="search"
@@ -119,10 +120,10 @@
           <td class="text-xs-right">{{ props.item.taken }}</td>
           <td class="text-xs-right">{{ props.item.allowance }}</td>
           <td class="justify-center layout px-0">
-            <v-btn icon class="mx-0" @click.stop="editItem(props.item)">
+            <v-btn v-if="$store.state.user.role === 'admin'" icon class="mx-0" @click.stop="editItem(props.item)">
               <v-icon color="teal">edit</v-icon>
             </v-btn>
-            <v-btn icon class="mx-0" @click.stop="deleteItem(props.item)">
+            <v-btn v-if="$store.state.user.role === 'admin'" icon class="mx-0" @click.stop="deleteItem(props.item)">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
           </td>
@@ -145,6 +146,7 @@
 
 <script>
 import UsersService from '@/services/UsersService';
+import store from '@/store/store';
 
 export default {
   data () {
@@ -208,7 +210,12 @@ export default {
   async mounted() {
     // do a request to the backend for all the users
     // so when the page is loaded do a request to backend - may need to do this fo rmanagers register page
-    this.items = (await UsersService.getAllUsers()).data.users;
+    if (store.state.user.role === 'manager') {
+      this.items = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
+    }
+    else {
+      this.items = (await UsersService.getAllUsers()).data.users;
+    }
     this.managers = (await UsersService.getManagers()).data.managers;
     // this will do a get request the moment the page is mounted
   },

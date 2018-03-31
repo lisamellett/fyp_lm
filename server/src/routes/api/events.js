@@ -8,6 +8,9 @@ module.exports = (app) => {
     // add above two lines back in when finished testing
     EventController.events);
 
+  app.get('/eventsapproved/:userId',
+    EventController.getApprovedEvents);
+
   app.post('/events',
     EventController.addEvent);
 

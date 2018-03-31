@@ -51,7 +51,10 @@
         <v-toolbar dense class="blue darken-2" dark>
           <v-toolbar-items class="ml-0">
             <v-btn flat @click="changeToEmployee" :class="{active1: showMine, notActive:!showMine}">My Calendar</v-btn>
-            <v-btn flat @click="changeToTeam" :class="{active1: !showMine, notActive:showMine}">Team Calendar</v-btn>
+            <v-btn flat @click="changeToTeam" :class="{active1: !showMine, notActive:showMine}">
+              <span v-if="$store.state.user.role === 'senior manager'">Company Calendar</span>
+              <span v-else>Team Calendar</span>
+            </v-btn>
           </v-toolbar-items>
 
           <v-spacer></v-spacer>
@@ -128,7 +131,8 @@
                     Back to Work
                   </v-flex>
                   <v-flex xs8>
-                    {{ prettyDate(item.end) }}
+                    <!--add one day to this -->
+                    {{ incrementDate(item.end) }}
                   </v-flex>
                   <v-flex xs4 v-if="item.reason">
                     Detail:
@@ -154,7 +158,8 @@
           <v-card-title class="subheading grey--text py-0"><span class="center">Showing schedule for {{ prettyDate(selectedDate2)}}</span></v-card-title>
           <v-flex xs12 v-if="filteredTeam.length === 0" class="pb-2 py-2">
             <v-card class="cyan lighten-5" raised>
-              <v-card-title class="body-1">No members of your team have events scheduled for this day</v-card-title>
+              <v-card-title v-if="$store.state.user.role === 'senior manager'" class="body-1">No employees have events scheduled for this day</v-card-title>
+              <v-card-title v-else class="body-1">No members of your team have events scheduled for this day</v-card-title>
             </v-card>
           </v-flex>
           <v-flex xs12 v-else v-for="item in filteredTeam" class="pb-2 py-2">
@@ -180,7 +185,7 @@
                     Back to Work
                   </v-flex>
                   <v-flex xs8>
-                    {{ prettyDate(item.end) }}
+                    {{ incrementDate(item.end) }}
                   </v-flex>
                 </v-layout>
               </v-card-title>
@@ -210,7 +215,7 @@
                     <v-list-tile-content>
                       <v-list-tile-title>{{event.title}} <span class="caption">{{event.type}}</span></v-list-tile-title>
                       <v-list-tile-sub-title> start: {{ prettyDate(event.start)}}</v-list-tile-sub-title>
-                      <v-list-tile-sub-title> back to work: {{ prettyDate(event.end)}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> back to work: {{ incrementDate(event.end)}}</v-list-tile-sub-title>
                     </v-list-tile-content>
                   </v-list-tile>
                 </template>
@@ -219,7 +224,10 @@
           </v-card>
           <v-card v-else>
             <v-toolbar dense class="blue darken-2" dark>
-              <v-toolbar-title>
+              <v-toolbar-title v-if="$store.state.user.role === 'senior manager'">
+                Company Employees Days Off
+              </v-toolbar-title>
+              <v-toolbar-title v-else>
                 Team Members Days Off
               </v-toolbar-title>
             </v-toolbar>
@@ -236,7 +244,7 @@
                     <v-list-tile-content>
                       <v-list-tile-title>{{ event.name }}</v-list-tile-title>
                       <v-list-tile-sub-title> start: {{ prettyDate(event.start)}}</v-list-tile-sub-title>
-                      <v-list-tile-sub-title> back to work: {{ prettyDate(event.end)}}</v-list-tile-sub-title>
+                      <v-list-tile-sub-title> back to work: {{ incrementDate(event.end)}}</v-list-tile-sub-title>
                     </v-list-tile-content>
                   </v-list-tile>
                 </template>
@@ -259,9 +267,9 @@ import store from '@/store/store';
 import EventService from '@/services/EventService';
 import NotificationService from '@/services/NotificationService';
 import UsersService from '@/services/UsersService';
-import CalendarView from "vue-simple-calendar";
-require("vue-simple-calendar/dist/static/css/default.css");
-require("vue-simple-calendar/dist/static/css/holidays-us.css");
+// import CalendarView from "vue-simple-calendar";
+// require("vue-simple-calendar/dist/static/css/default.css");
+// require("vue-simple-calendar/dist/static/css/holidays-us.css");
 const moment = require('moment');
 
 const today = new Date();
@@ -310,18 +318,29 @@ export default {
     'full-calendar': require('vue-fullcalendar'),
     HotelDatePicker,
     MyPanel,
-    CalendarView
   },
   async mounted() {
     this.myEvents = (await EventService.getUserEvents(store.state.user._id)).data.events;
     console.log('mine', this.myEvents);
     console.log(store.state.user.manager);
     console.log(store.state.user._id);
-    this.teamEvents = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
+    if (store.state.user.role === "senior manager"){
+      this.teamEvents = (await EventService.getEvents()).data.events;
+    } else if (store.state.user.role === "manager") {
+      // get events of the epoloyees you manage, not the employees your manaager managers
+      this.teamEvents = (await EventService.getTeamEvents(store.state.user._id)).data.events;
+    } else {
+      this.teamEvents = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
+    }
     this.getEvents(today);
     console.log('team', this.teamEvents);
   },
   methods: {
+    incrementDate (date) {
+      let newDate = new Date(date);
+      newDate.setDate(newDate.getDate() + 1);
+      return this.prettyDate(newDate);
+    },
     prettyDate(date) {
       const date1 = new Date(date).toUTCString();
       return date1.split(' ').slice(0, 4).join(' ');
@@ -469,7 +488,7 @@ export default {
         date.setDate(date.getDate() + days);
         return date;
       };
-      while (currentDate <= endDate) {
+      while (currentDate < endDate) {
         dates.push(currentDate);
         currentDate = addDays.call(currentDate, 1);
       }

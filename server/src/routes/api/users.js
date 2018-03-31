@@ -13,7 +13,7 @@ const UsersController = require('../../controllers/UsersController');
 module.exports = (app) => {
 
   app.get('/users',
-    // isAuthenticated,
+    isAuthenticated,
     // AuthenticationController.roleAuthorization(['admin']),
     // add above two lines back in when finished testing
     UsersController.users);
@@ -28,7 +28,7 @@ module.exports = (app) => {
 
   app.post('/users/login',
     AuthenticationController.login,
-    AuthenticationController.roleAuthorization(['employee', 'manager', 'admin'])); // this adds extra security -> talk about in report
+    AuthenticationController.roleAuthorization(['employee', 'manager', 'admin', 'senior manager'])); // this adds extra security -> talk about in report
 
   app.get('/users/:userId',
     isAuthenticated,
@@ -37,7 +37,7 @@ module.exports = (app) => {
   app.patch('/users/:userId',
     // to update users the user has to be logged in
     isAuthenticated,
-    AuthenticationController.roleAuthorization(['admin', 'manager']),
+    AuthenticationController.roleAuthorization(['admin', 'manager', 'senior manager']),
     UsersController.update);
 
   app.delete('/users/:userId',
@@ -46,8 +46,8 @@ module.exports = (app) => {
     UsersController.deleteOneUser);
 
   app.get('/managers',
-    isAuthenticated,
-    AuthenticationController.roleAuthorization(['admin']),
+    // isAuthenticated,
+    // AuthenticationController.roleAuthorization(['admin']),
     UsersController.managers);
 
   app.post('/reviews/:userId',

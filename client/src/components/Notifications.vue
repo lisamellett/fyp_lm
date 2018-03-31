@@ -56,7 +56,7 @@
               <v-icon class="mx-2 white--text">flash_on</v-icon>
               {{ notification.type }}
                 <v-spacer></v-spacer>
-              <v-btn icon @click.stop="deleteNotification(notification._id)">
+              <v-btn icon @click.prevent="deleteNotification(notification._id)">
                 <v-icon>close</v-icon>
               </v-btn>
             </v-toolbar>

@@ -316,4 +316,39 @@ module.exports = {
       });
     }
   },
+
+  async getApprovedEvents(req, res) {
+    try {
+      const docs = await Event.find( { employeeId: req.params.userId, type: 'approved'} );
+      const response = {
+        count: docs.length,
+        events: docs.map(doc => {
+          return {
+            _id: doc._id,
+            icon: doc.icon,
+            email: doc.email,
+            employeeId: doc.employeeId,
+            managerId: doc.managerId,
+            title: doc.title,
+            start: doc.start,
+            end: doc.end,
+            name: doc.name,
+            cssClass: doc.cssClass,
+            type: doc.type, // Request or Booked
+            reason: doc.reason, // t
+            dates: doc.dates,
+            manager: doc.manager,
+            warning: doc.warning,
+          }
+        }),
+      };
+      res.status(200).json(response);
+    } catch (err){
+      res.status(500).send({
+        error: 'An error has occurred trying to fetch the events for this employee',
+      });
+    }
+  },
+
+
 };

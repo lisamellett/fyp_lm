@@ -8,7 +8,7 @@ import Employees from '@/components/Employees';
 import Profile from '@/components/Profile';
 import Performance from '@/components/Performance';
 import MyPerformance from '@/components/MyPerformance';
-import Calendar2 from '@/components/Calendar2';
+import Metrics from '@/components/Metrics';
 
 Vue.use(Router);
 
@@ -35,11 +35,6 @@ export default new Router({
       component: Calendar,
     },
     {
-      path: '/team-calender',
-      name: 'teamCalendar',
-      component: Calendar2,
-    },
-    {
       path: '/employees',
       name: 'employees',
       component: Employees,
@@ -58,6 +53,11 @@ export default new Router({
       path: '/my-performance',
       name: 'myPerformance',
       component: MyPerformance,
+    },
+    {
+      path: '/metrics',
+      name: 'metrics',
+      component: Metrics,
     }
   ],
 });

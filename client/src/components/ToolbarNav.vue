@@ -78,7 +78,7 @@
   >
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <span class="hidden-sm-and-down">LM Soltutions</span>
+      <span class="hidden-sm-and-down">{{ $store.state.user.name }}</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon @click="getNotifications">
@@ -195,31 +195,32 @@ export default {
                 {icon: 'people_outline', text: 'Team Performance', destination: 'performance'}
               ]
             },
-            {icon: 'people', text: 'Employees'},
+            {icon: 'people', text: 'Employees', destination: 'employees'},
             {icon: 'account_circle', text: 'Profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
           ];
         case "senior manager":
           return [
-            {icon: 'show_chart', text: 'Metrics'},
-            {icon: 'date_range', text: 'Calendar'},
+            {icon: 'show_chart', text: 'Metrics', destination: 'metrics'},
+            {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
             {
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
               text: 'Performance',
               model: true,
               children: [
                 {icon: 'flash_on', text: 'My Performance', destination: 'myPerformance'},
-                {icon: 'people_outline', text: 'Employee Performance (read only)'}
+                {icon: 'people_outline', text: 'Employee Performance (read only)', destination: 'performance'}
               ]
             },
+            {icon: 'people', text: 'View Employees', destination: 'employees'},
             {icon: 'account_circle', text: 'Profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
 
           ];
         case "employee":
           return [
-            {icon: 'show_chart', text: 'Metrics'},
-            {icon: 'date_range', text: 'Calendar'},
+            {icon: 'show_chart', text: 'Metrics', destination: 'metrics'},
+            {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
             {icon: 'flash_on', text: 'Performance', destination: 'myPerformance'},
             {icon: 'account_circle', text: 'Profile'},
             // {icon: 'power_settings_new', text: 'Logout'},

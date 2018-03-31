@@ -20,11 +20,15 @@ export default {
     return Api().get('events/team/' + managerId);
   },
 
-  // getManagersEmployees(managerId) {
-  //   return Api().get('employees/' + managerId);
-  // },
-  //
+  getApprovedEvents(userId) {
+    return Api().get('eventsapproved/' + userId);
+  },
+
   addEvent(event) {
     return Api().post('/events', event);
   },
+
+  getEvents() {
+    return Api().get('/events');
+  }
 }

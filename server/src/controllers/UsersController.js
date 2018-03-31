@@ -57,7 +57,9 @@ module.exports = {
 
   async managers(req, res) {
     try {
-      const docs = await User.find( { role: "manager" } );
+      const docs1 = await User.find( { role: "manager" } );
+      const docs2 = await User.find( { role: "senior manager" } );
+      const docs = docs1.concat(docs2);
       const response = {
         count: docs.length,
         managers: docs.map(doc => {
@@ -181,9 +183,12 @@ module.exports = {
     try {
       const manager = await User.findOne({_id: managerId, role: "manager"});
       if (!manager) {
-        return res.status(403).send({
-          error: 'This user is not a manager, or else does not exist'
-        });
+        const seniorManager = await User.findOne({_id: managerId, role: "senior manager"});
+        if (!seniorManager) {
+          return res.status(403).send({
+            error: 'This user is not a manager or senior manager, or else does not exist'
+          });
+        }
       }
       const employees = await User.find( { manager: managerId } );
       const response = {

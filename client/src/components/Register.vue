@@ -12,13 +12,6 @@
               v-model="name"
               :rules="[v => !!v || 'Name is required']"
             ></v-text-field>
-            <!--<v-text-field-->
-              <!--label="Date of Birth"-->
-              <!--type="date"-->
-              <!--v-model="dob"-->
-              <!--:rules="[v => !!v || 'Date of birth is required']"-->
-              <!--required-->
-            <!--&gt;</v-text-field>-->
             <v-menu
               ref="menu"
               lazy
@@ -74,14 +67,6 @@
               :rules="[v => !!v || 'Manager is required']"
               required>
             </v-select>
-            <!--<v-select-->
-              <!--label="Team"-->
-              <!--v-model="selectTeam"-->
-              <!--tags-->
-              <!--:items="teams"-->
-              <!--:rules="[v => !!v || 'Team is required']"-->
-              <!--required>-->
-            <!--</v-select>-->
             <v-text-field
               label="Team"
               v-model="team"
@@ -118,6 +103,7 @@
               label="password"
               v-model="password"
               :rules="passwordRules"
+              :counter="20"
               required
             ></v-text-field>
           <div class="error-msg" v-html="error"></div>
@@ -190,13 +176,12 @@ export default {
       roles: [
         'employee',
         'manager',
-        'senior management',
+        'senior manager',
         'admin',
       ],
       selectManager: null,
       managers: [],
       selectTeam: null,
-      teams: ['sales', 'marketing'],
     }
   },
   watch: {
