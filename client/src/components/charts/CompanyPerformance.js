@@ -9,24 +9,16 @@ export default {
   extends: Bar,
   async mounted () {
     const employees = (await UsersService.getAllUsers()).data.users;
-    console.log(employees);
     let latestReviews = [];
     for (let employee in employees) {
       if (employees[employee].reviews.length > 0) {
         latestReviews.push((employees[employee]).reviews[0]);
       }
-      else{
-        console.log('y');
-      }
     }
-    console.log('latestReviews', latestReviews);
     const labels = [0, 1, 2, 3 , 4, 5];
     const results = [0, 0, 0, 0, 0, 0];
-    console.log(results);
     for (let i in latestReviews) {
       if (latestReviews[i].fields) {
-        console.log('here');
-        console.log(latestReviews[i].fields.AVERAGE);
         results[latestReviews[i].fields.AVERAGE] += 1;
       }
     }
