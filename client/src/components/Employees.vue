@@ -175,7 +175,7 @@ export default {
       roles: [
         'employee',
         'manager',
-        'senior management',
+        'senior manager',
         'admin',
       ],
       managers: [],

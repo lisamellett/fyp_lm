@@ -78,7 +78,7 @@
   >
     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <span class="hidden-sm-and-down">{{ $store.state.user.name }}</span>
+      <span class="hidden-sm-and-down">{{ $store.state.user.name }} <span class="caption">{{ $store.state.user.role }}</span></span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon @click="getNotifications">
@@ -167,7 +167,6 @@ export default {
               model: false,
               children: [
                 {icon: 'flash_on', text: 'My Performance', destination: 'myPerformance'},
-                {icon: 'people_outline', text: 'Employee Performance (read only)'} //Todo: what going to do here?
               ]
             },{
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
@@ -209,7 +208,7 @@ export default {
               model: true,
               children: [
                 {icon: 'flash_on', text: 'My Performance', destination: 'myPerformance'},
-                {icon: 'people_outline', text: 'Employee Performance (read only)', destination: 'performance'}
+                {icon: 'people_outline', text: 'Employee Performance', destination: 'performance'}
               ]
             },
             {icon: 'people', text: 'View Employees', destination: 'employees'},

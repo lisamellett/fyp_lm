@@ -58,7 +58,7 @@
           </v-toolbar-items>
 
           <v-spacer></v-spacer>
-          <v-btn icon @click="requestModel = !requestModel"><v-icon>add</v-icon></v-btn>
+          <v-btn flat @click="requestModel = !requestModel">New Request<v-icon right>add_circle</v-icon></v-btn>
         </v-toolbar>
         <transition-group tag="div" :name="transition" class="transitionStyle">
           <div

@@ -1,17 +1,26 @@
 <template>
   <v-layout column>
-    <v-flex xs8 offset-xs2>
+    <v-flex xs12>
+      <v-alert v-if="selectRole === 'senior manager'" type="warning" value="true">
+        If this user wishes to be their own manager, an admin will have to do this once they are registered
+      </v-alert>
+    </v-flex>
+    <v-flex>
       <div class="white elevation-2">
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title class="title">Register a New User</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-form v-model="valid" ref="form" lazy-validation>
+            <v-layout row wrap>
+              <v-flex xs6 class="px-2">
             <v-text-field
               label="Name"
               v-model="name"
               :rules="[v => !!v || 'Name is required']"
             ></v-text-field>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-menu
               ref="menu"
               lazy
@@ -38,6 +47,8 @@
                 :max="new Date().toISOString().substr(0, 10)"
               ></v-date-picker>
             </v-menu>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-select
               label="Gender"
               v-model="select"
@@ -45,6 +56,8 @@
               :rules="[v => !!v || 'Gender is required']"
               required>
             </v-select>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-select
               label="Role"
               v-model="selectRole"
@@ -52,27 +65,33 @@
               :rules="[v => !!v || 'Role is required']"
               required>
             </v-select>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <!--<input name="manager"-->
             <!--v-model="manager"-->
             <!--placeholder="manager">-->
             <!--&lt;!&ndash;may have to change this type &ndash;&gt;-->
             <!--<br>-->
             <v-select
-              label="Manager"
+              label="Team"
               v-model="selectManager"
               :items="managers"
-              item-text="name"
+              item-text="team"
               return-object
               autocomplete
-              :rules="[v => !!v || 'Manager is required']"
+              :rules="[v => !!v || 'Team is required']"
               required>
             </v-select>
+              </v-flex>
+              <v-flex xs6 class="px-2" v-if="selectRole === 'manager' || selectRole === 'senior manager'">
             <v-text-field
-              label="Team"
+              label="Team To Manage"
               v-model="team"
               :rules="[v => !!v || 'Team is required']"
               required
             ></v-text-field>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-text-field
               type="number"
               label="Holiday Allowance"
@@ -80,18 +99,24 @@
               :rules="[v => !!v || 'Holiday Allowance is required']"
               required
             ></v-text-field>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-text-field
               label="Job Title"
               v-model="title"
               :rules="[v => !!v || 'Job title is required']"
               required
             ></v-text-field>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-text-field
               label="Email Address"
               v-model="email"
               :rules="emailRules"
               required
             ></v-text-field>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-text-field
               label="username"
               v-model="username"
@@ -99,6 +124,8 @@
               :counter="20"
               required
             ></v-text-field>
+              </v-flex>
+              <v-flex xs6 class="px-2">
             <v-text-field
               label="password"
               v-model="password"
@@ -106,14 +133,20 @@
               :counter="20"
               required
             ></v-text-field>
+              </v-flex>
+              <v-flex xs12 class="px-2">
           <div class="error-msg" v-html="error"></div>
           <br>
+              </v-flex>
 <!--v-model is a two way binding that basically says set the input to whatever
             those values are in the controller-->
 
 <!--we want register method to be called when button is clicked-->
+            </v-layout>
           </v-form>
-          <v-btn class="cyan" @click="register" :disabled="!valid" dark>Register User</v-btn>
+          <v-flex>
+            <v-btn class="cyan" @click="register" :disabled="!valid" dark>Register User</v-btn>
+          </v-flex>
         </div>
       </div>
     </v-flex>
@@ -195,6 +228,10 @@ export default {
   },
   methods: {
     async register() {
+      if ((this.role === 'employee') || (this.role === 'admin')) {
+        this.team = this.selectManager.team;
+      }
+      console.log(this.team);
       try {
         await AuthenticationService.register({
           name: this.name,
