@@ -20,20 +20,16 @@ export default {
     // only want to get the ones that are approved
     let events = [];
     if ((store.state.user.role === 'senior manager') || (store.state.user.role === 'manager')) {
-      console.log('yoyoyoyoo');
       events = (await EventService.getTeamEvents(store.state.user._id)).data.events;
     }else {
-      console.log('im in here');
       events = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
     }
-    console.log(events);
     const dates1 = [];
     for (let event in events) {
       for (let date in (events[event]).dates) {
         dates1.push(((events[event]).dates)[date]);
       }
     }
-    console.log(dates1);
 
     for (let date in dates1) {
       let d = new Date(dates1[date]);

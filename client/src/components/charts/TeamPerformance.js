@@ -16,26 +16,18 @@ export default {
 
     let employees = [];
     if ((store.state.user.role === 'senior manager') || (store.state.user.role === 'manager')) {
-      console.log('hereeeeee');
       employees = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
     }else {
       employees = (await UsersService.getManagersEmployees(store.state.user.manager)).data.employees;
     }
     let latestReviews = [];
     for (let employee in employees) {
-      console.log(employees[employee]);
       if (employees[employee].reviews.length > 0) {
-        console.log('here');
         latestReviews.push((employees[employee]).reviews[0]);
       }
-      else{
-        console.log('y');
-      }
     }
-    console.log('latestReviews', latestReviews);
     const labels = ['Score: 0', 'Score: 1', 'Score: 2', 'Score: 3' , 'Score: 4', 'Score: 5'];
     const results = [0, 0, 0, 0, 0, 0];
-    console.log(results);
     for (let i in latestReviews) {
       results[latestReviews[i].fields.AVERAGE] += 1;
     }

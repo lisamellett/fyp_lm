@@ -32,9 +32,6 @@ export default {
       })
     }
 
-    console.log('datasets', datasets);
-
-
     this.renderChart({
       labels: ['Review 1', 'Review 2', 'Review 3', 'Review 4', 'Review 5'],
       datasets: datasets,

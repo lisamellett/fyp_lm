@@ -26,14 +26,12 @@ export default {
     const monthValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     // only want to get the ones that are approved
     const events = (await EventService.getApprovedEvents(store.state.user._id)).data.events;
-    console.log(events);
     const dates1 = [];
     for (let event in events) {
       for (let date in (events[event]).dates) {
         dates1.push(((events[event]).dates)[date]);
       }
     }
-    console.log(dates1);
 
     for (let date in dates1) {
       let d = new Date(dates1[date]);

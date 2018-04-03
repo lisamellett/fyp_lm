@@ -43,7 +43,7 @@ export default {
           hoverBorderColor: ['purple', '#ff3300'],
         }
       ]
-    }, {responsive: true, maintainAspectRatio: false})
+    }, {responsive: true, maintainAspectRatio: false  })
 
   }
 }
