@@ -8,6 +8,16 @@ export default {
 
   extends: Pie,
   async mounted () {
+
+    this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+    this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+    this.gradient.addColorStop(0, 'rgba(255, 102, 255, 0.5)');
+    // this.gradient.addColorStop(0.5, 'rgba(255, 153, 0, 0.8)');
+    this.gradient.addColorStop(1, 'rgba(102, 0, 102, 1)');
+    this.gradient2.addColorStop(0, 'rgba(255, 51, 0, 1)');
+    //this.gradient2.addColorStop(0.5, 'rgba(0, 204, 153, 0.8)');
+    this.gradient2.addColorStop(1, 'rgba(255, 153, 0, 0.5');
+
     let users = (await UsersService.getAllUsers()).data.users;
     let female = 0;
     let male = 0;
@@ -26,20 +36,14 @@ export default {
       datasets: [
         {
           label: 'Review Average Score',
-          backgroundColor: ['#EA80FC', '#B3E5FC'],
+          backgroundColor: [this.gradient, this.gradient2],
           data: [male, female],
+          hoverBackgroundColor: [this.gradient, this.gradient2],
+          hoverBorderWidth: 2,
+          hoverBorderColor: ['purple', '#ff3300'],
         }
       ]
-    }, {responsive: true, maintainAspectRatio: false, scales: {
-        yAxes: [{
-          display: true,
-          ticks: {
-            suggestedMax: 5,    // minimum will be 0, unless there is a lower value.
-            // OR //
-            beginAtZero: true   // minimum value will be 0.
-          }
-        }]
-      }})
+    }, {responsive: true, maintainAspectRatio: false})
 
   }
 }

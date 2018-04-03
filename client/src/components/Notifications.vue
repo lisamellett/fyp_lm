@@ -16,7 +16,7 @@
           <v-layout row wrap>
             <v-flex xs12 class="py-0">
             <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
-              <v-icon class="mx-2 white--text">work</v-icon>
+              <v-icon class="mx-2 white--text">date_range</v-icon>
                 {{ notification.type }}
             </v-toolbar>
             </v-flex>
@@ -49,13 +49,32 @@
           </v-layout>
       </v-card>
       <!--others-->
-      <v-card v-else :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+      <v-card v-else-if="notification.type==='Performance Review'" :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
         <v-layout row wrap>
           <v-flex xs12 class="py-0">
             <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
               <v-icon class="mx-2 white--text">flash_on</v-icon>
               {{ notification.type }}
                 <v-spacer></v-spacer>
+              <v-btn icon @click.prevent="deleteNotification(notification._id)">
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-toolbar>
+          </v-flex>
+          <v-flex>
+            <v-flex xs12 class="body-2 py-2">
+              <div>{{ notification.message }}</div>
+            </v-flex>
+          </v-flex>
+        </v-layout>
+      </v-card>
+      <v-card v-else :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+        <v-layout row wrap>
+          <v-flex xs12 class="py-0">
+            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
+              <v-icon class="mx-2 white--text">date_range</v-icon>
+              {{ notification.type }}
+              <v-spacer></v-spacer>
               <v-btn icon @click.prevent="deleteNotification(notification._id)">
                 <v-icon>close</v-icon>
               </v-btn>

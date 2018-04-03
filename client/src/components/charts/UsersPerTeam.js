@@ -15,20 +15,14 @@ export default {
     for (let x in managers) {
       teams[managers[x].team] = 0;
     }
-    console.log(teams);
-    console.log(users);
     let female = 0;
     let male = 0;
 
     for (let u in users) {
-      console.log(users[u].team);
-      console.log(teams[users[u].team]);
       if (users[u].team in teams) {
-        console.log(users[u].team);
         teams[users[u].team] ++;
       }
     }
-    console.log(teams);
 
     // for (let user in users) {
     //   if (users[user].gender === 'female') {
@@ -48,16 +42,7 @@ export default {
           data: Object.values(teams),
         }
       ]
-    }, {responsive: true, maintainAspectRatio: false, scales: {
-        yAxes: [{
-          display: true,
-          ticks: {
-            suggestedMax: 5,    // minimum will be 0, unless there is a lower value.
-            // OR //
-            beginAtZero: true   // minimum value will be 0.
-          }
-        }]
-      }})
+    }, {responsive: true, maintainAspectRatio: false})
 
   }
 }

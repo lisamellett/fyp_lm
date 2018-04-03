@@ -203,7 +203,12 @@
               </v-toolbar-title>
             </v-toolbar>
             <v-container class="hee">
-              <v-list two-line>
+              <v-flex xs12 v-if="myEventsSorted.length === 0" class="pb-2 py-2">
+                <v-card class="cyan lighten-5" raised>
+                  <v-card-title class="body-1 center">You have no upcoming events</v-card-title>
+                </v-card>
+              </v-flex>
+              <v-list two-line v-else>
                 <template v-for="event in myEventsSorted">
                   <v-divider></v-divider>
                   <!--<v-subheader>{{ event.title }}</v-subheader>-->
@@ -232,7 +237,12 @@
               </v-toolbar-title>
             </v-toolbar>
             <v-container class="hee">
-              <v-list two-line>
+              <v-flex xs12 v-if="teamEventsSorted.length === 0" class="pb-2 py-2">
+                <v-card class="cyan lighten-5" raised>
+                  <v-card-title class="body-1 center">No members of your team have upcoming events</v-card-title>
+                </v-card>
+              </v-flex>
+              <v-list v-else two-line>
                 <template v-for="event in teamEventsSorted">
                   <v-divider></v-divider>
                   <!--<v-subheader>{{ event.title }}</v-subheader>-->

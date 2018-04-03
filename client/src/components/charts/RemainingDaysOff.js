@@ -1,5 +1,3 @@
-import {Line} from 'vue-chartjs';
-import {Bar} from 'vue-chartjs';
 import {Pie} from 'vue-chartjs';
 import UsersService from "../../services/UsersService";
 import store from '@/store/store';
@@ -18,23 +16,12 @@ export default {
     //this.gradient2.addColorStop(0.5, 'rgba(0, 204, 153, 0.8)');
     this.gradient2.addColorStop(1, 'rgba(255, 153, 0, 0.5');
 
-    let users = [];
-    if ((store.state.user.role === 'senior manager') || (store.state.user.role === 'manager')) {
-      users = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
-    }else {
-      users = (await UsersService.getManagersEmployees(store.state.user.manager)).data.employees;
-    }
-    let female = 0;
-    let male = 0;
+    this.user = (await UsersService.getUser(store.state.user._id)).data.user;
+    this.taken = this.user.taken;
+    this.remaining = this.user.allowance - this.taken;
 
-    for (let user in users) {
-      if (users[user].gender === 'female') {
-        female += 1;
-      }else {
-        male+= 1;
-      }
-    }
-    let labels = ['Male', 'Female'];
+
+    let labels = ['Taken', 'Remaining'];
 
     this.renderChart({
       labels: labels,
@@ -42,7 +29,7 @@ export default {
         {
           label: 'Review Average Score',
           backgroundColor: [this.gradient, this.gradient2],
-          data: [male, female],
+          data: [this.taken, this.remaining],
           hoverBackgroundColor: [this.gradient, this.gradient2],
           hoverBorderWidth: 2,
           hoverBorderColor: ['purple', '#ff3300'],

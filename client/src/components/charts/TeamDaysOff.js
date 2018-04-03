@@ -8,6 +8,13 @@ export default {
 
   extends: Line,
   async mounted () {
+
+    this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+    this.gradient2 = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+    this.gradient.addColorStop(0, 'rgba(0, 0, 255, 1)');
+    this.gradient.addColorStop(0.5, 'rgba(0, 153, 255, 0.8)');
+    this.gradient.addColorStop(1, 'rgba(0, 255, 255, 0.6)');
+
     const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const monthValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     // only want to get the ones that are approved
@@ -39,7 +46,11 @@ export default {
       datasets: [
         {
           label: 'Days Off per Month',
-          backgroundColor: '#81D4FA',
+          borderColor: 'rgb(129, 212, 250)',
+          pointBackgroundColor: 'white',
+          borderWidth: 1,
+          pointBorderColor: '129, 212, 25',
+          backgroundColor: this.gradient,
           data: monthValues,
         }
       ]
