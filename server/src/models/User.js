@@ -26,6 +26,10 @@ const UserSchema = new mongoose.Schema({
   prettyDob: {type: String}, // todo: do I  need this?
   username: {type: String, required: true, unique:true},
   password: {type: String, required: true},
+  address: {type: String, required: true},
+  phone: {type: String, required: true},
+  kinName: {type: String, required: true},
+  kinNum: {type: String, required: true},
   // may include a list of message Ids here too
   // include a message schema and then when user is logged in
   // get all messages with that user id associated with them

@@ -8,19 +8,20 @@
     <v-flex>
       <div class="white elevation-2">
         <v-toolbar flat dense class="cyan" dark>
-          <v-toolbar-title class="title">Register a New User</v-toolbar-title>
+          <v-toolbar-title>Register a New User</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-form v-model="valid" ref="form" lazy-validation>
             <v-layout row wrap>
-              <v-flex xs6 class="px-2">
+              <v-flex xs6>
+              <v-flex xs12 class="px-2">
             <v-text-field
               label="Name"
               v-model="name"
               :rules="[v => !!v || 'Name is required']"
             ></v-text-field>
               </v-flex>
-              <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-menu
               ref="menu"
               lazy
@@ -48,7 +49,7 @@
               ></v-date-picker>
             </v-menu>
               </v-flex>
-              <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-select
               label="Gender"
               v-model="select"
@@ -57,7 +58,7 @@
               required>
             </v-select>
               </v-flex>
-              <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-select
               label="Role"
               v-model="selectRole"
@@ -66,12 +67,13 @@
               required>
             </v-select>
               </v-flex>
-              <v-flex xs6 class="px-2">
+
             <!--<input name="manager"-->
             <!--v-model="manager"-->
             <!--placeholder="manager">-->
             <!--&lt;!&ndash;may have to change this type &ndash;&gt;-->
             <!--<br>-->
+                <v-flex xs12 class="px-2">
             <v-select
               label="Team"
               v-model="selectManager"
@@ -91,7 +93,7 @@
               required
             ></v-text-field>
               </v-flex>
-              <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-text-field
               type="number"
               label="Holiday Allowance"
@@ -100,7 +102,7 @@
               required
             ></v-text-field>
               </v-flex>
-              <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-text-field
               label="Job Title"
               v-model="title"
@@ -108,7 +110,9 @@
               required
             ></v-text-field>
               </v-flex>
+              </v-flex>
               <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-text-field
               label="Email Address"
               v-model="email"
@@ -116,7 +120,42 @@
               required
             ></v-text-field>
               </v-flex>
-              <v-flex xs6 class="px-2">
+                <v-flex xs12 class="px-2">
+                  <v-text-field
+                    label="Address"
+                    v-model="address"
+                    :rules="[v => !!v || 'Address is required']"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 class="px-2">
+                  <v-text-field
+                    label="Phone"
+                    v-model="phone"
+                    :rules="[v => !!v || 'Phone number is required']"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-layout row wrap xs12 class="px-2">
+                  <v-flex xs2 class="caption grey--text">Next of Kin</v-flex>
+                  <v-flex xs10>
+                  <v-text-field
+                    label="Name"
+                    v-model="kinName"
+                    :rules="[v => !!v || 'Name of next of kin is required']"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs10 offset-xs2>
+                  <v-text-field
+                    label="Contact Number"
+                    v-model="kinNum"
+                    :rules="[v => !!v || 'Number of next of kin is required']"
+                    required
+                  ></v-text-field>
+                  </v-flex>
+                </v-layout>
+              <v-flex xs12 class="px-2">
             <v-text-field
               label="username"
               v-model="username"
@@ -125,7 +164,7 @@
               required
             ></v-text-field>
               </v-flex>
-              <v-flex xs6 class="px-2">
+              <v-flex xs12 class="px-2">
             <v-text-field
               label="password"
               v-model="password"
@@ -138,15 +177,16 @@
           <div class="error-msg" v-html="error"></div>
           <br>
               </v-flex>
+                <v-flex xs4 offset-xs8>
+                  <v-btn class="cyan" @click="register" :disabled="!valid" dark>Register User</v-btn>
+                </v-flex>
+              </v-flex>
 <!--v-model is a two way binding that basically says set the input to whatever
             those values are in the controller-->
 
 <!--we want register method to be called when button is clicked-->
             </v-layout>
           </v-form>
-          <v-flex>
-            <v-btn class="cyan" @click="register" :disabled="!valid" dark>Register User</v-btn>
-          </v-flex>
         </div>
       </div>
     </v-flex>
@@ -184,6 +224,10 @@ export default {
       email: '',
       username: '',
       password: '',
+      address: '',
+      phone: '',
+      kinName: '',
+      kinNum: '',
       error: null,
       emailRules: [
         (v) => {
@@ -228,10 +272,12 @@ export default {
   },
   methods: {
     async register() {
-      if ((this.role === 'employee') || (this.role === 'admin')) {
+      console.log(this.role);
+      if ((this.selectRole === 'employee') || (this.selectRole === 'admin')) {
         this.team = this.selectManager.team;
+        console.log('HERE');
       }
-      console.log(this.team);
+      console.log('team', this.team);
       try {
         await AuthenticationService.register({
           name: this.name,
@@ -248,6 +294,10 @@ export default {
           email: this.email,
           username: this.username,
           password: this.password,
+          address: this.address,
+          phone: this.phone,
+          kinName: this.kinName,
+          kinNum: this.kinNum,
         });
         this.$router.push({
           name: 'employees',

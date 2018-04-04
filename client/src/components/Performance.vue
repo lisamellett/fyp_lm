@@ -314,6 +314,10 @@ export default {
         manager: '',
         email: '',
         title: '',
+        address: '',
+        phone: '',
+        kinName: '',
+        kinNum: '',
         reviews: [],
       },
       currentViewEmployee: {
@@ -327,6 +331,10 @@ export default {
         manager: '',
         email: '',
         title: '',
+        address: '',
+        phone: '',
+        kinName: '',
+        kinNum: '',
         reviews: [],
       },
       headers: [

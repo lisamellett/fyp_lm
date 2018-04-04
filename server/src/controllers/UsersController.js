@@ -40,6 +40,10 @@ module.exports = {
             email: doc.email,
             username: doc.username,
             password: doc.password,
+            address: doc.address,
+            phone: doc.phone,
+            kinName: doc.kinName,
+            kinNum: doc.kinNum,
             request: {
               type: 'GET',
               url: 'http://localhost:8081/users/' + doc._id, // this is just to show we can format reponse whatever way we want
@@ -78,6 +82,10 @@ module.exports = {
             reviews: doc.reviews,
             username: doc.username,
             password: doc.password,
+            address: doc.address,
+            phone: doc.phone,
+            kinName: doc.kinName,
+            kinNum: doc.kinNum,
             request: {
               type: 'GET',
               url: 'http://localhost:8081/users/' + doc._id, // this is just to show we can format reponse whatever way we want
@@ -210,6 +218,10 @@ module.exports = {
             email: doc.email,
             username: doc.username,
             password: doc.password,
+            address: doc.address,
+            phone: doc.phone,
+            kinName: doc.kinName,
+            kinNum: doc.kinNum,
             request: {
               type: 'GET',
               url: 'http://localhost:8081/users/' + doc._id, // this is just to show we can format reponse whatever way we want

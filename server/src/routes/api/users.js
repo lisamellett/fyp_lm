@@ -13,7 +13,7 @@ const UsersController = require('../../controllers/UsersController');
 module.exports = (app) => {
 
   app.get('/users',
-    isAuthenticated,
+    // isAuthenticated,
     // AuthenticationController.roleAuthorization(['admin']),
     // add above two lines back in when finished testing
     UsersController.users);

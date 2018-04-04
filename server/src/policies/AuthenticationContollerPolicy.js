@@ -19,6 +19,10 @@ module.exports = {
       email: Joi.string(),
       username: Joi.string().alphanum().min(3).max(30).required(),
       password: Joi.string().regex(/^[a-zA-Z0-9]{8,32}$/),
+      address: Joi.string(),
+      phone: Joi.string(),
+      kinName: Joi.string(),
+      kinNum: Joi.string(),
     };
 
     const {error, value} = Joi.validate(req.body, schema);
@@ -70,6 +74,30 @@ module.exports = {
         case 'taken':
           res.status(400).send({
             error: 'Taken must be a number'
+          });
+          break;
+
+        case 'address':
+          res.status(400).send({
+            error: 'Address must be a string'
+          });
+          break;
+
+        case 'phone':
+          res.status(400).send({
+            error: 'Phone must be a string'
+          });
+          break;
+
+        case 'kinName':
+          res.status(400).send({
+            error: 'Name of kin must be a string'
+          });
+          break;
+
+        case 'kinNum':
+          res.status(400).send({
+            error: 'Kin number must be a string'
           });
           break;
 

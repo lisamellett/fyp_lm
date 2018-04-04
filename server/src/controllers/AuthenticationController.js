@@ -40,6 +40,10 @@ module.exports = {
           username: req.body.username,
           password: req.body.password,
           prettyDob: prettyDob,
+          address: req.body.address,
+          phone: req.body.phone,
+          kinName: req.body.kinName,
+          kinNum: req.body.kinNum,
         });
         return user.save();
       })
@@ -66,6 +70,10 @@ module.exports = {
             username: result.username,
             password: result.password,
             prettyDob: result.prettyDob,
+            address: result.address,
+            phone: result.phone,
+            kinName: result.kinName,
+            kinNum: result.kinNum,
             request: {
               type: 'GET',
               url: 'http://localhost:8081/users/' + result.id,

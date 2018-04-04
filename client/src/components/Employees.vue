@@ -55,6 +55,21 @@
                 <v-text-field label="Team" v-model="editedItem.team"></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
+                <v-text-field label="Address" v-model="editedItem.address"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Phone" v-model="editedItem.phone"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Next of Kin Name" v-model="editedItem.kinName"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Next of Kin Number" v-model="editedItem.kinNum"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field label="Email" v-model="editedItem.email"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
                 <v-select
                   label="Role"
                   v-model="editedItem.role"
@@ -190,6 +205,11 @@ export default {
         allowance: '',
         manager: '',
         title: '',
+        address: '',
+        phone: '',
+        kinName: '',
+        kinNum: '',
+        email: '',
       },
       defaultItem: {
         name: '',
@@ -201,6 +221,11 @@ export default {
         allowance: '',
         manager: '',
         title: '',
+        address: '',
+        phone: '',
+        kinName: '',
+        kinNum: '',
+        email: '',
       },
       items: [], // change items to users or employees
       menu: false,
