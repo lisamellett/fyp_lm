@@ -1,7 +1,7 @@
 <template>
       <div class="white elevation-2">
         <v-toolbar flat dense class="blue darken-2" dark>
-          <v-toolbar-title class="title">Login</v-toolbar-title>
+          <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
           <v-form v-model="valid" ref="form" lazy-validation>

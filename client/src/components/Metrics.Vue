@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout column>
     <v-flex>
       <v-card>
         <v-toolbar dense class="blue darken-2" dark>
