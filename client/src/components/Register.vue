@@ -266,9 +266,8 @@ export default {
       val && this.$nextTick(() => (this.$refs.picker.activePicker = 'YEAR'))
     }
   },
-  async mounted() {
+  async created() {
     this.managers = (await UsersService.getManagers()).data.managers;
-    console.log(this.managers);
   },
   methods: {
     async register() {

@@ -135,7 +135,7 @@ export default {
       }
     };
   },
-  async mounted() {
+  async created() {
     this.items = (await UsersService.getUser(store.state.user._id)).data.user.reviews;
     this.mostRecent = this.items[0];
     this.filteredItems = this.items;

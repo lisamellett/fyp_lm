@@ -384,7 +384,7 @@ export default {
       },
     }
   },
-  async mounted() {
+  async created() {
     this.filteredItems = this.currentViewEmployee.reviews;
     this.buildPagination();
     this.selectPage(1);

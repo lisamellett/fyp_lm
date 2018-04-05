@@ -127,7 +127,7 @@ export default {
       nots: [],
     }
   },
-  async mounted() {
+  async created() {
     this.nots = (await NotificationService.getUserNotifications(store.state.user._id)).data.notifications;
   },
   methods: {

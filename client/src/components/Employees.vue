@@ -234,7 +234,7 @@ export default {
     }
   },
   // make a dictionary of all user managers and display
-  async mounted() {
+  async created() {
     // do a request to the backend for all the users
     // so when the page is loaded do a request to backend - may need to do this fo rmanagers register page
     if (store.state.user.role === 'manager') {

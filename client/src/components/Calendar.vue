@@ -330,11 +330,8 @@ export default {
     HotelDatePicker,
     MyPanel,
   },
-  async mounted() {
+  async created() {
     this.myEvents = (await EventService.getUserEvents(store.state.user._id)).data.events;
-    console.log('mine', this.myEvents);
-    console.log(store.state.user.manager);
-    console.log(store.state.user._id);
     if (store.state.user.role === "senior manager"){
       this.teamEvents = (await EventService.getEvents()).data.events;
     } else if (store.state.user.role === "manager") {
