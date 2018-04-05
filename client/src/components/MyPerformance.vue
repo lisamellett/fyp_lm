@@ -1,6 +1,6 @@
 <template>
   <div>
-  <v-layout v-if="items.length === 0">
+  <v-layout v-if="$store.state.user.reviews.length === 0 && items.length === 0">
     <v-flex xs6 offset-xs3>
       <v-card>
         <v-toolbar dense class="cyan" dark>
