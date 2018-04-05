@@ -40,54 +40,54 @@
 
 <script>
 /* eslint-disable */
-  import MyMetrics from '../components/MyMetrics';
-  import TeamMetrics from '../components/TeamMetrics';
-  import CompanyMetrics from '../components/CompanyMetrics';
+import MyMetrics from '../components/MyMetrics';
+import TeamMetrics from '../components/TeamMetrics';
+import CompanyMetrics from '../components/CompanyMetrics';
 
-  export default {
-    data() {
-      return {
-        myMetrics: true,
-        teamMetrics: false,
-        companyMetrics: false,
+export default {
+  data() {
+    return {
+      myMetrics: true,
+      teamMetrics: false,
+      companyMetrics: false,
+    }
+  },
+  components: {
+    MyMetrics,
+    TeamMetrics,
+    CompanyMetrics,
+  },
+  methods: {
+    changeToMine() {
+      this.myMetrics = true;
+      this.teamMetrics = false;
+      this.companyMetrics = false;
+    },
+    changeToTeam() {
+      this.myMetrics = false;
+      this.teamMetrics = true;
+      this.companyMetrics = false;
+    },
+    changeToCompany() {
+      this.myMetrics = false;
+      this.teamMetrics = false;
+      this.companyMetrics = true;
+    },
+  },
+  computed: {
+    transition: function() {
+      if (this.myMetrics) {
+        return "slide-left"
+      }
+      else if (this.teamMetrics) {
+        return "slide"
+      }
+      else {
+        return "slide"
       }
     },
-    components: {
-      MyMetrics,
-      TeamMetrics,
-      CompanyMetrics,
-    },
-    methods: {
-      changeToMine() {
-        this.myMetrics = true;
-        this.teamMetrics = false;
-        this.companyMetrics = false;
-      },
-      changeToTeam() {
-        this.myMetrics = false;
-        this.teamMetrics = true;
-        this.companyMetrics = false;
-      },
-      changeToCompany() {
-        this.myMetrics = false;
-        this.teamMetrics = false;
-        this.companyMetrics = true;
-      },
-    },
-    computed: {
-      transition: function() {
-        if (this.myMetrics) {
-          return "slide-left"
-        }
-        else if (this.teamMetrics) {
-          return "slide"
-        }
-        else {
-          return "slide"
-        }
-      },
-    }
   }
+}
 </script>
 
 <style scoped>

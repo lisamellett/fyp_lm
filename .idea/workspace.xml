@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dcf4f286-4f9b-401b-bcde-2bad99bafeb0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Metrics.Vue" afterPath="$PROJECT_DIR$/client/src/components/Metrics.Vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -88,17 +89,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Metrics.Vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Metrics.Vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-413">
-              <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-              <folding />
+            <state relative-caret-position="317">
+              <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+              <folding>
+                <element signature="e#1287#1335#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
@@ -205,7 +208,6 @@
         <option value="$PROJECT_DIR$/client/src/components/Notifications.vue" />
         <option value="$PROJECT_DIR$/client/src/services/NotificationService.js" />
         <option value="$PROJECT_DIR$/client/src/services/EventService.js" />
-        <option value="$PROJECT_DIR$/client/src/components/Metrics.Vue" />
         <option value="$PROJECT_DIR$/client/src/components/charts/MyReviews.js" />
         <option value="$PROJECT_DIR$/client/src/components/charts/GenderInCompany.js" />
         <option value="$PROJECT_DIR$/client/src/components/charts/GenderOnTeam.js" />
@@ -219,6 +221,7 @@
         <option value="$PROJECT_DIR$/client/src/components/charts/RemainingDaysOff.js" />
         <option value="$PROJECT_DIR$/client/src/components/Home.vue" />
         <option value="$PROJECT_DIR$/client/src/router/index.js" />
+        <option value="$PROJECT_DIR$/client/src/components/Metrics.Vue" />
       </list>
     </option>
   </component>
@@ -387,14 +390,7 @@
       <workItem from="1517950307325" duration="10306000" />
       <workItem from="1517995252440" duration="28936000" />
       <workItem from="1518209330691" duration="40659000" />
-      <workItem from="1518319863022" duration="457197000" />
-    </task>
-    <task id="LOCAL-00009" summary="big commit">
-      <created>1520281815209</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1520281815209</updated>
+      <workItem from="1518319863022" duration="457264000" />
     </task>
     <task id="LOCAL-00010" summary="big commit just before passport stuff">
       <created>1520330936460</created>
@@ -732,11 +728,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522932377449</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="heroku deployment">
+      <created>1522932623277</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1522932623277</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="537095000" />
+    <option name="totallyTimeSpent" value="537162000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1278,14 +1281,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-413">
-          <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/Home.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1300,6 +1295,16 @@
           <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="e#21#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding>
+            <element signature="e#1287#1335#0" expanded="true" />
           </folding>
         </state>
       </provider>
