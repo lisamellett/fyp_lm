@@ -94,7 +94,7 @@
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
 import store from '@/store/store';
 import NotificationService from '@/services/NotificationService';
 import EventService from '@/services/EventService';

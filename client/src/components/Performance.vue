@@ -291,7 +291,7 @@
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
 import UsersService from '@/services/UsersService';
 import NotificationService from '@/services/NotificationService';
 import store from '../store/store';

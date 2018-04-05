@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
   import MyReviews from './charts/MyReviews.js';
   import DaysOffChart from '../components/charts/DaysOff.js';
   import RemainingDays from '../components/charts/RemainingDaysOff';

@@ -39,7 +39,7 @@
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
   import MyMetrics from '@/components/MyMetrics';
   import TeamMetrics from '@/components/TeamMetrics';
   import CompanyMetrics from '@/components/CompanyMetrics';

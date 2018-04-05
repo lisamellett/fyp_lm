@@ -112,7 +112,7 @@
 
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
 import store from '../store/store';
 
 export default {

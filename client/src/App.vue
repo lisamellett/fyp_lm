@@ -34,6 +34,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import store from '@/store/store';
 import Home from '@/components/Home';
 import ToolbarNav from '@/components/ToolbarNav';

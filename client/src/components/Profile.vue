@@ -9,7 +9,7 @@
 <!--everything inside this script tag is the
 controller and you can bind the html to it-->
 <script>
-  /* eslint-disable */
+/* eslint-disable */
   import MyPanel from '@/components/MyPanel';
 
   export default {
