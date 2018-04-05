@@ -20,9 +20,9 @@ module.exports = (app) => {
 
   app.post('/users/register',
     // to register a user someone has to be logged in
-    isAuthenticated,
-    AuthenticationController.roleAuthorization(['admin']), // only admins can register
-    AuthenticationControllerPolicy.register, // we call this middleware before we hit our controller
+    //isAuthenticated,
+    //AuthenticationController.roleAuthorization(['admin']), // only admins can register
+    //AuthenticationControllerPolicy.register, // we call this middleware before we hit our controller
     // when next() is called in policy then it will go  the controller
     AuthenticationController.register);
 
