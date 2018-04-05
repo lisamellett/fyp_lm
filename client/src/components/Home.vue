@@ -178,6 +178,7 @@
 </template>
 
 <script>
+  /* eslint-disable */
 import Login from '@/components/login'
 
 export default {

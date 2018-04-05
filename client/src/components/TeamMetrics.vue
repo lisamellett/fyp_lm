@@ -46,6 +46,7 @@
 </template>
 
 <script>
+  /* eslint-disable */
   import GenderOnTeam from './charts/GenderOnTeam';
   import DaysOffTeam from './charts/TeamDaysOff';
   import TeamPerformance from '../components/charts/TeamPerformance';

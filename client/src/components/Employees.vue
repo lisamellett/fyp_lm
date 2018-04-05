@@ -162,6 +162,7 @@
 <script>
 import UsersService from '@/services/UsersService';
 import store from '@/store/store';
+/* eslint-disable */
 
 export default {
   data () {

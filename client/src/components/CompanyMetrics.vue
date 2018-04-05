@@ -32,6 +32,7 @@
   import CompanyPerformance from './charts/CompanyPerformance';
   import CompanyDaysOff from './charts/CompanyDaysOff';
   import UsersPerTeam from './charts/UsersPerTeam';
+  /* eslint-disable */
 
   export default {
     components: {

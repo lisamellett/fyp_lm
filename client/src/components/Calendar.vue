@@ -277,6 +277,7 @@ import store from '@/store/store';
 import EventService from '@/services/EventService';
 import NotificationService from '@/services/NotificationService';
 import UsersService from '@/services/UsersService';
+/* eslint-disable */
 // import CalendarView from "vue-simple-calendar";
 // require("vue-simple-calendar/dist/static/css/default.css");
 // require("vue-simple-calendar/dist/static/css/holidays-us.css");
