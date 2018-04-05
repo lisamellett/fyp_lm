@@ -3,6 +3,7 @@ const bodyParser = require('body-parser'); // allows you to process json data ea
 const cors = require('cors'); // this will go into the modules folder and find the main file and assign it to a variable
 const morgan = require('morgan'); // log generator
 const mongoose = require('mongoose');
+const path = require('path');
 
 // what is a cors error - google images
 // cross origin resource sharing
@@ -28,6 +29,10 @@ app.use(morgan('combined')); // combine allows us to print out our logs in a cer
 app.use(bodyParser.json()); // allows our app to easily parse any json data that is sent in
 app.use(cors()); // you need cors if you want your server to be served on a
 // different domain and you want any client to be able to hit your server
+// app.use(express.static(path.join(__dirname, 'client/build')));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 require('./passport');
 
