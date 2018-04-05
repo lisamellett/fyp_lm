@@ -1,6 +1,6 @@
 import {Doughnut} from 'vue-chartjs';
 import UsersService from "../../services/UsersService";
-import store from '@/store/store';
+import store from '../../store/store';
 
 export default {
 

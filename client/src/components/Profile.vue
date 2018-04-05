@@ -10,7 +10,7 @@
 controller and you can bind the html to it-->
 <script>
 /* eslint-disable */
-  import MyPanel from '@/components/MyPanel';
+  import MyPanel from '../components/MyPanel';
 
   export default {
     components: {

@@ -271,12 +271,12 @@
 <!--everything inside this script tag is the
 controller and you can bind the html to it-->
 <script>
-import MyPanel from '@/components/MyPanel';
+import MyPanel from '../components/MyPanel';
 import HotelDatePicker from 'vue-hotel-datepicker';
-import store from '@/store/store';
-import EventService from '@/services/EventService';
-import NotificationService from '@/services/NotificationService';
-import UsersService from '@/services/UsersService';
+import store from '../store/store';
+import EventService from '../services/EventService';
+import NotificationService from '../services/NotificationService';
+import UsersService from '../services/UsersService';
 /* eslint-disable */
 // import CalendarView from "vue-simple-calendar";
 // require("vue-simple-calendar/dist/static/css/default.css");

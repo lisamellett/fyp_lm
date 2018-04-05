@@ -2,7 +2,7 @@ import {Line} from 'vue-chartjs';
 import {Bar} from 'vue-chartjs';
 import {Pie} from 'vue-chartjs';
 import UsersService from "../../services/UsersService";
-import store from '@/store/store';
+import store from '../../store/store';
 
 export default {
 

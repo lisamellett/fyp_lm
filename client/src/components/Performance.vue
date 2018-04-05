@@ -292,8 +292,8 @@
 
 <script>
 /* eslint-disable */
-import UsersService from '@/services/UsersService';
-import NotificationService from '@/services/NotificationService';
+import UsersService from '../services/UsersService';
+import NotificationService from '../services/NotificationService';
 import store from '../store/store';
 
 export default {

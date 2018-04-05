@@ -161,8 +161,8 @@
 
 <script>
 /* eslint-disable */
-import UsersService from '@/services/UsersService';
-import store from '@/store/store';
+import UsersService from '../services/UsersService';
+import store from '../store/store';
 
 
 export default {

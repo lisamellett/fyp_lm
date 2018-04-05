@@ -109,9 +109,9 @@
 
 <script>
 /* eslint-disable */
-import store from '@/store/store';
-import Notifications from '@/components/Notifications';
-import NotificationService from '@/services/NotificationService';
+import store from '../store/store';
+import Notifications from '../components/Notifications';
+import NotificationService from '../services/NotificationService';
 
 
 export default {

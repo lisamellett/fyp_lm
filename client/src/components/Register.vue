@@ -200,10 +200,10 @@ controller and you can bind the html to it-->
 /* eslint-disable */
 
 import VToolbar from 'vuetify/src/components/VToolbar/VToolbar';
-import AuthenticationService from '@/services/AuthenticationService';
+import AuthenticationService from '../services/AuthenticationService';
 import VTextField from 'vuetify/es5/components/VTextField/VTextField';
 import VSelect from "vuetify/es5/components/VSelect/VSelect";
-import UsersService from '@/services/UsersService';
+import UsersService from '../services/UsersService';
 
 export default {
   components: {

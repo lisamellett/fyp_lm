@@ -5,7 +5,7 @@
 import 'vuetify/dist/vuetify.min.css';
 import 'vuetify/src/stylus/main.styl';
 
-import store from '@/store/store';
+import store from './store/store';
 
 import Vue from 'vue';
 // import Vuetify from 'vuetify';
