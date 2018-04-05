@@ -85,7 +85,7 @@
               required>
             </v-select>
               </v-flex>
-              <v-flex xs6 class="px-2" v-if="selectRole === 'manager' || selectRole === 'senior manager'">
+              <v-flex xs12 class="px-2" v-if="selectRole === 'manager' || selectRole === 'senior manager'">
             <v-text-field
               label="Team To Manage"
               v-model="team"

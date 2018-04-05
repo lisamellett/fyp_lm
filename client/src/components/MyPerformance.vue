@@ -114,13 +114,14 @@
 <script>
 /* eslint-disable */
 import store from '../store/store';
+import UsersService from "../services/UsersService";
 
 export default {
   data() {
     return {
       search: '',
-      items: store.state.user.reviews,
-      mostRecent: store.state.user.reviews[0],
+      items: [],
+      mostRecent: null,
       searchItem: '',
       filteredItems: [],
       paginatedItems: [],
@@ -134,7 +135,9 @@ export default {
       }
     };
   },
-  mounted() {
+  async mounted() {
+    this.items = (await UsersService.getUser(store.state.user._id)).data.user.reviews;
+    this.mostRecent = this.items[0];
     this.filteredItems = this.items;
     this.buildPagination();
     this.selectPage(1);
