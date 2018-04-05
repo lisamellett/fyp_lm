@@ -28,11 +28,11 @@
 </template>
 
 <script>
+/* eslint-disable */
   import GenderInCompany from './charts/GenderInCompany';
   import CompanyPerformance from './charts/CompanyPerformance';
   import CompanyDaysOff from './charts/CompanyDaysOff';
   import UsersPerTeam from './charts/UsersPerTeam';
-  /* eslint-disable */
 
   export default {
     components: {

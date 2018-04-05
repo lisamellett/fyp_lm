@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  /* eslint-disable */
+/* eslint-disable */
 export default {
   // name: 'HelloWorld',
   // data() {
