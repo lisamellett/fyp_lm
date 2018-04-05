@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="dcf4f286-4f9b-401b-bcde-2bad99bafeb0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Home.vue" afterPath="$PROJECT_DIR$/client/src/components/Home.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -102,8 +101,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="54" column="28" lean-forward="true" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+            <state relative-caret-position="288">
+              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
               <folding>
                 <element signature="e#21#43#0" expanded="true" />
               </folding>
@@ -388,14 +387,7 @@
       <workItem from="1517950307325" duration="10306000" />
       <workItem from="1517995252440" duration="28936000" />
       <workItem from="1518209330691" duration="40659000" />
-      <workItem from="1518319863022" duration="456965000" />
-    </task>
-    <task id="LOCAL-00008" summary="added in login and register, added user tokens">
-      <created>1519040674747</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1519040674747</updated>
+      <workItem from="1518319863022" duration="457197000" />
     </task>
     <task id="LOCAL-00009" summary="big commit">
       <created>1520281815209</created>
@@ -733,11 +725,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522932077838</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="heroku deployment">
+      <created>1522932377449</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1522932377449</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="536863000" />
+    <option name="totallyTimeSpent" value="537095000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1297,8 +1296,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="54" column="28" lean-forward="true" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+        <state relative-caret-position="288">
+          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
           <folding>
             <element signature="e#21#43#0" expanded="true" />
           </folding>
