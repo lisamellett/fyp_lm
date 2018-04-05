@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dcf4f286-4f9b-401b-bcde-2bad99bafeb0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Metrics.Vue" afterPath="$PROJECT_DIR$/client/src/components/Metrics.Vue" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/Metrics.Vue" afterPath="$PROJECT_DIR$/client/src/components/MetricsTest.Vue" />
+      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" afterPath="$PROJECT_DIR$/client/src/router/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -89,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Metrics.Vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
+      <file leaf-file-name="MetricsTest.Vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/MetricsTest.Vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+            <state relative-caret-position="480">
+              <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
               <folding>
                 <element signature="e#1287#1335#0" expanded="true" />
               </folding>
@@ -101,11 +102,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+            <state relative-caret-position="174">
+              <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
               <folding>
                 <element signature="e#21#43#0" expanded="true" />
               </folding>
@@ -390,14 +391,7 @@
       <workItem from="1517950307325" duration="10306000" />
       <workItem from="1517995252440" duration="28936000" />
       <workItem from="1518209330691" duration="40659000" />
-      <workItem from="1518319863022" duration="457264000" />
-    </task>
-    <task id="LOCAL-00010" summary="big commit just before passport stuff">
-      <created>1520330936460</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1520330936460</updated>
+      <workItem from="1518319863022" duration="457338000" />
     </task>
     <task id="LOCAL-00011" summary="big commit just after passport stuff">
       <created>1520336852845</created>
@@ -735,11 +729,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522932623277</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="dedent">
+      <created>1522932697303</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1522932697303</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="537162000" />
+    <option name="totallyTimeSpent" value="537236000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -840,7 +841,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="added passport js functionality" />
     <MESSAGE value="added role based authorization to app" />
     <MESSAGE value="adding a performance review feature" />
     <MESSAGE value="a load of stuff on performance" />
@@ -865,7 +865,8 @@
     <MESSAGE value="small changes" />
     <MESSAGE value="heroku" />
     <MESSAGE value="heroku deployment" />
-    <option name="LAST_COMMIT_MESSAGE" value="heroku deployment" />
+    <MESSAGE value="dedent" />
+    <option name="LAST_COMMIT_MESSAGE" value="dedent" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1289,22 +1290,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
+    <entry file="file://$PROJECT_DIR$/client/src/components/MetricsTest.Vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        <state relative-caret-position="480">
+          <caret line="32" column="30" lean-forward="false" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
           <folding>
-            <element signature="e#21#43#0" expanded="true" />
+            <element signature="e#1287#1335#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
+    <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="32" column="30" lean-forward="true" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+        <state relative-caret-position="174">
+          <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
           <folding>
-            <element signature="e#1287#1335#0" expanded="true" />
+            <element signature="e#21#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
