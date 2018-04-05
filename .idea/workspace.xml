@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dcf4f286-4f9b-401b-bcde-2bad99bafeb0" name="Default" comment="heroku deployment">
+    <list default="true" id="dcf4f286-4f9b-401b-bcde-2bad99bafeb0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.vue" afterPath="$PROJECT_DIR$/client/src/App.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Calendar.vue" afterPath="$PROJECT_DIR$/client/src/components/Calendar.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Employees.vue" afterPath="$PROJECT_DIR$/client/src/components/Employees.vue" />
       <change beforePath="$PROJECT_DIR$/client/src/components/Home.vue" afterPath="$PROJECT_DIR$/client/src/components/Home.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Login.vue" afterPath="$PROJECT_DIR$/client/src/components/Login.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Metrics.Vue" afterPath="$PROJECT_DIR$/client/src/components/Metrics.Vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Notifications.vue" afterPath="$PROJECT_DIR$/client/src/components/Notifications.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Performance.vue" afterPath="$PROJECT_DIR$/client/src/components/Performance.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Profile.vue" afterPath="$PROJECT_DIR$/client/src/components/Profile.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Register.vue" afterPath="$PROJECT_DIR$/client/src/components/Register.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ToolbarNav.vue" afterPath="$PROJECT_DIR$/client/src/components/ToolbarNav.vue" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/CompanyDaysOff.js" afterPath="$PROJECT_DIR$/client/src/components/charts/CompanyDaysOff.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/CompanyPerformance.js" afterPath="$PROJECT_DIR$/client/src/components/charts/CompanyPerformance.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/DaysOff.js" afterPath="$PROJECT_DIR$/client/src/components/charts/DaysOff.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/GenderInCompany.js" afterPath="$PROJECT_DIR$/client/src/components/charts/GenderInCompany.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/GenderOnTeam.js" afterPath="$PROJECT_DIR$/client/src/components/charts/GenderOnTeam.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/ManagerPerformance.js" afterPath="$PROJECT_DIR$/client/src/components/charts/ManagerPerformance.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/MyReviews.js" afterPath="$PROJECT_DIR$/client/src/components/charts/MyReviews.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/RemainingDaysOff.js" afterPath="$PROJECT_DIR$/client/src/components/charts/RemainingDaysOff.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/TeamDaysOff.js" afterPath="$PROJECT_DIR$/client/src/components/charts/TeamDaysOff.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/TeamPerformance.js" afterPath="$PROJECT_DIR$/client/src/components/charts/TeamPerformance.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/charts/UsersPerTeam.js" afterPath="$PROJECT_DIR$/client/src/components/charts/UsersPerTeam.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/main.js" afterPath="$PROJECT_DIR$/client/src/main.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/router/index.js" afterPath="$PROJECT_DIR$/client/src/router/index.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/AuthenticationService.js" afterPath="$PROJECT_DIR$/client/src/services/AuthenticationService.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/EventService.js" afterPath="$PROJECT_DIR$/client/src/services/EventService.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/NotificationService.js" afterPath="$PROJECT_DIR$/client/src/services/NotificationService.js" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/UsersService.js" afterPath="$PROJECT_DIR$/client/src/services/UsersService.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,36 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GenderInCompany.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/charts/GenderInCompany.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GenderOnTeam.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/charts/GenderOnTeam.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DaysOff.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/components/charts/DaysOff.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="24" lean-forward="false" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TeamDaysOff.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/components/charts/TeamDaysOff.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -134,14 +77,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RemainingDaysOff.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RemainingDaysOff.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/components/charts/RemainingDaysOff.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+              <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Metrics.Vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-413">
+              <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="54" column="28" lean-forward="true" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+              <folding>
+                <element signature="e#21#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Home.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/Home.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="181" column="38" lean-forward="false" selection-start-line="181" selection-start-column="38" selection-end-line="181" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -217,7 +192,6 @@
         <option value="$PROJECT_DIR$/client/src/components/TeamMetrics.vue" />
         <option value="$PROJECT_DIR$/client/src/services/Api.js" />
         <option value="$PROJECT_DIR$/client/src/store/store.js" />
-        <option value="$PROJECT_DIR$/client/src/router/index.js" />
         <option value="$PROJECT_DIR$/client/src/components/Register.vue" />
         <option value="$PROJECT_DIR$/client/src/main.js" />
         <option value="$PROJECT_DIR$/client/src/App.vue" />
@@ -229,7 +203,6 @@
         <option value="$PROJECT_DIR$/client/src/services/UsersService.js" />
         <option value="$PROJECT_DIR$/client/src/components/Profile.vue" />
         <option value="$PROJECT_DIR$/client/src/components/Performance.vue" />
-        <option value="$PROJECT_DIR$/client/src/components/Home.vue" />
         <option value="$PROJECT_DIR$/client/src/components/Notifications.vue" />
         <option value="$PROJECT_DIR$/client/src/services/NotificationService.js" />
         <option value="$PROJECT_DIR$/client/src/services/EventService.js" />
@@ -245,6 +218,8 @@
         <option value="$PROJECT_DIR$/client/src/components/charts/CompanyDaysOff.js" />
         <option value="$PROJECT_DIR$/client/src/components/charts/ManagerPerformance.js" />
         <option value="$PROJECT_DIR$/client/src/components/charts/RemainingDaysOff.js" />
+        <option value="$PROJECT_DIR$/client/src/components/Home.vue" />
+        <option value="$PROJECT_DIR$/client/src/router/index.js" />
       </list>
     </option>
   </component>
@@ -413,14 +388,7 @@
       <workItem from="1517950307325" duration="10306000" />
       <workItem from="1517995252440" duration="28936000" />
       <workItem from="1518209330691" duration="40659000" />
-      <workItem from="1518319863022" duration="456745000" />
-    </task>
-    <task id="LOCAL-00007" summary="added register page and app header">
-      <created>1518319640856</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1518319640856</updated>
+      <workItem from="1518319863022" duration="456965000" />
     </task>
     <task id="LOCAL-00008" summary="added in login and register, added user tokens">
       <created>1519040674747</created>
@@ -758,11 +726,18 @@
       <option name="project" value="LOCAL" />
       <updated>1522931596647</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="heroku deployment">
+      <created>1522932077838</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1522932077838</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="536643000" />
+    <option name="totallyTimeSpent" value="536863000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1093,17 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="e#21#43#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/Register.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1201,14 +1165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/Home.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="181" column="21" lean-forward="false" selection-start-line="181" selection-start-column="21" selection-end-line="181" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/Notifications.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1229,14 +1185,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="19" lean-forward="false" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -1324,9 +1272,35 @@
     <entry file="file://$PROJECT_DIR$/client/src/components/charts/RemainingDaysOff.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <caret line="6" column="20" lean-forward="false" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/Metrics.Vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-413">
+          <caret line="44" column="32" lean-forward="false" selection-start-line="44" selection-start-column="32" selection-end-line="44" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/Home.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="181" column="38" lean-forward="false" selection-start-line="181" selection-start-column="38" selection-end-line="181" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="54" column="28" lean-forward="true" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="e#21#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
