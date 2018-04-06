@@ -41,7 +41,7 @@ export default {
       labels: months,
       datasets: [
         {
-          label: 'Days Off per Month',
+          label: 'Number of Days Off',
           borderColor: 'rgb(129, 212, 250)',
           pointBackgroundColor: 'white',
           borderWidth: 1,

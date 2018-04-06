@@ -1,14 +1,14 @@
 <template>
   <v-layout row wrap class="blue lighten-5">
-    <v-flex xs6 class="px-3 py-3">
+    <v-flex d-flex xs6 class="px-3 py-3">
       <v-card>
-        <v-card-title class="py-2 grey--text">Gender ratio on your team</v-card-title>
+        <v-card-title class="py-2 grey--text">Gender ratio on your team ({{ $store.state.user.team }} team)</v-card-title>
         <gender-on-team></gender-on-team>
       </v-card>
     </v-flex>
     <v-flex xs6 class="px-3 py-3">
       <v-card>
-        <v-card-title class="py-2 grey--text">Average scores team members achieved on their last performance review</v-card-title>
+        <v-card-title class="py-2 grey--text">Average scores team members achieved on their last performance review ({{ $store.state.user.team }} team)</v-card-title>
         <team-performance></team-performance>
       </v-card>
     </v-flex>
@@ -37,7 +37,7 @@
     <v-layout row wrap v-else>
       <v-flex xs12 class="px-3 py-3">
         <v-card>
-          <v-card-title class="py-2 grey--text">Number of days off team members took per month</v-card-title>
+          <v-card-title class="py-2 grey--text">Number of days off team members took per month ({{ $store.state.user.team }} team)</v-card-title>
           <days-off-team></days-off-team>
         </v-card>
       </v-flex>

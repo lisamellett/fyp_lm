@@ -1,6 +1,6 @@
 <template>
   <v-layout column>
-    <v-layout row wrap>
+    <v-layout row wrap v-if="this.user.name !== ''">
 
       <v-flex xs6 d-flex>
         <v-layout row wrap>

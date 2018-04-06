@@ -1,8 +1,5 @@
 import {Line} from 'vue-chartjs';
-import {Bar} from 'vue-chartjs';
-import UsersService from "../../services/UsersService";
 import EventService from "../../services/EventService";
-import store from '../../store/store';
 
 export default {
 
@@ -36,7 +33,7 @@ export default {
       labels: months,
       datasets: [
         {
-          label: 'Days Off per Month',
+          label: 'Number of Days Off',
           borderColor: 'rgb(129, 212, 250)',
           pointBackgroundColor: 'white',
           borderWidth: 1,
