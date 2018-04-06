@@ -1,8 +1,5 @@
 <template>
 <div>
-    <!--<v-toolbar class="white">-->
-      <!--<v-toolbar-title v-text="title"></v-toolbar-title>-->
-    <!--</v-toolbar>-->
     <v-content>
       <section>
         <v-parallax :src="require('@/assets/hero.jpeg')" height="600">
@@ -20,14 +17,6 @@
             <v-flex xs6>
               <login></login>
             </v-flex>
-            <!--<v-btn-->
-              <!--class="blue lighten-2 mt-5"-->
-              <!--dark-->
-              <!--large-->
-              <!--:to="{name:'login'}"-->
-            <!--&gt;-->
-              <!--Login-->
-            <!--</v-btn>-->
           </v-layout>
         </v-parallax>
       </section>
