@@ -74,7 +74,7 @@ export default {
         this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
         console.log("waiting");
-        this.$router.push('home');
+        this.$router.push('metrics');
       } catch (error) {
         this.error = error.response.data.error;
       }

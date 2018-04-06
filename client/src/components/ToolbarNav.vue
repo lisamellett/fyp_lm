@@ -179,7 +179,7 @@ export default {
               ]
             },
             {icon: 'settings', text: 'Settings'},
-            {icon: 'account_circle', text: 'Profile'},
+            {icon: 'account_circle', text: 'Profile', destination: 'profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
           ];
         case "manager":
@@ -196,7 +196,7 @@ export default {
               ]
             },
             {icon: 'people', text: 'Employees', destination: 'employees'},
-            {icon: 'account_circle', text: 'Profile'},
+            {icon: 'account_circle', text: 'Profile', destination: 'profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
           ];
         case "senior manager":
@@ -213,7 +213,7 @@ export default {
               ]
             },
             {icon: 'people', text: 'View Employees', destination: 'employees'},
-            {icon: 'account_circle', text: 'Profile'},
+            {icon: 'account_circle', text: 'Profile', destination: 'profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
 
           ];
@@ -222,7 +222,7 @@ export default {
             {icon: 'show_chart', text: 'Metrics', destination: 'metrics'},
             {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
             {icon: 'flash_on', text: 'Performance', destination: 'myPerformance'},
-            {icon: 'account_circle', text: 'Profile'},
+            {icon: 'account_circle', text: 'Profile', destination: 'profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
           ];
       }

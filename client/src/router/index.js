@@ -59,6 +59,11 @@ export default new Router({
       path: '/metrics',
       name: 'metrics',
       component: Metrics,
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
     }
   ],
 });

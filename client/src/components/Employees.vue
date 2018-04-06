@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" max-width="800">
       <v-card>
         <v-card-title>
           Edit Employee
