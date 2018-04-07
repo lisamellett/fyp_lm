@@ -340,16 +340,12 @@ export default {
       this.teamEvents = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
     }
     this.getEvents(today);
-    console.log('team', this.teamEvents);
   },
   methods: {
     setStyle() {
       let el = document.getElementsByClassName('events-day');
-      console.log(el);
       for (let i=0; i<el.length; i++) {
-        console.log('');
         el[i].style.minHeight="100px";
-        console.log(el[i]);
       }
     },
     incrementDate (date) {
@@ -391,7 +387,6 @@ export default {
       this.getTeamEvents(newDate);
     },
     moreClick(day, events, jsEvent) {
-      console.log('moreCLick', day, events, jsEvent)
     },
     cancelPressed() {
       this.requestModel = false;

@@ -18,7 +18,7 @@
                 slot="activator"
               >
                 <img
-                  :src="require('@/assets/nobody_m.original.jpg')"
+                  :src="require('@/assets/blankmodel.png')"
                 >
               </v-avatar>
               </v-flex>
@@ -272,13 +272,13 @@
                     <v-flex d-flex>
                       <v-layout row>
                         <v-flex xs6 class="mx-2 my-2">
-                          <v-card class="teal lighten-5">
+                          <v-card class="blue lighten-5">
                             <div class="text-sm-center caption grey--text pt-2">Taken</div>
                             <div class="text-sm-center txt grey--text">{{ this.user.taken }}</div>
                           </v-card>
                         </v-flex>
                         <v-flex xs6 class="mx-2 my-2">
-                          <v-card class="teal lighten-5">
+                          <v-card class="blue lighten-5">
                             <div class="text-sm-center caption grey--text pt-2">Remaining</div>
                             <div class="text-sm-center txt grey--text">{{ this.user.allowance - this.user.taken }}</div>
                           </v-card>
@@ -375,7 +375,6 @@ import store from "../store/store";
         }
         let x = 0;
         for (let i = 0; i < this.user.reviews.length; i++) {
-          console.log(this.user.reviews[i].fields.AVERAGE);
           x += this.user.reviews[i].fields.AVERAGE;
         }
         return x / this.user.reviews.length;
@@ -387,7 +386,7 @@ import store from "../store/store";
 
 <style scoped>
   .grad {
-    background: linear-gradient(#00ACC1, #D1C4E9);
+    background: linear-gradient(#1976D2, #D1C4E9);
   }
 
   .ff {

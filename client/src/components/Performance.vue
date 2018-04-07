@@ -439,7 +439,6 @@ export default {
           message: "A new review has been submitted by " + store.state.user.name + '(' + store.state.user.role + ')',
           data: {},
         };
-        console.log('frontend', review.email);
         await UsersService.addReview(this.currentEmployee._id, review);
         await NotificationService.addNotification(notification);
         this.e1 = 1;
@@ -473,7 +472,6 @@ export default {
     },
     viewReviews(employee1) {
       this.currentViewEmployee = employee1;
-      console.log(this.currentViewEmployee.name);
       this.filteredItems = this.currentViewEmployee.reviews;
       this.buildPagination();
       this.selectPage(1);
@@ -492,9 +490,7 @@ export default {
       this.newField = '';
     },
     removeField(field) {
-      console.log(field);
       this.$delete(this.fields, field);
-      console.log(this.fields);
     },
     closeViewDialog() {
       this.viewDialog = false;
@@ -521,10 +517,7 @@ export default {
       }
     },
     selectPage(item) {
-      console.log(this.currentViewEmployee.name);
-      console.log(this.currentViewEmployee.reviews);
       this.selected = item;
-      console.log('selected', this.selected);
       this.pagination.currentPage = item;
       let start = 0;
       let end = 0;

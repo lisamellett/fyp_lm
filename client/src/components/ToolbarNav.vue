@@ -100,7 +100,7 @@
       temporary
       v-model="right"
       fixed
-      class="blue-grey lighten-2"
+      class="blue lighten-5"
     >
       <notifications v-bind:nots="nots"></notifications>
     </v-navigation-drawer>
@@ -132,9 +132,7 @@ export default {
   },
   methods: {
     test(i) {
-      console.log(i.model);
       i.model = !i.model;
-      console.log(i.model);
     },
     getNotifications() { // this function updates the nots list
       this.right = !this.right;
@@ -178,7 +176,6 @@ export default {
                 {icon: 'person_add', text: 'Register an Employee', destination: 'register'},
               ]
             },
-            {icon: 'settings', text: 'Settings'},
             {icon: 'account_circle', text: 'Profile', destination: 'profile'},
             // {icon: 'power_settings_new', text: 'Logout'},
           ];

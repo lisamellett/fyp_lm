@@ -144,13 +144,14 @@
       <!--</template>-->
       <template slot="items" slot-scope="props">
         <tr @click="props.expanded = !props.expanded">
+          <td v-if="props.expanded"><v-icon>keyboard_arrow_up</v-icon></td>
+          <td v-else><v-icon>keyboard_arrow_down </v-icon></td>
           <td class="text-xs-left">{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.role }}</td>
-          <td class="text-xs-right">{{ props.item.dob }}</td>
-          <td class="text-xs-right">{{ props.item.gender }}</td>
+          <td class="text-xs-right">{{ props.item.title }}</td>
           <td class="text-xs-right">{{ props.item.team }}</td>
-          <td class="text-xs-right">{{ props.item.taken }}</td>
           <td class="text-xs-right">{{ props.item.allowance }}</td>
+          <td class="text-xs-right">{{ props.item.taken }}</td>
           <td class="justify-center layout px-0">
             <v-btn v-if="$store.state.user.role === 'admin'" icon class="mx-0" @click.stop="editItem(props.item)">
               <v-icon color="teal">edit</v-icon>
@@ -167,8 +168,76 @@
       <template slot="expand" slot-scope="props">
         <v-card flat>
           <v-card-text>
-            <h4 class="text-xs-left">Job Title</h4>
-            <p class="text-xs-left">{{ props.item.title }}</p>
+            <v-layout row>
+
+              <v-flex xs4 class="border-flex">
+                <v-layout row wrap>
+                  <v-flex xs12 class="text-xs-left">General</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff blue--text text--lighten-2">fiber_manual_record</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Name</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.name }}</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff blue--text text--lighten-2">fiber_manual_record</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Date of Birth</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.dob }}</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff blue--text text--lighten-2">fiber_manual_record</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Gender</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.gender }}</v-flex>
+
+                </v-layout>
+              </v-flex>
+
+              <v-flex xs4 class="border-flex">
+                <v-layout row wrap>
+                  <v-flex xs12 class="text-xs-left">Contact Details</v-flex>
+                  <v-flex xs1>
+                    <v-icon class="ff2 blue--text text--lighten-2">home</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Address</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.address }}</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff2 blue--text text--lighten-2">phone</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Phone</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.phone }}</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff2 blue--text text--lighten-2">email</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Email</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.email }}</v-flex>
+
+                </v-layout>
+              </v-flex>
+
+              <v-flex xs4>
+                <v-layout row wrap>
+                  <v-flex xs12 class="text-xs-left">Next of Kin</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff2 blue--text text--lighten-2">person</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Name</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.kinName }}</v-flex>
+
+                  <v-flex xs1>
+                    <v-icon class="ff2 blue--text text--lighten-2">phone</v-icon>
+                  </v-flex>
+                  <v-flex xs3 class="grey--text text-xs-left">Phone</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ props.item.kinNum }}</v-flex>
+
+                </v-layout>
+              </v-flex>
+            </v-layout>
           </v-card-text>
         </v-card>
       </template>
@@ -189,6 +258,7 @@ export default {
       search: '',
       rowsPerPage: [10,25,{"text":"All","value":-1}],
       headers: [
+        {text: '', sortable: false},
         {
           text: 'Employees',
           align: 'left',
@@ -196,11 +266,10 @@ export default {
           value: 'name'
         },
         { text: 'Role', value: 'role' },
-        { text: 'Date of Birth', value: 'dob' },
-        { text: 'Gender', value: 'gender' },
+        { text: 'Job Title', value: 'title' },
         { text: 'Team', value: 'team' },
+        { text: 'Holiday Allowance', value: 'allowance' },
         { text: 'Holidays Taken', value: 'taken' },
-        { text: 'Total Holidays', value: 'allowance' },
       ],
       genders: [
         'male',
@@ -329,3 +398,28 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+
+  .ff {
+    font-size: 8px;
+  }
+
+  .ff2 {
+    font-size: 12px;
+  }
+
+  .border-flex {
+    border-right: 1px darkgrey solid;
+    margin-right: 10px;
+  }
+
+  .myClass {
+    background-color: #E3F2FD;
+  }
+
+  tr:hover {
+    background-color: blue;
+  }
+
+</style>

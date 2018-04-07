@@ -15,7 +15,9 @@
       </v-card>
     </v-flex>
   </v-layout>
-  <v-layout id="performance" v-else>
+    <div v-else>
+  <v-layout id="performance" v-if="this.items.length !== 0">
+
     <v-flex xs8 class="mr-4">
       <v-text-field
         append-icon="search"
@@ -107,6 +109,7 @@
       </div>
     </v-flex>
   </v-layout>
+    </div>
   </div>
 </template>
 

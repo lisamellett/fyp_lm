@@ -271,12 +271,9 @@ export default {
   },
   methods: {
     async register() {
-      console.log(this.role);
       if ((this.selectRole === 'employee') || (this.selectRole === 'admin')) {
         this.team = this.selectManager.team;
-        console.log('HERE');
       }
-      console.log('team', this.team);
       try {
         await AuthenticationService.register({
           name: this.name,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar color="indigo">
+    <v-toolbar color="blue darken-2">
       <v-icon>notifications</v-icon>
       <v-toolbar-title class="white--text">Notifications</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -12,10 +12,10 @@
     <v-layout column>
     <v-flex xs12 v-for="notification in nots">
       <!--time off request-->
-      <v-card raised v-if="notification.type==='Time Off Request'" :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+      <v-card raised v-if="notification.type==='Time Off Request'" :to="{name: getLink(notification.type)}" hover class="blue lighten-4 my-1">
           <v-layout row wrap>
             <v-flex xs12 class="py-0">
-            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
+            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="blue">
               <v-icon class="mx-2 white--text">date_range</v-icon>
                 {{ notification.type }}
             </v-toolbar>
@@ -49,10 +49,10 @@
           </v-layout>
       </v-card>
       <!--others-->
-      <v-card v-else-if="notification.type==='Performance Review'" :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+      <v-card v-else-if="notification.type==='Performance Review'" :to="{name: getLink(notification.type)}" hover class="blue lighten-4 my-1">
         <v-layout row wrap>
           <v-flex xs12 class="py-0">
-            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
+            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="blue">
               <v-icon class="mx-2 white--text">flash_on</v-icon>
               {{ notification.type }}
                 <v-spacer></v-spacer>
@@ -68,10 +68,10 @@
           </v-flex>
         </v-layout>
       </v-card>
-      <v-card v-else :to="{name: getLink(notification.type)}" hover class="indigo lighten-4 my-1">
+      <v-card v-else :to="{name: getLink(notification.type)}" hover class="blue lighten-4 my-1">
         <v-layout row wrap>
           <v-flex xs12 class="py-0">
-            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="indigo lighten-3">
+            <v-toolbar dark style="border-radius: 3px 3px 0 0" dense flat class="blue">
               <v-icon class="mx-2 white--text">date_range</v-icon>
               {{ notification.type }}
               <v-spacer></v-spacer>
