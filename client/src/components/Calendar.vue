@@ -56,35 +56,39 @@
               <span v-else>Team Calendar</span>
             </v-btn>
           </v-toolbar-items>
-
           <v-spacer></v-spacer>
           <v-btn flat @click="requestModel = !requestModel">New Request<v-icon right>add_circle</v-icon></v-btn>
         </v-toolbar>
-        <transition-group tag="div" :name="transition" class="transitionStyle">
+        <v-flex style="overflow: hidden">
+          <transition :name="transition" mode="out-in">
+            <div
+            key="self"
+            v-if="showMine"
+            class="blue">
+            <full-calendar
+              :events="myEvents"
+              locale="en"
+              @eventClick="eventClick"
+              @dayClick="dayClick"
+              @moreClick="moreClick">
+            </full-calendar>
+            </div>
           <div
-          key="self"
-          v-if="showMine">
-          <full-calendar
-            class="calendar"
-            :events="myEvents"
-            locale="en"
-            @eventClick="eventClick"
-            @dayClick="dayClick"
-            @moreClick="moreClick">
-          </full-calendar>
-          </div>
-        <div
-          key="team"
-          v-else>
-          <full-calendar
-            :events="teamEvents"
-            locale="en"
-            @eventClick="eventClickTeam"
-            @dayClick="dayClickTeam"
-            @moreClick="moreClick"
-          ></full-calendar>
-          </div>
-        </transition-group>
+            key="team"
+            v-else
+            class="pink"
+            style="overflow: hidden; position: relative"
+          >
+            <full-calendar
+              :events="teamEvents"
+              locale="en"
+              @eventClick="eventClickTeam"
+              @dayClick="dayClickTeam"
+              @moreClick="moreClick"
+            ></full-calendar>
+            </div>
+          </transition>
+        </v-flex>
       </v-card>
     </v-flex>
     <v-flex xs4 class="ml-3">
@@ -520,11 +524,11 @@ export default {
   }
 
   .slide-enter {
-    transform: translate(100%,0);
+    transform: translate(100%, 0);
   }
 
   .slide-leave-active {
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
   .slide-enter-active {
     transition: all 0.5s;
@@ -543,7 +547,7 @@ export default {
   }
 
   .slide-left-leave-active {
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
 
   .slide-left-enter-active {
@@ -571,9 +575,5 @@ export default {
     overflow: auto;
     border-radius: unset;
     max-height: 300px;
-  }
-  .events-day1 {
-    min-height: 0px;
-    height: 100px;
   }
 </style>

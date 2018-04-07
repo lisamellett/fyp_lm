@@ -10,29 +10,31 @@
           </v-toolbar-items>
           <v-spacer></v-spacer>
         </v-toolbar>
-        <transition-group tag="div" :name="transition" class="transitionStyle">
-          <div
-            key="mine"
-            v-if="myMetrics">
-            <my-metrics>
-              mine
-            </my-metrics>
-          </div>
-          <div
-            key="team"
-            v-else-if="teamMetrics">
-            <team-metrics>
-              team
-            </team-metrics>
-          </div>
-          <div
-            key="company"
-            v-else>
-            <company-metrics>
-              company
-            </company-metrics>
-          </div>
-        </transition-group>
+        <v-flex style="overflow: hidden">
+          <transition :name="transition" mode="out-in">
+            <div
+              key="mine"
+              v-if="myMetrics">
+              <my-metrics>
+                mine
+              </my-metrics>
+            </div>
+            <div
+              key="team"
+              v-else-if="teamMetrics">
+              <team-metrics>
+                team
+              </team-metrics>
+            </div>
+            <div
+              key="company"
+              v-else>
+              <company-metrics>
+                company
+              </company-metrics>
+            </div>
+          </transition>
+        </v-flex>
       </v-card>
     </v-flex>
   </v-layout>
@@ -50,6 +52,7 @@ export default {
       myMetrics: true,
       teamMetrics: false,
       companyMetrics: false,
+      comingFrom: 'myMetrics',
     }
   },
   components: {
@@ -64,6 +67,15 @@ export default {
       this.companyMetrics = false;
     },
     changeToTeam() {
+      if (this.myMetrics) {
+        this.comingFrom = 'myMetrics';
+      }
+      else if(this.companyMetrics) {
+        this.comingFrom = 'companyMetrics';
+      }
+      else {
+        this.comingFrom = 'teamMetrics';
+      }
       this.myMetrics = false;
       this.teamMetrics = true;
       this.companyMetrics = false;
@@ -79,11 +91,15 @@ export default {
       if (this.myMetrics) {
         return "slide-left"
       }
-      else if (this.teamMetrics) {
+      else if (this.companyMetrics) {
         return "slide"
       }
       else {
-        return "slide"
+        if (this.comingFrom === 'myMetrics') {
+          return 'slide';
+        } else {
+          return 'slide-left';
+        }
       }
     },
   }
@@ -104,7 +120,7 @@ export default {
   }
 
   .slide-leave-active {
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
   .slide-enter-active {
     transition: all 0.5s;
@@ -123,7 +139,7 @@ export default {
   }
 
   .slide-left-leave-active {
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
 
   .slide-left-enter-active {

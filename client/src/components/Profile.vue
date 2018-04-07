@@ -303,7 +303,7 @@
                         <v-icon class="ff blue--text text--lighten-2">fiber_manual_record</v-icon>
                       </v-flex>
                       <v-flex xs11 class="pl-3 pr-2">
-                        <span class="">A total of {{ this.user.reviews.length }} so far by management. </span>
+                        <span class="">A total of {{ this.user.reviews.length }} reviews has been submitted for you so far. </span>
                       </v-flex>
                     </v-layout>
                     <v-layout row wrap class="pb-2">

@@ -9,7 +9,7 @@ import Employees from '../components/Employees';
 import Profile from '../components/Profile';
 import Performance from '../components/Performance';
 import MyPerformance from '../components/MyPerformance';
-import Metrics from '../components/MetricsTest';
+import Metrics from '../components/Metrics';
 
 Vue.use(Router);
 
