@@ -3,9 +3,13 @@
     <v-flex xs8>
       <v-dialog v-model="requestModel" max-width="750px">
         <v-card>
-          <v-card-title>
-            <span class="headline">Request Time Off</span>
-          </v-card-title>
+            <!--<span class="headline">Request Time Off</span>-->
+            <v-toolbar card dark color="primary">
+              <v-btn icon @click.native="cancelPressed" dark>
+                <v-icon>close</v-icon>
+              </v-btn>
+              <v-toolbar-title>Request Time Off</v-toolbar-title>
+            </v-toolbar>
           <v-card-text>
             <v-form v-model="valid" ref="form" lazy-validation>
             <v-container>
@@ -17,7 +21,7 @@
                 <v-flex xs12>
                   <v-select
                     label="Select a Reason For your absence"
-                    color="teal"
+                    color="blue"
                     v-model="selectReason"
                     :items="reasons"
                     :rules="[v => !!v || 'A reason is required']"
@@ -26,7 +30,7 @@
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field
-                    color="teal"
+                    color="blue"
                     multi-line
                     v-model="detail"
                   >
@@ -42,8 +46,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="teal darken-1" flat @click.native="cancelPressed">Cancel</v-btn>
-            <v-btn color="teal darken-1" flat @click.native="submitRequest" :disabled="!valid">Submit</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="cancelPressed">Cancel</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="submitRequest" :disabled="!valid">Submit</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

@@ -3,7 +3,7 @@
   <v-layout v-if="$store.state.user.reviews.length === 0 && items.length === 0">
     <v-flex xs6 offset-xs3>
       <v-card>
-        <v-toolbar dense class="cyan" dark>
+        <v-toolbar dense class="blue darken-2" dark>
           <v-icon light>info</v-icon>
           <v-toolbar-title>
             No Performace Reviews
@@ -65,7 +65,7 @@
               </v-btn>
             </v-flex>
             <v-flex>
-                <a v-for="item in pagination.filteredItems"  v-on:click="selectPage(item)" v-bind:class="{'is-info': item === pagination.currentPage}" :class="{active:item === selected}">{{item}}</a>
+                <a v-for="item in pagination.filteredItems"  v-on:click="selectPage(item)" :class="{active:item === selected}">{{item}}</a>
             </v-flex>
             <v-flex>
               <v-btn icon class="mt-0" v-on:click="selectPage(pagination.currentPage+1)" :disabled="pagination.currentPage===(pagination.items[pagination.items.length-1] || pagination.items.length===0)">
@@ -129,7 +129,7 @@ export default {
       pagination: {
         range: 5,
         currentPage: 1,
-        itemPerPage: 6,
+        itemPerPage: 7,
         items: [],
         filteredItems: [],
       }
@@ -246,7 +246,7 @@ export default {
 
   p {
     text-align: left;
-    margin: auto auto 20px auto;
+    margin: auto 10px 20px auto;
   }
 
   .pagination {
@@ -268,8 +268,6 @@ export default {
 
   .pagination a:hover:not(.active) {
     background-color: #ddd;
-    border-radius: 5px;
   }
-
 
 </style>

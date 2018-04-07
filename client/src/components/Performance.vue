@@ -25,7 +25,7 @@
             <v-alert type="success"  dismissible v-model="successAlert">
               The review has successfully been added
             </v-alert>
-            <v-layout>
+            <v-layout id="performance">
               <v-flex xs8 class="mr-4 ml-4 mt-4">
                 <v-text-field
                   append-icon="search"
@@ -115,7 +115,7 @@
           <div style="flex: 1 1 auto;"/>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="addDialog">
+      <v-dialog max-width="1000" v-model="addDialog">
         <v-card tile>
           <v-alert type="error" dismissible v-model="blankFieldAlert">
             Please enter a field name
@@ -171,9 +171,7 @@
                   <v-stepper-content step="2">
                     <v-card class="mb-5">
                       <v-layout row>
-                        <v-flex xs2>
-                          <v-subheader v-if="currentEmployee">Provide {{ currentEmployee.name }} with some feedback:</v-subheader>
-                        </v-flex>
+                        <v-flex class="subheader my-2" xs2 v-if="currentEmployee">Provide {{ currentEmployee.name }} with some feedback:</v-flex>
                         <v-flex xs10>
                           <v-text-field
                             name="feedback"
@@ -185,7 +183,7 @@
                       </v-layout>
                     </v-card>
                     <v-btn flat @click="backPressed">Back</v-btn>
-                    <v-btn color="primary" @click.native="e1 = 3">Continue</v-btn>
+                    <v-btn color="primary" @click="secondContine">Continue</v-btn>
                     <v-btn flat @click="cancelPressed">Cancel</v-btn>
                   </v-stepper-content>
                   <v-stepper-content step="3">
@@ -265,7 +263,8 @@
             <td class="text-xs-left">{{ props.item.name }}</td>
             <td class="text-xs-right">{{ props.item.role }}</td>
             <td class="text-xs-right">{{ props.item.title }}</td>
-            <td class="text-xs-right">{{ props.item.team }}</td>
+            <td class="text-xs-right">{{ props.item.reviews.length }}</td>
+            <td class="text-xs-right">{{ props.item.reviews[0].fields.AVERAGE }}</td>
             <td class="justify-center layout px-0">
               <v-tooltip left>
               <v-btn slot="activator" icon class="mx-0" @click.stop="viewReviews(props.item)">
@@ -347,7 +346,8 @@ export default {
         },
         { text: 'Role', value: 'role' },
         { text: 'Job Title', value: 'title' },
-        { text: 'Team', value: 'team' },
+        { text: 'Number Reviews', value: 'reviews.length' },
+        { text: 'Last Review Average', value: 'reviews[0].fields.AVERAGE' },
         { text: 'Performance Actions', value: 'actions', sortable: false, align: 'center'},
       ],
       e1: 0,
@@ -368,8 +368,6 @@ export default {
         "quality of work": 0,
       },
       newField: '',
-      // perPage: 6,
-      // pagination: {},
       selected: null,
       searchItem: '',
       filteredItems: [],
@@ -378,7 +376,7 @@ export default {
       pagination: {
         range: 5,
         currentPage: 1,
-        itemPerPage: 6,
+        itemPerPage: 7,
         items: [],
         filteredItems: [],
       },
@@ -388,20 +386,26 @@ export default {
     this.filteredItems = this.currentViewEmployee.reviews;
     this.buildPagination();
     this.selectPage(1);
-    // do a request to the backend for all the users
-    // so when the page is loaded do a request to backend - may need to do this fo rmanagers register page
-
     if (store.state.user.role === 'senior manager') {
       this.employees = (await UsersService.getAllUsers()).data.users;
     } else {
       this.employees = (await UsersService.getManagersEmployees(store.state.user._id)).data.employees;
     }
-    console.log(this.employees);
-    // this will do a get request the moment the page is mounted
   },
   methods: {
     backPressed() {
       this.e1 -= 1;
+    },
+    secondContine() {
+      this.e1 = 3;
+      let total = 0;
+      let length = 0;
+      for( let field in this.fields) {
+        length += 1;
+        total += this.fields[field];
+      }
+      const average = Math.round(total / length);
+      this.$set(this.fields, 'AVERAGE', average);
     },
     cancelPressed() {
       this.addDialog = false;
@@ -420,28 +424,6 @@ export default {
       };
     },
     async submitPressed() {
-      console.log(this.fields);
-      // get the average of all the fields and then set this value to an average field
-      // $scope.sum = function (items, prop) {
-      //   if (items == null) {
-      //     return 0;
-      //   }
-      //   return items.reduce(function (a, b) {
-      //     return b[prop] == null ? a : a + b[prop];
-      //   }, 0);
-      // };
-
-      let total = 0;
-      let length = 0;
-      for( let field in this.fields) {
-        length += 1;
-        total += this.fields[field];
-        console.log('average', total);
-      }
-      const average = Math.round(total / length);
-
-      this.$set(this.fields, 'AVERAGE', average);
-
       try {
         const review = {
           authorId: store.state.user._id,
@@ -487,7 +469,6 @@ export default {
     },
     addReview(employee) {
       this.currentEmployee = employee;
-      console.log(employee.email);
       this.addDialog = true;
     },
     viewReviews(employee1) {
@@ -507,7 +488,6 @@ export default {
         }, 5000);
         return
       }
-      // this.fields[field]= 0;
       this.$set(this.fields, field, 0);
       this.newField = '';
     },
@@ -583,6 +563,10 @@ export default {
 <style scoped>
   .error-msg {
     color: red;
+  }
+
+  #performance {
+    text-align: center;
   }
 
   .performance {

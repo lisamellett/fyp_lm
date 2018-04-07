@@ -2,9 +2,9 @@
   <v-card>
     <v-dialog v-model="dialog" max-width="800">
       <v-card>
-        <v-card-title>
-          Edit Employee
-        </v-card-title>
+        <v-toolbar flat dense class="blue darken-2" dark>
+          <v-toolbar-title>Edit Employee</v-toolbar-title>
+        </v-toolbar>
         <v-card-text>
           <v-container grid-list-md>
             <v-layout wrap>
@@ -92,6 +92,23 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" flat @click.native="close">Cancel</v-btn>
           <v-btn color="blue darken-1" flat @click.native="save">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="deleteModal" max-width="400">
+      <v-card>
+        <v-toolbar flat dense class="blue darken-2" dark>
+          <v-toolbar-title>
+          Delete User
+        </v-toolbar-title>
+      </v-toolbar>
+        <v-card-text>
+        Are you sure you would like to delete the user {{ this.deleteUserName.name }}?
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click.native="deleteModal= false ">Cancel</v-btn>
+          <v-btn color="red darken-1" flat @click.native="deleteClicked">Delete</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -229,8 +246,10 @@ export default {
         kinNum: '',
         email: '',
       },
+      deleteUserName: '',
       items: [], // change items to users or employees
       menu: false,
+      deleteModal: false,
     }
   },
   // make a dictionary of all user managers and display
@@ -266,10 +285,16 @@ export default {
       }
       this.dialog = true;
     },
-    async deleteItem (item) {
-      const index = this.items.indexOf(item);
-      confirm('Are you sure you want to delete the user ' + item.name + '?') && this.items.splice(index, 1) && await UsersService.deleteUser(item._id);
+    deleteItem (item) {
+      this.deleteModal = true;
+      this.deleteUserName = item;
+      // confirm('Are you sure you want to delete the user ' + item.name + '?') && this.items.splice(index, 1) && await UsersService.deleteUser(item._id);
     }, // change this to a nicer confirm
+    async deleteClicked () {
+      await UsersService.deleteUser(this.deleteUserName._id);
+      this.deleteUserName = '';
+      this.deleteModal = false;
+    } ,
     close () {
       this.dialog = false;
       setTimeout(() => {
@@ -298,8 +323,6 @@ export default {
         }
       } else {
         this.items.push(this.editedItem);
-        console.log('else');
-        // else is for creating new user -> should prob get rid of this
       }
       this.close()
     }

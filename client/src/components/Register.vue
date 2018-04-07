@@ -7,7 +7,7 @@
     </v-flex>
     <v-flex>
       <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar flat dense class="blue darken-2" dark>
           <v-toolbar-title>Register a New User</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
@@ -178,7 +178,7 @@
           <br>
               </v-flex>
                 <v-flex xs4 offset-xs8>
-                  <v-btn class="cyan" @click="register" :disabled="!valid" dark>Register User</v-btn>
+                  <v-btn class="blue darken-2" @click="register" :disabled="!valid" dark>Register User</v-btn>
                 </v-flex>
               </v-flex>
 <!--v-model is a two way binding that basically says set the input to whatever
