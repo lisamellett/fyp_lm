@@ -79,7 +79,7 @@
           <full-calendar
             :events="teamEvents"
             locale="en"
-            @eventClick="eventClick"
+            @eventClick="eventClickTeam"
             @dayClick="dayClickTeam"
             @moreClick="moreClick"
           ></full-calendar>
@@ -93,7 +93,7 @@
         <v-card v-if="showMine">
           <v-toolbar class="blue darken-2" dark dense>
             <v-toolbar-title>
-              {{ prettyDate(selectedDate) }}
+              {{ prettyDate2(selectedDate) }}
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-tooltip top>
@@ -102,7 +102,7 @@
             </v-tooltip>
           </v-toolbar>
           <v-container class="hee2">
-          <v-card-title class="subheading grey--text py-0">Showing schedule for {{ prettyDate(selectedDate)}}</v-card-title>
+          <v-card-title class="subheading grey--text py-0">Showing schedule for {{ prettyDate2(selectedDate)}}</v-card-title>
           <v-flex xs12 v-if="filteredItems.length === 0" class="pb-2 py-2">
             <v-card class="cyan lighten-5" raised>
               <v-card-title class="body-1 center">You have no events scheduled for this day</v-card-title>
@@ -151,11 +151,11 @@
         <v-card v-else>
           <v-toolbar class="blue darken-2" dark dense>
             <v-toolbar-title>
-              {{ prettyDate(selectedDate2) }}
+              {{ prettyDate2(selectedDate2) }}
             </v-toolbar-title>
           </v-toolbar>
           <v-container class="hee2">
-          <v-card-title class="subheading grey--text py-0"><span class="center">Showing schedule for {{ prettyDate(selectedDate2)}}</span></v-card-title>
+          <v-card-title class="subheading grey--text py-0"><span class="center">Showing schedule for {{ prettyDate2(selectedDate2)}}</span></v-card-title>
           <v-flex xs12 v-if="filteredTeam.length === 0" class="pb-2 py-2">
             <v-card class="cyan lighten-5" raised>
               <v-card-title v-if="$store.state.user.role === 'senior manager'" class="body-1">No employees have events scheduled for this day</v-card-title>
@@ -211,8 +211,6 @@
               <v-list two-line v-else>
                 <template v-for="event in myEventsSorted">
                   <v-divider></v-divider>
-                  <!--<v-subheader>{{ event.title }}</v-subheader>-->
-                  <!--<v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>-->
                   <v-list-tile avatar>
                     <v-list-tile-avatar>
                       <v-icon :class="event.cssClass" class="white--text">{{ event.icon }}</v-icon>
@@ -245,8 +243,6 @@
               <v-list v-else two-line>
                 <template v-for="event in teamEventsSorted">
                   <v-divider></v-divider>
-                  <!--<v-subheader>{{ event.title }}</v-subheader>-->
-                  <!--<v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>-->
                   <v-list-tile avatar>
                     <v-list-tile-avatar>
                       <v-icon :class="event.cssClass" class="white--text">{{ event.icon }}</v-icon>
@@ -278,10 +274,6 @@ import EventService from '../services/EventService';
 import NotificationService from '../services/NotificationService';
 import UsersService from '../services/UsersService';
 /* eslint-disable */
-// import CalendarView from "vue-simple-calendar";
-// require("vue-simple-calendar/dist/static/css/default.css");
-// require("vue-simple-calendar/dist/static/css/holidays-us.css");
-const moment = require('moment');
 
 const today = new Date();
 
@@ -335,7 +327,6 @@ export default {
     if (store.state.user.role === "senior manager"){
       this.teamEvents = (await EventService.getEvents()).data.events;
     } else if (store.state.user.role === "manager") {
-      // get events of the epoloyees you manage, not the employees your manaager managers
       this.teamEvents = (await EventService.getTeamEvents(store.state.user._id)).data.events;
     } else {
       this.teamEvents = (await EventService.getTeamEvents(store.state.user.manager)).data.events;
@@ -344,6 +335,15 @@ export default {
     console.log('team', this.teamEvents);
   },
   methods: {
+    setStyle() {
+      let el = document.getElementsByClassName('events-day');
+      console.log(el);
+      for (let i=0; i<el.length; i++) {
+        console.log('');
+        el[i].style.minHeight="100px";
+        console.log(el[i]);
+      }
+    },
     incrementDate (date) {
       let newDate = new Date(date);
       newDate.setDate(newDate.getDate() + 1);
@@ -353,6 +353,10 @@ export default {
       const date1 = new Date(date).toUTCString();
       return date1.split(' ').slice(0, 4).join(' ');
     },
+    prettyDate2(date) {
+      const date2 = new Date(date).toString();
+      return date2.split(' ').slice(0, 4).join(' ');
+    },
     changeToTeam() {
       this.showMine = false;
     },
@@ -360,33 +364,23 @@ export default {
       this.showMine = true;
     },
     eventClick(event, jsEvent, pos) {
-      console.log('eventClick', event.title, jsEvent, pos)
+      this.dayClick(new Date(event.start));
     },
-    dayClick(day, jsEvent) {
+    eventClickTeam(event) {
+      this.dayClickTeam(new Date(event.start));
+    },
+    dayClick(day) {
       this.selectedDate = day;
-      // const selected = new Date(day);
-      // console.log('selected', selected);
-      console.log('day', day);
       const dateTest = this.convertToUTC(day);
-      console.log('dateTest', dateTest);
       const newDate = dateTest.toISOString();
-      // const moment = moment(newDate).format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
-      // console.log('moment', moment);
-      console.log('iso', newDate);
       this.getEvents(newDate);
-      console.log('filtered', this.filteredItems);
-      console.log('dayClick', day, jsEvent);
+
     },
     dayClickTeam(day, jsEvent) {
       this.selectedDate2 = day;
-      console.log('day', day);
       const dateTest = this.convertToUTC(day);
-      console.log('dateTest', dateTest);
       const newDate = dateTest.toISOString();
-      console.log('iso', newDate);
       this.getTeamEvents(newDate);
-      console.log('filtered', this.filteredTeam);
-      console.log('dayClick', day, jsEvent);
     },
     moreClick(day, events, jsEvent) {
       console.log('moreCLick', day, events, jsEvent)
@@ -397,38 +391,20 @@ export default {
     },
     getEvents(day) {
       this.filteredItems = this.myEvents.filter(function (event) {
-        console.log('start', event.start);
-        console.log('name', event.name);
         return (event.dates.indexOf(day) > -1); // this returns the event if any days of the event are clicked
       });
     },
     getTeamEvents(day) {
-      console.log('taken', store.state.user.taken);
       this.filteredTeam = this.teamEvents.filter(function(event) {
         return (event.dates.indexOf(day) > -1);
       })
     },
     convertToUTC(date) {
-      console.log('date', date);
-
       const date1 = date.toString().split(' ', 4).join(' ') + ' UTC';
-      console.log('date1', date1);
       const newStart = new Date(date1);
-      console.log('newStart', newStart.toUTCString());
       return newStart;
     },
-    // searchInTheList(searchText, currentPage){
-    //   this.filteredItems = this.currentViewEmployee.reviews.filter( function(v, k){
-    //     return v.date.toLowerCase().indexOf(searchText.toLowerCase()) > -1
-    //   });
-    //   this.buildPagination();
-
     async submitRequest() {
-      // create request event
-      // send notification to manager
-      // send email to manager
-      // send warning to manager if allowed holidays will be exceeded
-      // make call to api to update event list
       let css = '';
       let icon = '';
       if (this.selectReason === 'Holiday') {
@@ -445,7 +421,6 @@ export default {
       }
 
       const manager = (await UsersService.getUser(store.state.user.manager)).data.user;
-      console.log('manager', manager);
 
       const request = {
         employeeId: store.state.user._id,
@@ -457,17 +432,15 @@ export default {
         dates: this.getDateRange(this.startDate, this.endDate),
         cssClass: css,
         icon: icon,
-        type: 'pending', // Request or Booked
-        reason: this.detail, // this could be appointment, holidays -> may only show in your personal cal
+        type: 'pending',
+        reason: this.detail,
         manager: manager,
         email: store.state.user.email,
         warning: this.warning,
       };
-      console.log(request);
       let result = {};
       try {
         result = await EventService.addEvent(request);
-        // send new request for events here (update them to show new request)
       } catch(error) {
         this.error = error.response.data.error;
       }
@@ -478,7 +451,6 @@ export default {
         message: store.state.user.name + " has request time off.",
         data: result.data.createdEvent,
       };
-      console.log(notification.data);
       await NotificationService.addNotification(notification);
       this.requestModel = false;
       this.startDate = null;
@@ -504,13 +476,6 @@ export default {
       return dates;
     },
 
-// Usage
-//       var dates = getDates(new Date(2013,10,22), new Date(2013,11,25));
-//       dates.forEach(function(date) {
-//         console.log(date);
-//       });
-//     },
-
     getDifferenceInDays(d1, d2) {
       const timeDiff = Math.abs(d1.getTime() - d2.getTime());
       const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -523,24 +488,18 @@ export default {
     },
 
     setStart(payload) {
-      console.log('payload start', payload);
       this.startDate = this.convertToUTC(payload);
-      console.log(this.startDate.toISOString());
-      console.log('startDate', this.startDate);
     },
 
     setEnd(payload) {
-      console.log('payload', payload);
       if (payload !== null) {
         const yesterday = new Date(payload);
         yesterday.setDate(payload.getDate()-1);
         this.endDate = this.convertToUTC(yesterday);
         this.getDifferenceInDays(this.startDate, this.endDate);
-        console.log(this.getDateRange(this.startDate, this.endDate));
       } else {
         this.endDate = payload;
       }
-      console.log('enddate', this.endDate);
     },
   },
 };
@@ -612,5 +571,9 @@ export default {
     overflow: auto;
     border-radius: unset;
     max-height: 300px;
+  }
+  .events-day1 {
+    min-height: 0px;
+    height: 100px;
   }
 </style>
