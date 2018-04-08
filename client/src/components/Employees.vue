@@ -184,7 +184,7 @@
                     <v-icon class="ff blue--text text--lighten-2">fiber_manual_record</v-icon>
                   </v-flex>
                   <v-flex xs3 class="grey--text text-xs-left">Date of Birth</v-flex>
-                  <v-flex xs8 class="text-xs-left">{{ props.item.dob }}</v-flex>
+                  <v-flex xs8 class="text-xs-left">{{ prettyDate(props.item.dob) }}</v-flex>
 
                   <v-flex xs1>
                     <v-icon class="ff blue--text text--lighten-2">fiber_manual_record</v-icon>
@@ -340,6 +340,10 @@ export default {
     }
   },
   methods: {
+    prettyDate(date) {
+      const date1 = new Date(date).toUTCString();
+      return date1.split(' ').slice(1, 4).join(' ');
+    },
     saveDob(dob) {
       this.$refs.menu.save(dob)
     },
