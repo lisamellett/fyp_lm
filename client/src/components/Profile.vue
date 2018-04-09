@@ -66,7 +66,7 @@
                   <v-list>
                     <v-list-tile>
                       <v-list-tile-title>
-                        {{ this.user.dob }}
+                        {{ prettyDate(this.user.dob) }}
                       </v-list-tile-title>
                     </v-list-tile>
                   </v-list>
@@ -379,6 +379,12 @@ import store from "../store/store";
         }
         return x / this.user.reviews.length;
       }
+    },
+    methods: {
+      prettyDate(date) {
+        const date1 = new Date(date).toUTCString();
+        return date1.split(' ').slice(1, 4).join(' ');
+      },
     }
   };
 
