@@ -2,7 +2,7 @@
 <div>
     <v-content>
       <section>
-        <v-parallax :src="require('@/assets/hero.jpeg')" height="600">
+        <v-parallax :src="require('@/assets/lake2.jpg')" height="600">
           <v-layout
             row
             align-center
@@ -10,7 +10,7 @@
             class="white--text"
           >
             <v-flex xs-6>
-            <img src="../assets/Kin_Logo.png" height="200" class="center">
+            <img src="../assets/kinlogo.png" height="200" class="center">
             <h1 class="white--text mb-2 display-1 text-xs-center"></h1>
             <div class="subheading mb-3 text-xs-center">FYP by Lisa Mellett</div>
             </v-flex>
@@ -48,9 +48,11 @@
                       <div class="headline text-xs-center">Metrics</div>
                     </v-card-title>
                     <v-card-text>
-                      LM Metrics allows you to view statistics about your company. With a click of a button
-                      you can easily see where your employees are excelling and where help and guidance may
-                      be required. Which month do most of your employees take annual leave during? Let us help
+                      Kin Metrics allows all users to view statistics about your company. Employees can view personal metrics, team metrics as well as general
+                      metrics about the company. With a click of a button
+                      managers can easily see where their employees are excelling and where help and guidance may
+                      be required. How are your employees performing at work? Which month do most of your employees take annual leave during? Is
+                      diversity incorporated into your company? Let Kin help
                       you prepare for the future.
                     </v-card-text>
                   </v-card>
@@ -64,10 +66,11 @@
                       <div class="headline">Performance</div>
                     </v-card-title>
                     <v-card-text>
-                      Help your employees reach their potential using our state of the art performance
-                      review system. We allow you to post reviews about your employees which are only
-                      visible to the employee, their manager and senior management, Full privacy is ensured
-                      and your employees can see where they are excelling.
+                      Help your employees reach their full potential using our state of the art performance
+                      review system. Annual performance reviews are a thing of the past. Kin allows you to carry out reviews
+                      easily to maximise performance in your company. Kin uses a customisable rating scale method in conjunction with
+                      We allow you to post reviews about your employees which are only
+                      an essay method to create a flexible, easy-to-use performance system that suits any companies needs.
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -81,9 +84,10 @@
                     </v-card-title>
                     <v-card-text>
                       Managing your employees annual leave has never been made more simple. Easily
-                      view which employees have up coming time off and with a click of a button managers
-                      can approve/disprove time off. No more shuffling through paperwork to find time-off
-                      request forms, have it all accessible from place.
+                      view which employees have upcoming time off. No more shuffling through paperwork to find time-off
+                      request forms, have it all accessible from one place. Our dual calendar system means employees can easily
+                      see which requests have been approved and which are pending while also being able to see which fellow team members
+                      have upcoming time off. We at Kin believe this is vital for employees to plan ahead.
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -94,17 +98,10 @@
       </section>
 
       <section>
-        <v-parallax :src="require('@/assets/section.jpg')" height="380">
+        <v-parallax :src="require('@/assets/bottom.jpg')" height="380">
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-3 text-xs-center">HR at your fingertips</div>
             <em>Sign your business up today</em>
-            <v-btn
-              class="blue lighten-2 mt-5"
-              dark
-              large
-            >
-              Sign Up
-            </v-btn>
           </v-layout>
         </v-parallax>
       </section>
@@ -115,11 +112,14 @@
             <v-flex xs12 sm4>
               <v-card class="elevation-0 transparent">
                 <v-card-title primary-title class="layout justify-center">
-                  <div class="headline">Company info</div>
+                  <div class="headline">About Me</div>
                 </v-card-title>
                 <v-card-text>
-                  Hi my name is Lisa Mellett and I have been working on this project for several
-                  months now. Please give me a good grade. That is all.
+                  I have always had a keen interest in art and design growing up while maths was my favourite subject in school.
+                  I decided to do computer science as it would allow me to combine the two things I loved, logical thinking and
+                  creativity. The motive behind KIN came from my six-month work placement at Teamwork.com. During this time Teamwork
+                  struggled to find a good HR system. I had gained a keen interest in SaaS during my placement and so I thought I would
+                  develop my own web application, which is how KIN came about.
                 </v-card-text>
               </v-card>
             </v-flex>
@@ -137,7 +137,7 @@
                       <v-icon class="blue--text text--lighten-2">phone</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-tile-title>111-222 3333</v-list-tile-title>
+                      <v-list-tile-title>0872864413</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
@@ -145,7 +145,7 @@
                       <v-icon class="blue--text text--lighten-2">place</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-tile-title>Crap Mac Lab, Western Gateway</v-list-tile-title>
+                      <v-list-tile-title>Mac Lab, Western Gateway.</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
