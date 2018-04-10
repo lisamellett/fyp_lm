@@ -36,7 +36,7 @@
                   v-on:keyup="searchInTheList(searchItem)"
                 ></v-text-field>
                 <span class="help is-dark"><strong>{{filteredItems.length}}</strong> of {{ currentViewEmployee.reviews.length}} reviews found</span>
-                <v-expansion-panel popout>
+                <v-expansion-panel popout v-if="paginatedItems.length !== 0">
                   <v-expansion-panel-content v-for="(review) in paginatedItems" :key="review._id">
                     <div slot="header" class="subheader">{{ review.date }}</div>
                     <v-card>
@@ -264,7 +264,8 @@
             <td class="text-xs-right">{{ props.item.role }}</td>
             <td class="text-xs-right">{{ props.item.title }}</td>
             <td class="text-xs-right">{{ props.item.reviews.length }}</td>
-            <td class="text-xs-right">{{ props.item.reviews[0].fields.AVERAGE }}</td>
+            <td v-if="props.item.reviews[0]" class="text-xs-right">{{ props.item.reviews[0].fields.AVERAGE }}</td>
+            <td v-else class="text-xs-right">N/A</td>
             <td class="justify-center layout px-0">
               <v-tooltip left>
               <v-btn slot="activator" icon class="mx-0" @click.stop="viewReviews(props.item)">
