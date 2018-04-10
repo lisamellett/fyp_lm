@@ -13,16 +13,16 @@ const UsersController = require('../../controllers/UsersController');
 module.exports = (app) => {
 
   app.get('/users',
-    // isAuthenticated,
-    // AuthenticationController.roleAuthorization(['admin']),
+    isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']),
     // add above two lines back in when finished testing
     UsersController.users);
 
   app.post('/users/register',
     // to register a user someone has to be logged in
-    //isAuthenticated,
-    //AuthenticationController.roleAuthorization(['admin']), // only admins can register
-    //AuthenticationControllerPolicy.register, // we call this middleware before we hit our controller
+    isAuthenticated,
+    AuthenticationController.roleAuthorization(['admin']), // only admins can register
+    AuthenticationControllerPolicy.register, // we call this middleware before we hit our controller
     // when next() is called in policy then it will go  the controller
     AuthenticationController.register);
 
@@ -46,13 +46,16 @@ module.exports = (app) => {
     UsersController.deleteOneUser);
 
   app.get('/managers',
-    // isAuthenticated,
+    isAuthenticated,
     // AuthenticationController.roleAuthorization(['admin']),
     UsersController.managers);
 
   app.post('/reviews/:userId',
+    isAuthenticated,
+    AuthenticationController.roleAuthorization(['manager', 'senior manager']),
     UsersController.addReview);
 
   app.get('/employees/:managerId',
+    isAuthenticated,
     UsersController.getManagersEmployees);
 };

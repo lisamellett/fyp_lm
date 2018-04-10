@@ -42,7 +42,7 @@
                     <v-card>
                       <v-card-text>
                         <table align="left" class="mr-4 performance">
-                          <tr class="cyan performancetr">
+                          <tr class="light performancetr">
                             <th class="performanceth">Skill</th>
                             <th class="performanceth">Score</th>
                           </tr>
@@ -567,7 +567,7 @@ export default {
     margin: 5px auto 20px auto;
     border-collapse: collapse;
     border: 1px solid #eee;
-    border-bottom: 2px solid #00BCD4;
+    border-bottom: 2px solid #42A5F5;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.10),
     0 10px 20px rgba(0, 0, 0, 0.05),
     0 20px 20px rgba(0, 0, 0, 0.05),
@@ -591,7 +591,7 @@ export default {
   }
 
   .performanceth {
-    background: #00BCD4;
+    background: #42A5F5;
     color: #fff;
     text-transform: uppercase;
     font-size: 12px;

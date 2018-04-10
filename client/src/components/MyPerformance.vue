@@ -217,7 +217,7 @@ export default {
     margin: auto auto 20px auto;
     border-collapse: collapse;
     border: 1px solid #eee;
-    border-bottom: 2px solid #00BCD4;
+    border-bottom: 2px solid #42A5F5;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.10),
     0 10px 20px rgba(0, 0, 0, 0.05),
     0 20px 20px rgba(0, 0, 0, 0.05),
@@ -241,7 +241,7 @@ export default {
   }
 
   th {
-    background: #00BCD4;
+    background: #42A5F5;
     color: #fff;
     text-transform: uppercase;
     font-size: 12px;

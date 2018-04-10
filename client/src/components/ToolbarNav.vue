@@ -160,14 +160,8 @@ export default {
           return [
             {icon: 'show_chart', text: 'Metrics', destination: 'metrics'},
             {icon: 'date_range', text: 'Calendar', destination: 'calendar'},
+            {icon: 'flash_on', text: 'My Performance', destination: 'myPerformance'},
             {
-              icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
-              text: 'Performance',
-              model: false,
-              children: [
-                {icon: 'flash_on', text: 'My Performance', destination: 'myPerformance'},
-              ]
-            },{
               icon: 'keyboard_arrow_up', 'icon-alt': 'keyboard_arrow_down',
               text: 'Employees',
               model: false,

@@ -1,12 +1,12 @@
 import {Line} from 'vue-chartjs';
-import {Bar} from 'vue-chartjs';
+import {Doughnut} from 'vue-chartjs';
 import {Pie} from 'vue-chartjs';
 import UsersService from "../../services/UsersService";
 import store from '../../store/store';
 
 export default {
 
-  extends: Pie,
+  extends: Doughnut,
   async mounted () {
 
     this.gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
