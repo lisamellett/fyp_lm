@@ -16,7 +16,6 @@ module.exports = {
     User.findById(req.body.manager) // this is to make sure the manager exists
       .then(manager => {
         if (!manager) {
-          console.log('hahjsdh');
           return res.status(404).json({
             message: "Manager not found",
           });

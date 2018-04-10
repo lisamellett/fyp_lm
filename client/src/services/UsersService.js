@@ -11,7 +11,6 @@ export default {
   },
 
   updateUser(updates, userId) {
-    console.log('update');
     return Api().patch('/users/' + userId, updates);
   },
 
