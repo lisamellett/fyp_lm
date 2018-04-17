@@ -297,7 +297,7 @@ export default {
         });
         this.$router.push({
           name: 'employees',
-        }); // may want to change this to different location
+        });
       } catch (error) {
         this.error = error.response.data.error;
       }
