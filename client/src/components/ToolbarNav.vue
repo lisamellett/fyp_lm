@@ -139,7 +139,7 @@ export default {
       this.apiCall();
     },
     async apiCall() {
-      this.nots = (await NotificationService.getUserNotifications(store.state.user._id)).data.notifications;
+      this.nots = (await NotificationService.getUserNotifications(store.state.user._id)).data.notifications; //test
       this.nots = this.nots.reverse();
     },
     navigateTo(destination) {
