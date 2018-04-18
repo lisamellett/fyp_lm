@@ -178,7 +178,7 @@ export default {
     },
     async deleteNotification(notificationId) {
       await NotificationService.deleteNotification(notificationId);
-      this.$parent.$options.parent.apiCall(); // cause vue doesnt like mutating props form child component
+      this.$parent.$options.parent.apiCall(); // cause vue doesnt like mutating props from child components
     }
   },
 }
