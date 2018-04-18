@@ -484,7 +484,9 @@ export default {
       const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
       const daysLeft = store.state.user.allowance - store.state.user.taken - diffDays;
       if (daysLeft < 0) {
-        this.warning = "Warning: You have exceeded you're total allowed holidays by " + Math.abs(daysLeft) + " days. A member of admin will be notified along with your manager if you proceed with this request."
+        this.warning = "Warning: You have exceeded you're total allowed holidays by "
+          + Math.abs(daysLeft) + " days. " +
+          "A member of admin will be notified along with your manager if you proceed with this request."
       } else {
         this.warning = '';
       }
