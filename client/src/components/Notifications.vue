@@ -151,9 +151,7 @@ export default {
       await EventService.updateEvent(event._id, changes);
       await NotificationService.addNotification(notification);
       const taken = (await UsersService.getUser(event.employeeId)).data.user.taken;
-      console.log('taken', taken);
       const updateTaken = taken + (event.dates.length - 1);
-      console.log('updateTaken', updateTaken);
       const updates = [{
         propName: 'taken',
         value: updateTaken,
