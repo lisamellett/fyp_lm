@@ -44,7 +44,7 @@ const UserSchema = new mongoose.Schema({
   // will have a from: userid, to: useris
 });
 
-UserSchema.pre('save', function() { // do i need to include update abd before here too?
+UserSchema.pre('save', function() {
   const user = this;
 
   const SALT_FACTOR = 8;

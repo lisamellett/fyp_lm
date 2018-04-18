@@ -4,7 +4,7 @@ const config = require('../config/config');
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail', // todo: may need to change this to own host when deploy
+  service: 'gmail',
   port: 25,
   secure: false, // true for 465, false for other ports
   auth: {
@@ -153,7 +153,6 @@ module.exports = {
         from: '"Kin" <elizamillitt@gmail.com>', // sender address
         to: email, // list of receivers
         subject: 'Performance Review', // Subject line
-        // text: 'Hello world?', // plain text body
         html: output // html body
       };
 
