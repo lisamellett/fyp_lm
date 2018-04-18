@@ -4,8 +4,6 @@
 // strategy we put in passport.js
 const passport = require('passport');
 
-// had to write this custom logic because passport default sends
-// back html error but we want json for out pure restful api
 module.exports = function (req, res, next) {
   passport.authenticate('jwt', function (err, user) {
     if (err || !user) {

@@ -125,12 +125,12 @@ export default {
       return date1.split(' ').slice(0, 4).join(' ');
     },
     async approve(event, notificationId) {
-      // must include in decrement counter
       const notification = {
         senderId: store.state.user._id,
         receiverId: event.employeeId,
         type: "Request Approved",
-        message: store.state.user.name + " has approved your time off from " + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
+        message: store.state.user.name + " has approved your time off from "
+        + this.prettyDate(event.start) + " to " + this.prettyDate(event.end),
         data: event,
       };
       let css = '';
@@ -159,15 +159,9 @@ export default {
         value: updateTaken,
       }];
       await UsersService.updateUser(updates, event.employeeId);
-      this.deleteNotification(notificationId); // may change this to just update the notification
-
-      // change status
-      // change color
-      // send email
-      // send notification
-      // console.log(event);
-
+      this.deleteNotification(notificationId);
     },
+
     async disapprove(event, notificationId) {
       const notification = {
         senderId: store.state.user._id,

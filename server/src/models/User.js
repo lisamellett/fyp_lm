@@ -61,8 +61,6 @@ UserSchema.pre('save', function() { // do i need to include update abd before he
       user.password = hash;
     })
 
-  // may need to include next here
-
 });
 
 UserSchema.methods.comparePassword = function (candidatePassword) {
